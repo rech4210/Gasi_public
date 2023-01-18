@@ -1,60 +1,60 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using System.Linq;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class BuffManager : MonoBehaviour
 {
-    //public delegate void BuffTrigger(Buff);
-
-    List<Buff> myBuffList = new List<Buff>();
-
     Ray ray;
-
+    ArrayList buffers = new ArrayList();
     RaycastHit hit;
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        
+        if (Input.GetMouseButtonDown(0))
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Debug.DrawRay(Camera.main.transform.position,ray.direction * 20f,Color.red);
-
             if (Physics.Raycast(ray, out hit,50f))
             {
-                hit.collider.GetComponent<Buff>().OnChecked();
-                Debug.Log(hit.collider.gameObject.name);
+                try
+                {
+                    hit.collider.GetComponent<Buff>().OnChecked();
+                }
+                catch (System.Exception e)
+                {
+                    Debug.Log("대상 아님") ;
+                }
             }
         }
     }
-
-    private void Awake()
-    {
-    }
     void Start()
     {
-        myBuffList.Clear();
     }
 
     public void GetBuff(Buff buff)
     {
-        if (myBuffList.Contains(buff)) // 이부분 각각 적용임..
+        if (buffers?.Count> 0)
         {
-            buff.BuffUp();
-        }
-        else
-        {
-            myBuffList.Add(buff);
-            buff.BuffUse();
-            for (int i = 0; i < myBuffList.Count; i++)
+            for (int i = 0; i < buffers.Count; i++)
             {
-                Debug.Log(myBuffList[i]);
+                if (buffers[i].GetType() == buff.GetType())
+                {
+                    Debug.Log(buffers[i]);
+                    buff.BuffUp();
+                    break;
+                }
+                else if (i >= buffers.Count -1)
+                {
+                    buffers.Add(buff);
+                    buff.BuffUse();
+                }
             }
         }
-        for (int i = 0; i < myBuffList.Count; i++)
-        {
-            Debug.Log(myBuffList[i].ToString());
-        }
+        else { buffers.Add(buff); buff.BuffUse();}
     }
-
 }
+

@@ -1,17 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 
-// 버프 타입 개체
-
-public abstract class Buff : MonoBehaviour
+public abstract class Buff : StatusEffect
 {
-
     public int point;
-    public abstract void OnChecked();
     public abstract void BuffUse();
     public abstract void BuffUp();
-    
-
+    public abstract void BuffDown();
+    public abstract void RankUp(int rank);
 }

@@ -1,7 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterBuff : Buff
+public class PowerUp : Buff
 {
+
     private void Start()
     {
         FindBuffManager(buffManager);
@@ -16,7 +19,7 @@ public class CharacterBuff : Buff
     public override void BuffUp()
     {
         base.point = 5;
-        //Debug.Log($"데미지 증가{point}");
+        Debug.Log($"데미지 증가{point}");
     }
 
     public override void BuffUse()
@@ -27,14 +30,13 @@ public class CharacterBuff : Buff
 
     public override void Init()
     {
-
+       
     }
 
     public override void RankUp(int rank)
     {
         base.rank = rank;
     }
-
     public override void BuffDown()
     {
         Debug.Log($"버프 감소 : {this.GetType()}");
