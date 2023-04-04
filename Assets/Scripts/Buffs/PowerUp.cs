@@ -1,46 +1,39 @@
 using UnityEngine;
-
 public class PowerUp : StatusEffect, IBuff
 {
-    BuffStorage type = BuffStorage.Power;
-    BuffStat status;
-    BuffData data;
+    BuffEnumStorage type = BuffEnumStorage.Power;
+    BuffData data; // 각 카드가 data를 가지고 있어서 생기는 문제임 그냥. -> 버프 매니저에서 일괄적으로 버프 상태를 관리하도록 해야함.
     private void Start()
     {
-        FindBuffManager(buffManager);
-        Debug.Log("생성되었습니다");
-        Init();
+        if (data.StatusEffect == null)
+        {
+            FindBuffManager(buffManager);
+            Init();
+        }
     }
-
     public override void OnChecked()
     {
         buffManager.AddorUpdateDictionary(type, data);
     }
-
-    public override void BuffUp()
+     // -> 버프를 각각 개체에서 관리하는게 아닌, 버프매니저의 contains 키로 모으기
+    public override BuffData BuffUp()
     {
-        RankUp();
-        base.point = 5;
-        Debug.Log($"데미지 증가{point}");
+        data.stat.rank++;
+        data.stat.point += data.stat.upValue;
+        return data;
     }
 
-    public override void BuffUse()
+    public override BuffData BuffUse()
     {
-        base.point = 15;
-        status.point = point;
-        Debug.Log($"버프 최초 사용 : {this.GetType()}");
-    }
-    public override void RankUp()
-    {
-        rank++;
-        status.rank  = rank;
-        Debug.Log($"랭크 상승 :{rank}");
+        data.stat.point += data.stat.useValue;
+        return data;
     }
 
     public override void Init()
     {
-        data = new BuffData(this,status);
-        //포인트와 랭크 초기화
+        data.StatusEffect = this;
+        data = buffManager.SetBuffData(type,data);
+        Debug.Log(this.data.StatusEffect+"  " + data.stat);
     }
 
 }

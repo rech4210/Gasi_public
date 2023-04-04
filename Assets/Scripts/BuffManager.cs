@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,43 +8,51 @@ using UnityEngine;
 
 public class BuffManager : MonoBehaviour
 {
-    private Dictionary<BuffStorage, BuffData> 
-        dictBuff = new Dictionary<BuffStorage, BuffData>();
+    private Dictionary<BuffEnumStorage, BuffData> allBuffArchive = new();
 
-    private Dictionary<StatusEffect, BuffStat> 
-        buffValuePairs = new Dictionary<StatusEffect, BuffStat>();
+    private Dictionary<BuffEnumStorage, BuffData> containBuffDictionary = new();
 
-    // -> 여기에서 전체 버프에 대한 초기화를 시켜주고 해당 버프가 카드에 등장하면
-    //    전체를 순환하면서 맞는 데이터값을 전달해줌.
     Ray ray;
     RaycastHit hit;
 
-    BuffData buffData;
+    BuffData buffData; //초기화용 버프
 
     private void Awake()
     {
-        dictBuff.Clear();
-
-        
+        containBuffDictionary.Clear();
+        temp();
     }
-
-    /* 1. 버프를 누른다.
-     * 2. AddDictionary를 통해 해당 버프가 존재하는지 판단.
-     * 3. 만약 존재한다면 SetBuffData를 통해 저장하고 값을 최신화 시켜준다 (BuffManager가 관리).
-     *      3-1. 아니라면 버프 리스트 전체를 순회하면서 Type과 비교하여 값을 넣어준다.
-     * 4. 최신화 된 값을 가져와 각 버프가 가진 BuffData에 대입한다.
-     */
-    public BuffData SetBuffData(StatusEffect statusEffect)
+    public BuffData SetBuffData(BuffEnumStorage type, BuffData data) 
     {
-        // 이미 가진 데이터들과 비교하여 처리할것.
-        
-        if (buffValuePairs.TryGetValue(statusEffect,out BuffStat value))
+        // 이미 존재하는경우 다시 카드에 부착되면 init이 발동될거임 해당 문제 처리
+        if (!containBuffDictionary.ContainsKey(type))
         {
-            buffData = new BuffData(statusEffect, value);
-
+            if (allBuffArchive.TryGetValue(type, out BuffData archiveData))
+            {
+                archiveData.StatusEffect = data.StatusEffect;
+                buffData = archiveData;
+            }
+        }
+        else
+        {
+            Debug.Log("이미 아카이브에 등록된 버프입니다");
+            buffData = data;
         }
         return buffData;
     }
+    public void temp()
+    {
+        allBuffArchive.Add(BuffEnumStorage.Power, new BuffData(null, new BuffStat(1, 5, 7, 10)));
+        allBuffArchive.Add(BuffEnumStorage.Health, new BuffData(null, new BuffStat(1, 5, 22, 100)));
+
+        foreach (var item in allBuffArchive.Keys)
+        {
+            Debug.Log("키 등록: "+item);
+        }
+        //편하게 할 방법.
+    }
+
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -54,48 +64,52 @@ public class BuffManager : MonoBehaviour
                 try
                 {
                     hit.collider.GetComponent<StatusEffect>().OnChecked();
+
                 }
-                catch (System.NullReferenceException e)
+                catch (System.Exception e)
                 {
-                    Debug.Log("대상 아님") ;
+                    Debug.Log(e);
                 }
+
             }
         }
     }
 
-    public void AddorUpdateDictionary(BuffStorage buffType, BuffData buffValues)
+    public void AddorUpdateDictionary(BuffEnumStorage buffType, BuffData data)
     {
-        if (dictBuff.ContainsKey(buffType))
+        if (containBuffDictionary.ContainsKey(buffType))
         {
-            Debug.Log("이미 존재합니다 랭크 증가");
-            buffValues.StatusEffect.BuffUp();
-            // 여기 딕셔너리 최신화
+            containBuffDictionary[buffType] = data.StatusEffect.BuffUp();
+            Debug.Log($"이미 존재합니다 랭크 증가");
         }
         else
         {
-            dictBuff.Add(buffType, buffValues);
-            buffValues.StatusEffect.BuffUse();
-            
-            Debug.Log("없는 버프 추가 : " + dictBuff.Keys + " " + "버프 갯수:"+ dictBuff.Count);
+            data.StatusEffect.BuffUse();
+            containBuffDictionary.Add(buffType,data); //각각에 인스턴스로 존재해버림, 이 데이터 값들을 버프매니저에서 통합으로 관리해야함.
+            Debug.Log("없는 버프 추가 : " + allBuffArchive[buffType].StatusEffect + " " + "버프 갯수:"+ allBuffArchive.Count);
         }
+        Debug.Log($"대상 버프 : {buffType}, " +
+            $"스탯 상승 : {containBuffDictionary[buffType].stat.point}, " +
+            $"랭크 : {containBuffDictionary[buffType].stat.rank}");
     }
 
-    public void RemoveSomthing(BuffStorage buffType)
+
+    // 굳이 버프를 동적으로 생성해줘야 함? 미리 밖으로 꺼내두고 bool이나 setactive로 buffdata 탐색해서 처리해주면 되는거 아님?
+    public void RemoveSomthing(BuffEnumStorage buffType) 
     {
-        if (dictBuff.ContainsKey(buffType))
+        if (containBuffDictionary.ContainsKey(buffType))
         {
-            dictBuff.Remove(buffType);
+            containBuffDictionary.Remove(buffType);
         }
     }
 
-    public StatusEffect ReturnBuff(BuffStorage buffType)
+    public BuffData ReturnBuff(BuffEnumStorage buffType)
     {
-        return dictBuff[buffType].StatusEffect;
+        return containBuffDictionary[buffType];
     }
-    public StatusEffect CheckBuff(BuffStorage buffType)
+    public StatusEffect CheckBuff(BuffEnumStorage buffType) /// 이거 삭제해도 될듯
     {
-        return dictBuff[buffType].StatusEffect;
+        return containBuffDictionary[buffType].StatusEffect;
     }
-    
 }
 

@@ -1,7 +1,6 @@
 
 #region 버프 종류, 버프 데이터
 
-
 public struct BuffData
 {
     public StatusEffect StatusEffect;
@@ -13,7 +12,7 @@ public struct BuffData
         this.stat = stat;
     }
 }
-public enum BuffStorage
+public enum BuffEnumStorage
 {
     Health,
     Speed,
@@ -30,7 +29,6 @@ public struct BuffStat
     public int point;
     public int useValue;
     public int upValue;
-
 
     public BuffStat(int rank, int point, int useValue, int upValue)
     {

@@ -24,7 +24,6 @@ public abstract class StatusEffect : MonoBehaviour,IStatusEffect
             if (GameObject.FindWithTag("BuffManager")
             .TryGetComponent<BuffManager>(out buff))
             {
-                Debug.Log(buff);
                 this.buffManager = buff;
             }
         }
@@ -36,9 +35,14 @@ public abstract class StatusEffect : MonoBehaviour,IStatusEffect
     }
 
     // 아래는 인터페이스인데 이거 이렇게 써야 할 필요 있나?
-    public virtual void  BuffUse(){}
+    public virtual BuffData BuffUse()
+    {
+        return new BuffData();
+    }
 
-    public virtual void BuffUp(){}
+    public virtual BuffData BuffUp()
+    {
+        return new BuffData();
+    }
 
-    public virtual void RankUp(){}
 }

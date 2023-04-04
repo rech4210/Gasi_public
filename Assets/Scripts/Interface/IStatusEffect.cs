@@ -1,6 +1,5 @@
 public interface IStatusEffect
 {
-    public void BuffUse();
-    public void BuffUp();
-    public void RankUp();
+    public BuffData BuffUse();
+    public BuffData BuffUp();
 }
