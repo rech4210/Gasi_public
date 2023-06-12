@@ -1,5 +1,5 @@
 using UnityEngine;
-public abstract class StatusEffect : MonoBehaviour,IStatusEffect
+public abstract class StatusEffect : MonoBehaviour/*, IStatusEffect*/
 {
     protected BuffManager buffManager;
 
@@ -35,14 +35,14 @@ public abstract class StatusEffect : MonoBehaviour,IStatusEffect
     }
 
     // 아래는 인터페이스인데 이거 이렇게 써야 할 필요 있나?
-    public virtual BuffData BuffUse()
-    {
-        return new BuffData();
-    }
+    //public virtual BuffStat BuffUse()
+    //{
+    //    return new BuffStat();
+    //}
 
-    public virtual BuffData BuffUp()
-    {
-        return new BuffData();
-    }
+    //public virtual BuffStat BuffUp()
+    //{
+    //    return new BuffStat();
+    //}
 
 }

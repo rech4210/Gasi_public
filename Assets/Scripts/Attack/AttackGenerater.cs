@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 public abstract class AttackGenerater : MonoBehaviour
 {
-    BuffEnumStorage buff;
+    //BuffEnumStorage buff;
     AttackType attckType;
     public AttackStatus attackStatus;
     public int rank
@@ -28,6 +27,5 @@ public abstract class AttackGenerater : MonoBehaviour
 
     public virtual void Generater(AttackGenerater attackObj)
     {
-        buff = BuffEnumStorage.Health;
     }
 }

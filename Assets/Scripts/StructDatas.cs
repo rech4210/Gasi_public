@@ -3,35 +3,37 @@
 
 public struct BuffData
 {
-    public StatusEffect StatusEffect;
+    char buffCode;
     public BuffStat stat;
 
-    public BuffData(StatusEffect statusEffect, BuffStat stat)
+    public BuffData(char buffCode, BuffStat stat)
     {
-        this.StatusEffect = statusEffect;
+        this.buffCode = buffCode;
         this.stat = stat;
     }
 }
-public enum BuffEnumStorage
-{
-    Health,
-    Speed,
-    Wisdom,
-    Agility,
-    Endurance,
-    Power,
-    Remove,
-}
+//public enum BuffCode
+//{
+//    Health,
+//    Speed,
+//    Wisdom,
+//    Agility,
+//    Endurance,
+//    Power,
+//    Remove,
+//}
 
 public struct BuffStat
 {
+    public string buffEnumName;
     public int rank;
     public int point;
     public int useValue;
     public int upValue;
 
-    public BuffStat(int rank, int point, int useValue, int upValue)
+    public BuffStat(string buffEnumName, int rank, int point, int useValue, int upValue)
     {
+        this.buffEnumName = buffEnumName;
         this.rank = rank;
         this.point = point;
         this.useValue = useValue;
