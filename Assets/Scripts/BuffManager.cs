@@ -5,20 +5,31 @@ public class BuffManager : MonoBehaviour
     //use char type to buff code
     //기존 버프 enum 을 만들어서 해결하려 했으나, json 파일에 넣으면 필요없다고 판단
     //그러므로  char 타입으로 256까지 카드 버프종류를 구분할 수 있도록 타입을 만들기
-    private Dictionary<char, BuffStat> allBuffArchive = new();
+    private Dictionary<char, BuffStat> allBuffStatArchive = new();
+    private Dictionary<char, CardInfo> allCardInfoArchive = new();
 
     private Dictionary<char, BuffStat> containBuffDictionary = new();
 
-    Ray ray;
-    RaycastHit hit;
 
-    BuffData buffData; //초기화용 버프
+
+    //Ray ray;
+    //RaycastHit hit;
+
+    //BuffData buffData; //초기화용 버프
 
     private void Awake()
     {
-        allBuffArchive.Clear();
+        //?_?
+        allBuffStatArchive.Clear();
+        allCardInfoArchive.Clear();
+
         containBuffDictionary.Clear();
         temp();
+    }
+
+    private void Start()
+    {
+        Debug.Log(JsonUtility.ToJson(allBuffStatArchive[(char)1]));
     }
 
     /*
@@ -30,35 +41,15 @@ public class BuffManager : MonoBehaviour
     public void temp()
     {
         // 여기 부분을 json 타입으로 파싱해서 가져와야함.
-        allBuffArchive.Add((char)1,new BuffStat("power",1, 5, 7, 10));
-        allBuffArchive.Add((char)2, new BuffStat("HealthUp", 1, 5, 22, 100));
+        allBuffStatArchive.Add((char)1,new BuffStat(1, 5, 7, 10));
+        allBuffStatArchive.Add((char)2, new BuffStat(1, 5, 22, 100));
 
-        foreach (var item in allBuffArchive.Keys)
+        allCardInfoArchive.Add((char)1, new CardInfo("name","bg","fr","informaton","description"));
+        allCardInfoArchive.Add((char)2, new CardInfo("name", "bg", "fr", "informaton", "description"));
+
+        foreach (var item in allBuffStatArchive.Keys)
         {
-            Debug.Log("키 등록: "+item);
-        }
-    }
-
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.DrawRay(Camera.main.transform.position,ray.direction * 20f,Color.red);
-            if (Physics.Raycast(ray, out hit,50f))
-            {
-                try
-                {
-                    hit.collider.GetComponent<PowerUp>().OnChecked();
-
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log(e);
-                }
-
-            }
+            Debug.Log("키 등록: " + allCardInfoArchive[item].BuffEnumName);
         }
     }
 
@@ -83,13 +74,14 @@ public class BuffManager : MonoBehaviour
         }
         else
         {
-            containBuffDictionary.Add(buffCode, allBuffArchive[buffCode]); //각각에 인스턴스로 존재해버림, 이 데이터 값들을 버프매니저에서 통합으로 관리해야함.
-            Debug.Log("없는 버프 추가 : " + allBuffArchive[buffCode].buffEnumName + " " + "현재 버프 갯수:"+ containBuffDictionary.Count);
+            containBuffDictionary.Add(buffCode, allBuffStatArchive[buffCode]); //각각에 인스턴스로 존재해버림, 이 데이터 값들을 버프매니저에서 통합으로 관리해야함.
+            Debug.Log("없는 버프 추가 : " + allCardInfoArchive[buffCode].BuffEnumName + " " + "현재 버프 갯수:"+ containBuffDictionary.Count);
         }
-        Debug.Log($"대상 버프 : {containBuffDictionary[buffCode].buffEnumName}, " +
+        Debug.Log($"대상 버프 : {allCardInfoArchive[buffCode].BuffEnumName}, " +
             $"스탯 상승 : {containBuffDictionary[buffCode].point}, " +
             $"랭크 : {containBuffDictionary[buffCode].rank}");
     }
+    // 플레이어 적용부 구현하기
 
     public BuffStat BuffUp(BuffStat buffStat)
     {
@@ -119,9 +111,14 @@ public class BuffManager : MonoBehaviour
         return containBuffDictionary[buffCode];
     }
 
-    public Dictionary<char, BuffStat> DicToGenerate()
+    public Dictionary<char, BuffStat> StatToGenerate()
     {
-        return allBuffArchive;
+        return allBuffStatArchive;
+    }
+
+    public Dictionary<char,CardInfo> InfoToGenerate()
+    {
+        return allCardInfoArchive;
     }
 }
 
