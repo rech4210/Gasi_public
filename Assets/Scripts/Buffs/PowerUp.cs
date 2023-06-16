@@ -43,6 +43,7 @@ public class PowerUp : StatusEffect/*, IBuff*/
         }
         
 
+
         //this.transform.GetChild(0).GetChild(1).GetComponent<TextMeshPro>().text = cardInfo.BuffEnumName;
         //this.transform.GetChild(2).GetComponent<TextMeshPro>().text = cardInfo.information;
         //this.transform.GetChild(3).GetComponent<TextMeshPro>().text = cardInfo.description;

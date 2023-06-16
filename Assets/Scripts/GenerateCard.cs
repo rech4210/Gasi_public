@@ -79,10 +79,10 @@ public class GenerateCard : MonoBehaviour
         for (int i = 0; i < cardCount; i++)
         {
             var cardObj = Instantiate(cardPrefab,this.transform);
-            var _buffcode = (char)Random.Range(1, statGenerateDic.Count + 1);
+            buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
 
             cardObj.GetComponent<PowerUp>()
-                .GetRandomCodeWithInfo(_buffcode, infoGenerateDic[_buffcode]);
+                .GetRandomCodeWithInfo(buffCode, infoGenerateDic[buffCode]);
             //Will be change
         }
 

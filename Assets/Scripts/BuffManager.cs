@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 public class BuffManager : MonoBehaviour
 {
@@ -10,10 +12,9 @@ public class BuffManager : MonoBehaviour
 
     private Dictionary<char, BuffStat> containBuffDictionary = new();
 
+    string path = null;
 
-
-    //Ray ray;
-    //RaycastHit hit;
+    int buffCounts = 100;
 
     //BuffData buffData; //초기화용 버프
 
@@ -25,11 +26,25 @@ public class BuffManager : MonoBehaviour
 
         containBuffDictionary.Clear();
         temp();
+
+
     }
 
     private void Start()
     {
-        Debug.Log(JsonUtility.ToJson(allBuffStatArchive[(char)1]));
+        try
+        {
+            SaveJson();
+        }
+
+        catch (System.Exception e)
+        {
+            Debug.Log(e + "Path is not defined");
+            throw e;
+        }
+
+        JsonParsing();
+
     }
 
     /*
@@ -38,6 +53,43 @@ public class BuffManager : MonoBehaviour
      * 3. temp 함수 부분에서 json 파싱하는 부분을 만들어줘야할듯.
      */
 
+
+    public void SaveJson()
+    {
+        path = Path.Combine(Application.dataPath + "/Json/", "BuffData.json");
+        //string jsonData = null;
+
+        File.WriteAllText(path, "");
+        for (int i = 1; i < buffCounts; i++)
+        {
+            BuffData buffData = new BuffData((char)i, new BuffStat(1, 1, 1, 1), new CardInfo("1", "1", "1", "1", "1"));
+            string jsonData = JsonUtility.ToJson(buffData,true);
+            File.AppendAllText(path, jsonData);
+            File.AppendAllText(path, "\n");
+        }
+
+    }
+
+    public void JsonParsing()
+    {
+        path = Path.Combine(Application.dataPath + "/Json/", "BuffData.json");
+
+        string jsonData = File.ReadAllText(path);
+        Debug.Log(jsonData);
+
+        var _buffData = JsonConvert.DeserializeObject<BuffData>(jsonData);
+        //BuffData _buffData =JsonUtility.FromJson<BuffData>(jsonData);
+        _buffData.Print();
+        for (int i = 0; i < buffCounts; i++)
+        {
+            allBuffStatArchive.Add(_buffData.buffCode, _buffData.stat);
+            allCardInfoArchive.Add(_buffData.buffCode, _buffData.cardInfo);
+
+            Debug.Log(allBuffStatArchive[_buffData.buffCode]);
+            Debug.Log(allCardInfoArchive[_buffData.buffCode]);
+
+        }
+    }
     public void temp()
     {
         // 여기 부분을 json 타입으로 파싱해서 가져와야함.

@@ -3,17 +3,17 @@ public abstract class StatusEffect : MonoBehaviour/*, IStatusEffect*/
 {
     protected BuffManager buffManager;
 
-    private int _point;
-    public int point { get { return _point; } protected set { _point = value; } }
+    //private int _point;
+    //public int point { get { return _point; } protected set { _point = value; } }
 
-    private int _rank = 1;
-    public int rank { get { return _rank; } protected set { _rank = value; } }
+    //private int _rank = 1;
+    //public int rank { get { return _rank; } protected set { _rank = value; } }
 
-    private int _upBuffValue;
-    public int upBuffValue { get { return _rank; } protected set { _rank = value; } }
+    //private int _upBuffValue;
+    //public int upBuffValue { get { return _rank; } protected set { _rank = value; } }
 
-    private int _useBuffValue;
-    public int useBuffValue { get { return _rank; } protected set { _rank = value; } }
+    //private int _useBuffValue;
+    //public int useBuffValue { get { return _rank; } protected set { _rank = value; } }
 
     public abstract void Init();
     public abstract void OnChecked();

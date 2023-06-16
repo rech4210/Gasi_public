@@ -1,0 +1,1584 @@
+{
+    "buffCode": 1,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 2,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 3,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 4,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 5,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 6,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 7,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 8,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 9,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 10,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 11,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 12,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 13,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 14,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 15,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 16,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 17,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 18,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 19,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 20,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 21,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 22,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 23,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 24,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 25,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 26,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 27,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 28,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 29,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 30,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 31,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 32,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 33,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 34,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 35,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 36,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 37,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 38,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 39,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 40,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 41,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 42,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 43,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 44,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 45,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 46,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 47,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 48,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 49,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 50,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 51,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 52,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 53,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 54,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 55,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 56,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 57,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 58,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 59,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 60,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 61,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 62,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 63,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 64,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 65,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 66,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 67,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 68,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 69,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 70,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 71,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 72,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 73,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 74,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 75,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 76,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 77,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 78,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 79,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 80,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 81,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 82,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 83,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 84,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 85,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 86,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 87,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 88,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 89,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 90,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 91,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 92,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 93,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 94,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 95,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 96,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 97,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 98,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}
+{
+    "buffCode": 99,
+    "cardInfo": {
+        "BuffEnumName": "1",
+        "BGImage": "1",
+        "FRImage": "1",
+        "information": "1",
+        "description": "1"
+    },
+    "stat": {
+        "rank": 1,
+        "point": 1,
+        "useValue": 1,
+        "upValue": 1
+    }
+}

@@ -155,6 +155,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1147348dfd5c32649ac43e4fd953fca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackStatus:
+    rank: 0
+    point: 0
+    duration: 0
+    scale: 0
 --- !u!114 &91602982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +172,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda1666c860fc224c902c3dc25e2f09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackStatus:
+    rank: 0
+    point: 0
+    duration: 0
+    scale: 0
 --- !u!114 &91602983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +189,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f602cddb36b534e86ddd8a057b731a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackStatus:
+    rank: 0
+    point: 0
+    duration: 0
+    scale: 0
 --- !u!114 &91602984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +206,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d74b81f563cd54bad3815cb9dad89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackStatus:
+    rank: 0
+    point: 0
+    duration: 0
+    scale: 0
 --- !u!4 &91602985
 Transform:
   m_ObjectHideFlags: 0
@@ -238,6 +258,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1147348dfd5c32649ac43e4fd953fca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackStatus:
+    rank: 0
+    point: 0
+    duration: 0
+    scale: 0
 --- !u!136 &319680751
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -550,7 +575,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 6944005444380503360, guid: 78d3f19e4bb95f847be7208d043855c1,
     type: 3}
-  cardCount: 3
+  cardCount: 1
+  eventSystem: {fileID: 2062075330}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,6 +1070,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda1666c860fc224c902c3dc25e2f09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackStatus:
+    rank: 0
+    point: 0
+    duration: 0
+    scale: 0
 --- !u!136 &1045756930
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1155,6 +1186,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f602cddb36b534e86ddd8a057b731a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackStatus:
+    rank: 0
+    point: 0
+    duration: 0
+    scale: 0
 --- !u!136 &1147911867
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1365,6 +1401,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d74b81f563cd54bad3815cb9dad89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackStatus:
+    rank: 0
+    point: 0
+    duration: 0
+    scale: 0
 --- !u!136 &1832752462
 CapsuleCollider:
   m_ObjectHideFlags: 0

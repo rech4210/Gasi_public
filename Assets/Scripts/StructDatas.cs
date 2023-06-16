@@ -11,14 +11,20 @@
  */
 #region 버프 종류, 버프 데이터
 using System;
+using System.Diagnostics;
 
 [Serializable]
 public class BuffData
 {
-    char buffCode;
+    public char buffCode;
     public CardInfo cardInfo;
     public BuffStat stat;
 
+
+    public void Print()
+    {
+        UnityEngine.Debug.Log("test");
+    }
     public BuffData(char buffCode, BuffStat stat, CardInfo cardInfo)
     {
         this.buffCode = buffCode;
@@ -59,10 +65,10 @@ public struct BuffStat
         this.useValue = useValue;
         this.upValue = upValue;
     }
-} 
+}
 #endregion
 
-
+[Serializable]
 #region 공격 종류, 공격 데이터
 public enum AttackType
 {
