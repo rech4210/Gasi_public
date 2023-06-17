@@ -79,10 +79,16 @@ public class GenerateCard : MonoBehaviour
         for (int i = 0; i < cardCount; i++)
         {
             var cardObj = Instantiate(cardPrefab,this.transform);
-            buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
+            //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
+            buffCode = (char)1;
 
-            cardObj.GetComponent<PowerUp>()
-                .GetRandomCodeWithInfo(buffCode, infoGenerateDic[buffCode]);
+            if (infoGenerateDic.TryGetValue(buffCode, out CardInfo cardInfo))
+            {
+                cardObj.GetComponent<PowerUp>()
+                .GetRandomCodeWithInfo(buffCode, cardInfo);
+            }
+            else Debug.Log("Missing value");
+            
             //Will be change
         }
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using Unity.VisualScripting;
 using UnityEngine;
 public class BuffManager : MonoBehaviour
 {
@@ -27,23 +28,24 @@ public class BuffManager : MonoBehaviour
         containBuffDictionary.Clear();
         temp();
 
+        //트라이 캐치 구문이 존나 어색한데?
+        //try
+        //{
+        //    SaveJson();
+        //}
 
+        //catch (System.Exception e)
+        //{
+        //    Debug.Log(e + "Path is not defined");
+        //    throw e;
+        //}
+
+        JsonParsing();
     }
 
     private void Start()
     {
-        try
-        {
-            SaveJson();
-        }
 
-        catch (System.Exception e)
-        {
-            Debug.Log(e + "Path is not defined");
-            throw e;
-        }
-
-        JsonParsing();
 
     }
 
@@ -60,49 +62,64 @@ public class BuffManager : MonoBehaviour
         //string jsonData = null;
 
         File.WriteAllText(path, "");
-        for (int i = 1; i < buffCounts; i++)
+
+        //BuffData buffData = new BuffData((char)i, new BuffStat(1, 1, 1, 1), new CardInfo("1", "1", "1", "1", "1"));
+        //    string jsonData = JsonUtility.ToJson(buffData, true);
+        //    File.AppendAllText(path, jsonData);
+        Structure buffdata = new Structure();
+
+        for (int i = 0; i < buffCounts; i++)
         {
-            BuffData buffData = new BuffData((char)i, new BuffStat(1, 1, 1, 1), new CardInfo("1", "1", "1", "1", "1"));
-            string jsonData = JsonUtility.ToJson(buffData,true);
-            File.AppendAllText(path, jsonData);
-            File.AppendAllText(path, "\n");
+            BuffData buff = new BuffData((char)i, new BuffStat(1, 1, 1, 1), new CardInfo("1", "1", "1", "1", "1"));
+            //File.AppendAllText(path, jsonData);
+            //File.AppendAllText(path, "\n");
+            //File.AppendAllText(path, ",");
+            buffdata.buff[i] = buff;
         }
+        string jsonData = JsonUtility.ToJson(buffdata, true);
+        File.WriteAllText(path, jsonData);
 
     }
 
+
     public void JsonParsing()
     {
+ 
         path = Path.Combine(Application.dataPath + "/Json/", "BuffData.json");
 
         string jsonData = File.ReadAllText(path);
         Debug.Log(jsonData);
 
-        var _buffData = JsonConvert.DeserializeObject<BuffData>(jsonData);
-        //BuffData _buffData =JsonUtility.FromJson<BuffData>(jsonData);
-        _buffData.Print();
+        //var _buffData = JsonConvert.DeserializeObject<BuffData>(jsonData);
+        Structure _buffData = JsonUtility.FromJson<Structure>(jsonData);
+
+        //allBuffStatArchive.Add(_buffData.buffCode, _buffData.stat);
+        //allCardInfoArchive.Add(_buffData.buffCode, _buffData.cardInfo);
+        
+
         for (int i = 0; i < buffCounts; i++)
         {
-            allBuffStatArchive.Add(_buffData.buffCode, _buffData.stat);
-            allCardInfoArchive.Add(_buffData.buffCode, _buffData.cardInfo);
+            allBuffStatArchive.Add(_buffData.buff[i].buffCode, _buffData.buff[i].stat);
+            allCardInfoArchive.Add(_buffData.buff[i].buffCode, _buffData.buff[i].cardInfo);
 
-            Debug.Log(allBuffStatArchive[_buffData.buffCode]);
-            Debug.Log(allCardInfoArchive[_buffData.buffCode]);
+            Debug.Log(allBuffStatArchive[_buffData.buff[i].buffCode].point);
+            Debug.Log(allCardInfoArchive[_buffData.buff[i].buffCode].BuffEnumName);
 
         }
     }
     public void temp()
     {
         // 여기 부분을 json 타입으로 파싱해서 가져와야함.
-        allBuffStatArchive.Add((char)1,new BuffStat(1, 5, 7, 10));
-        allBuffStatArchive.Add((char)2, new BuffStat(1, 5, 22, 100));
+        //allBuffStatArchive.Add((char)1,new BuffStat(1, 5, 7, 10));
+        //allBuffStatArchive.Add((char)2, new BuffStat(1, 5, 22, 100));
 
-        allCardInfoArchive.Add((char)1, new CardInfo("name","bg","fr","informaton","description"));
-        allCardInfoArchive.Add((char)2, new CardInfo("name", "bg", "fr", "informaton", "description"));
+        //allCardInfoArchive.Add((char)1, new CardInfo("name","bg","fr","informaton","description"));
+        //allCardInfoArchive.Add((char)2, new CardInfo("name", "bg", "fr", "informaton", "description"));
 
-        foreach (var item in allBuffStatArchive.Keys)
-        {
-            Debug.Log("키 등록: " + allCardInfoArchive[item].BuffEnumName);
-        }
+        //foreach (var item in allBuffStatArchive.Keys)
+        //{
+        //    Debug.Log("키 등록: " + allCardInfoArchive[item].BuffEnumName);
+        //}
     }
 
     //중앙 허브에서 버프 추가 관리 및 연산까지 수행한 후 뿌려주는게 맞을까?

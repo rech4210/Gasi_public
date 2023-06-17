@@ -11,7 +11,19 @@
  */
 #region 버프 종류, 버프 데이터
 using System;
-using System.Diagnostics;
+
+
+[Serializable]
+public class Structure
+{
+    public BuffData[] buff;
+
+    public Structure()
+    {
+        buff = new BuffData[100];
+    }
+
+}
 
 [Serializable]
 public class BuffData
@@ -20,10 +32,9 @@ public class BuffData
     public CardInfo cardInfo;
     public BuffStat stat;
 
-
     public void Print()
     {
-        UnityEngine.Debug.Log("test");
+        UnityEngine.Debug.Log($"code:{buffCode},{cardInfo.BuffEnumName},{stat.point}");
     }
     public BuffData(char buffCode, BuffStat stat, CardInfo cardInfo)
     {
