@@ -80,7 +80,7 @@ public class GenerateCard : MonoBehaviour
         {
             var cardObj = Instantiate(cardPrefab,this.transform);
             //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
-            buffCode = (char)1;
+            buffCode = (char)0;
 
             if (infoGenerateDic.TryGetValue(buffCode, out CardInfo cardInfo))
             {

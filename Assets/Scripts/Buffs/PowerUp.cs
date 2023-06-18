@@ -1,5 +1,7 @@
+using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PowerUp : StatusEffect/*, IBuff*/
 {
@@ -43,12 +45,27 @@ public class PowerUp : StatusEffect/*, IBuff*/
         }
         
 
+        if (this.transform.GetChild(0).GetChild(0).TryGetComponent<Image>(out Image image))
+        {
+
+            image.sprite = Resources.Load<Sprite>(Path.Combine("CardResource/", cardInfo.BGImage));
+            if (image.sprite == null)
+            {
+                Debug.Log($"There is no resource__{cardInfo.BGImage} at: " + Path.Combine(Application.dataPath + "/CardResource/", ""));
+            }
+        }
+        else
+        {
+            Debug.Log("wrong Path in child backImage");
+        }
+
+        // var asd = this.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("/CardResource/Emoji");
+        //Debug.Log(asd);
 
         //this.transform.GetChild(0).GetChild(1).GetComponent<TextMeshPro>().text = cardInfo.BuffEnumName;
         //this.transform.GetChild(2).GetComponent<TextMeshPro>().text = cardInfo.information;
         //this.transform.GetChild(3).GetComponent<TextMeshPro>().text = cardInfo.description;
 
-        //this.GetComponent<Image>().sprite = JsonUtility.FromJson()cardInfo.BGImage;
         //this.GetComponent<Image>().sprite = cardInfo.FRImage;
         //data = buffManager.SetBuffData(buffCode, stat);
         //Debug.Log(stat);
