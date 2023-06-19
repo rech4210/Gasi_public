@@ -3,11 +3,11 @@
         {
             "buffCode": 0,
             "cardInfo": {
-                "BuffEnumName": "1a",
-                "BGImage": "Emoji",
-                "FRImage": "1",
-                "information": "1",
-                "description": "1"
+                "BuffEnumName": "Emoji",
+                "BGImage": "1",
+                "FRImage": "Emoji",
+                "information": "이모지",
+                "description": "귀여워 보이는 이모지다."
             },
             "stat": {
                 "rank": 1,

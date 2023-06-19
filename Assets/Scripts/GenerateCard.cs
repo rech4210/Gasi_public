@@ -13,7 +13,7 @@ public class GenerateCard : MonoBehaviour
     private Dictionary<char, BuffStat> statGenerateDic;
     private Dictionary<char, CardInfo> infoGenerateDic;
     public GameObject cardPrefab;
-    PowerUp powerUp;
+    StatusEffect buffEffect;
     //추후 카드 프리팹에 들어갈 요소, 이미지 들을 정리할 구조체가 필요할듯.
 
     public int cardCount;
@@ -33,6 +33,7 @@ public class GenerateCard : MonoBehaviour
         if (GameObject.FindWithTag("BuffManager")
             .TryGetComponent<BuffManager>(out BuffManager buffManager))
         {
+            //------이 부분, 버프 데이터가 삭제될 경우 최신화가 아마 안될거임.. 이 부분 버프매니저에서 수정------//
             this.statGenerateDic = buffManager.StatToGenerate();
             this.infoGenerateDic = buffManager.InfoToGenerate();
 
@@ -54,13 +55,15 @@ public class GenerateCard : MonoBehaviour
             //중복 누름에 대한 우려 존재
             foreach (var result in raycastResults) 
             {
-                if(result.gameObject.transform.parent.TryGetComponent<PowerUp>(out PowerUp component))
+                if(result.gameObject.transform.parent.TryGetComponent<StatusEffect>(out StatusEffect component))
                 {
-                    powerUp = component;
-                    powerUp.OnChecked();
+                    buffEffect = component;
+                    buffEffect.OnChecked();
                 }
-                else
+                else if(result.gameObject.transform.parent.TryGetComponent<AbstractAttack>(out AbstractAttack component2))
                 {
+                    component2.
+
                     Debug.Log("찾을수 없는 컴포넌트 대상");
                 }
                 
@@ -80,11 +83,12 @@ public class GenerateCard : MonoBehaviour
         {
             var cardObj = Instantiate(cardPrefab,this.transform);
             //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
+            // 생성된 카드들 배치하는것도 만들어야 함.
             buffCode = (char)0;
 
             if (infoGenerateDic.TryGetValue(buffCode, out CardInfo cardInfo))
             {
-                cardObj.GetComponent<PowerUp>()
+                cardObj.GetComponent<StatusEffect>()
                 .GetRandomCodeWithInfo(buffCode, cardInfo);
             }
             else Debug.Log("Missing value");
@@ -92,6 +96,7 @@ public class GenerateCard : MonoBehaviour
             //Will be change
         }
 
+        
         //for (int i = 0; i < 3; i++)
         //{
         //    buffStorage = (BuffEnumStorage)Random.Range(0, buffStorageLength);

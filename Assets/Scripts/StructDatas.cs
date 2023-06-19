@@ -81,29 +81,58 @@ public struct BuffStat
 
 [Serializable]
 #region 공격 종류, 공격 데이터
+
+//public class AttackStructure
+//{
+
+//}
+
+
 public enum AttackType
 {
     laser,
     guided,
     bullet,
-    trap
+    trap,
+    Upgrade
 }
 
 [Serializable]
 public struct AttackStatus
 {
+    public AttackType attackType;
     public int rank;
     public int point;
     public float duration;
     public float scale;
 
-    public AttackStatus(int rank, int point, float duration, float scale)
+    public AttackStatus(AttackType attackType, int rank, int point, float duration, float scale)
     {
+        this.attackType = attackType;
         this.rank = rank;
         this.point = point;
         this.duration = duration;
         this.scale = scale;
     }
-} 
+}
+
+[Serializable]
+public class AttackInfo
+{
+    public string attackEnumNmae;
+    public string BGImage;
+    public string FRImage;
+    public string information; // 공격이 ... 만큼... 한다. 변화된 수치도 표기
+    public string description; //발이 느려진다.. ex
+    public AttackInfo(string attackEnumNmae, string bGImage, string fRImage, string information, string description)
+    {
+        this.attackEnumNmae = attackEnumNmae;
+        BGImage = bGImage;
+        FRImage = fRImage;
+        this.information = information;
+        this.description = description;
+    }
+}
+
 #endregion
 

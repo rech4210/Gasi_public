@@ -13,6 +13,10 @@ public class BuffManager : MonoBehaviour
 
     private Dictionary<char, BuffStat> containBuffDictionary = new();
 
+    private Dictionary<char, AttackStatus> allAttackStatArchive = new();
+    private Dictionary<char, AttackStatus> containAttackStatDictionary = new();
+
+
     string path = null;
 
     int buffCounts = 100;
@@ -26,12 +30,13 @@ public class BuffManager : MonoBehaviour
         allCardInfoArchive.Clear();
 
         containBuffDictionary.Clear();
-        temp();
 
+
+        SaveAttackJson();
         //트라이 캐치 구문이 존나 어색한데?
         //try
         //{
-        //    SaveJson();
+        //    SaveBuffJson();
         //}
 
         //catch (System.Exception e)
@@ -56,29 +61,42 @@ public class BuffManager : MonoBehaviour
      */
 
 
-    public void SaveJson()
+    public void SaveBuffJson()
     {
         path = Path.Combine(Application.dataPath + "/Json/", "BuffData.json");
         //string jsonData = null;
 
         File.WriteAllText(path, "");
 
-        //BuffData buffData = new BuffData((char)i, new BuffStat(1, 1, 1, 1), new CardInfo("1", "1", "1", "1", "1"));
-        //    string jsonData = JsonUtility.ToJson(buffData, true);
-        //    File.AppendAllText(path, jsonData);
         Structure buffdata = new Structure();
 
         for (int i = 0; i < buffCounts; i++)
         {
             BuffData buff = new BuffData((char)i, new BuffStat(1, 1, 1, 1), new CardInfo("1", "1", "1", "1", "1"));
-            //File.AppendAllText(path, jsonData);
-            //File.AppendAllText(path, "\n");
-            //File.AppendAllText(path, ",");
+
             buffdata.buff[i] = buff;
         }
         string jsonData = JsonUtility.ToJson(buffdata, true);
         File.WriteAllText(path, jsonData);
 
+    }
+
+    public void SaveAttackJson()
+    {
+        path = Path.Combine(Application.dataPath + "/Json/", "AttackData.json");
+        //string jsonData = null;
+
+        File.WriteAllText(path, "");
+
+        AttackStatus attackdata = new AttackStatus();
+
+        for (int i = 0; i < 5; i++)
+        {
+            attackdata = new AttackStatus(AttackType.bullet, 1, 1, 1.0f, 1.0f);
+
+        }
+        string jsonData = JsonUtility.ToJson(attackdata, true);
+        File.WriteAllText(path, jsonData);
     }
 
 
@@ -107,20 +125,7 @@ public class BuffManager : MonoBehaviour
 
         }
     }
-    public void temp()
-    {
-        // 여기 부분을 json 타입으로 파싱해서 가져와야함.
-        //allBuffStatArchive.Add((char)1,new BuffStat(1, 5, 7, 10));
-        //allBuffStatArchive.Add((char)2, new BuffStat(1, 5, 22, 100));
 
-        //allCardInfoArchive.Add((char)1, new CardInfo("name","bg","fr","informaton","description"));
-        //allCardInfoArchive.Add((char)2, new CardInfo("name", "bg", "fr", "informaton", "description"));
-
-        //foreach (var item in allBuffStatArchive.Keys)
-        //{
-        //    Debug.Log("키 등록: " + allCardInfoArchive[item].BuffEnumName);
-        //}
-    }
 
     //중앙 허브에서 버프 추가 관리 및 연산까지 수행한 후 뿌려주는게 맞을까?
     // 아니라면 연산 수행은 카드 단에서 진행하는게 맞을까?
