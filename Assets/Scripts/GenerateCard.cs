@@ -41,6 +41,20 @@ public class GenerateCard : MonoBehaviour
         Generate();
     }
 
+    // 이 부분에서 생성을 어떻게 처리할지?
+
+    // 1. attack과 buff 생성기의 함수를 따로 만들어 처리한다.
+    // 2. 분기로 처리한다.
+    // 3. 나누지 않고 하나의 오브젝트를 받고, Add 컴포넌트 처리
+
+    // 어택 제너레이트 고려해야 할 점.
+    /*
+     * 1. 카드를 누르면 이벤트가 처리되어, 개체가 생성되어야 함.
+     * 2. 생성된 개체는 업데이트된 성능으로 생성됨.
+     * 3. 이미 생성된 개체들도 자동적으로 업데이트 되도록 만들어야 함.
+     * 4. 그렇다면 각 카드에 특수기능을 넣어서 관리하여야 하는지..? 아니라면 
+     * 5. 일괄적용 기능과 함수 제어는 어텍 제너레이터안에 리스트로 관리해야할것 같다.
+    */
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -62,7 +76,6 @@ public class GenerateCard : MonoBehaviour
                 }
                 else if(result.gameObject.transform.parent.TryGetComponent<AbstractAttack>(out AbstractAttack component2))
                 {
-                    component2.
 
                     Debug.Log("찾을수 없는 컴포넌트 대상");
                 }

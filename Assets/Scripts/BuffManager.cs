@@ -13,7 +13,10 @@ public class BuffManager : MonoBehaviour
 
     private Dictionary<char, BuffStat> containBuffDictionary = new();
 
+
     private Dictionary<char, AttackStatus> allAttackStatArchive = new();
+    private Dictionary<char, AttackCardInfo> allAttackCardInfoArchive = new();
+
     private Dictionary<char, AttackStatus> containAttackStatDictionary = new();
 
 
@@ -88,14 +91,16 @@ public class BuffManager : MonoBehaviour
 
         File.WriteAllText(path, "");
 
-        AttackStatus attackdata = new AttackStatus();
+        AttackStructure structure = new AttackStructure();
 
         for (int i = 0; i < 5; i++)
         {
-            attackdata = new AttackStatus(AttackType.bullet, 1, 1, 1.0f, 1.0f);
+            AttackData attackData = new AttackData((char)i,new AttackStatus(AttackType.bullet,1,1,1,1),new AttackCardInfo("1", "1", "1", "1", "1"));
+
+            structure.attackDatas[i] = attackData;
 
         }
-        string jsonData = JsonUtility.ToJson(attackdata, true);
+        string jsonData = JsonUtility.ToJson(structure, true);
         File.WriteAllText(path, jsonData);
     }
 
