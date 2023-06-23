@@ -25,6 +25,7 @@ public class PowerUp : StatusEffect/*, IBuff*/
     {
         Debug.Log("온체크 발동");
         buffManager.AddorUpdateDictionary(buffCode);
+        // 여기에 연산하는 기능?
     }
 
     public override void GetRandomCodeWithInfo(char buffCode, CardInfo cardInfo )
@@ -32,6 +33,11 @@ public class PowerUp : StatusEffect/*, IBuff*/
 
     //card generate
     public override void Init()
+    {
+        SetCardInfo();
+    }
+
+    public override void SetCardInfo()
     {
         //자식들이 동적으로 변하지 않으니까 이 부분은 start에서 파싱해두자.
         if (this.transform.GetChild(0).GetChild(1)

@@ -62,6 +62,7 @@ public class CardInfo
 }
 
 [Serializable]
+// 여기에 버프 타입 넣어야하지 않을까?
 public struct BuffStat
 {
     public int rank;
@@ -79,22 +80,22 @@ public struct BuffStat
 }
 #endregion
 
-[Serializable]
 #region 공격 종류, 공격 데이터
 
 
 
+[Serializable]
 public class AttackStructure
 {
     public AttackData[] attackDatas;
 }
 
-
+[Serializable]
 public class AttackData
 {
-    char attackCode;
-    AttackStatus attackStatus;
-    AttackCardInfo attackInfo;
+    public char attackCode;
+    public AttackStatus attackStatus;
+    public  AttackCardInfo attackInfo;
 
     public AttackData(char attackCode, AttackStatus status ,AttackCardInfo info)
     {
@@ -104,6 +105,7 @@ public class AttackData
     }
 }
 
+[Serializable]
 public enum AttackType
 {
     laser,

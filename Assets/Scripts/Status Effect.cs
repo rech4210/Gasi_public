@@ -1,5 +1,5 @@
 using UnityEngine;
-public abstract class StatusEffect : MonoBehaviour/*, IStatusEffect*/
+public abstract class StatusEffect : MonoBehaviour, ISetCardInfo/*, IStatusEffect*/
 {
     protected BuffManager buffManager;
 
@@ -34,6 +34,8 @@ public abstract class StatusEffect : MonoBehaviour/*, IStatusEffect*/
         }
     }
     public abstract void GetRandomCodeWithInfo(char buffCode, CardInfo cardInfo);
+
+    public abstract void SetCardInfo();
 
     // 아래는 인터페이스인데 이거 이렇게 써야 할 필요 있나?
     //public virtual BuffStat BuffUse()

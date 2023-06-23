@@ -1,22 +1,23 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class AbstractAttack : MonoBehaviour
+public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo
 {
+    char attackCode;
+    AttackType attackType;
     private AttackStatus attackStatus;
+    private AttackCardInfo attackInfo;
+    public AttackCardInfo _attackInfo { get { return attackInfo; }}
 
     public AttackStatus _attackStatus { get {return attackStatus ;} set { SetAttackStatus(value); }}
-    //public int rank
-    //{ get { return attackStatus.rank; } set { attackStatus.rank += value; }}
-    //public int point
-    //{ get { return attackStatus.point; } set { attackStatus.point = value; } }
-    //public float duration
-    //{ get { return attackStatus.duration; } set { attackStatus.duration= value; } }
-    //public float scale
-    //{ get { return attackStatus.scale; } set { attackStatus.scale = value; } }
 
-    public abstract AttackType GetAttackType();
+    public abstract void OnChecked();
 
+
+    public virtual void GetRandomCodeWithInfo(char attackCode, AttackCardInfo cardInfo)
+    { this.attackCode = attackCode; attackInfo = cardInfo; }
+    //public override void GetRandomCodeWithInfo(char buffCode, CardInfo cardInfo)
+    //{ this.buffCode = buffCode; _CardInfo = cardInfo; }
     public virtual void SetAttackStatus(AttackStatus attackStatus)
     {
         _attackStatus = attackStatus;
@@ -38,4 +39,6 @@ public abstract class AbstractAttack : MonoBehaviour
                 break;
         }
     }
+
+    public abstract void SetCardInfo();
 }

@@ -64,6 +64,7 @@ public class BuffManager : MonoBehaviour
      */
 
 
+    #region 제이슨 파싱
     public void SaveBuffJson()
     {
         path = Path.Combine(Application.dataPath + "/Json/", "BuffData.json");
@@ -81,7 +82,6 @@ public class BuffManager : MonoBehaviour
         }
         string jsonData = JsonUtility.ToJson(buffdata, true);
         File.WriteAllText(path, jsonData);
-
     }
 
     public void SaveAttackJson()
@@ -113,12 +113,7 @@ public class BuffManager : MonoBehaviour
         string jsonData = File.ReadAllText(path);
         Debug.Log(jsonData);
 
-        //var _buffData = JsonConvert.DeserializeObject<BuffData>(jsonData);
         Structure _buffData = JsonUtility.FromJson<Structure>(jsonData);
-
-        //allBuffStatArchive.Add(_buffData.buffCode, _buffData.stat);
-        //allCardInfoArchive.Add(_buffData.buffCode, _buffData.cardInfo);
-        
 
         for (int i = 0; i < buffCounts; i++)
         {
@@ -131,12 +126,35 @@ public class BuffManager : MonoBehaviour
         }
     }
 
+    public void JsonAttackParsing()
+    {
+
+        path = Path.Combine(Application.dataPath + "/Json/", "AttackData.json");
+
+        string jsonData = File.ReadAllText(path);
+        Debug.Log(jsonData);
+
+        AttackStructure _attackStruct = JsonUtility.FromJson<AttackStructure>(jsonData);
+
+
+        for (int i = 0; i < buffCounts; i++)
+        {
+            allAttackStatArchive.Add(_attackStruct.attackDatas[i].attackCode, _attackStruct.attackDatas[i].attackStatus);
+            allAttackCardInfoArchive.Add(_attackStruct.attackDatas[i].attackCode, _attackStruct.attackDatas[i].attackInfo);
+
+            Debug.Log(allBuffStatArchive[_attackStruct.attackDatas[i].attackCode].point);
+            Debug.Log(allCardInfoArchive[_attackStruct.attackDatas[i].attackCode].BuffEnumName);
+
+        }
+    }
+
+    #endregion
 
     //중앙 허브에서 버프 추가 관리 및 연산까지 수행한 후 뿌려주는게 맞을까?
     // 아니라면 연산 수행은 카드 단에서 진행하는게 맞을까?
     // 우선 뿌려주는 형식이라면 연산을 버프매니저에서 진행한다.
     // 그리고 중복되는 판단을 point 값이 0인지 아닌지로 판단하는걸로 하자.
-    
+
     // 그건 그렇다쳐도 플레이어한테 들어갈 스탯은 어떻게 구분할건데?
     // 스탯만해도 아주 다양하게 나뉘는데. 버프 코드로 처리할거임? 아니면 .
 
@@ -162,19 +180,19 @@ public class BuffManager : MonoBehaviour
     }
     // 플레이어 적용부 구현하기
 
-    public BuffStat BuffUp(BuffStat buffStat)
+    private BuffStat BuffUp(BuffStat buffStat)
     {
         buffStat.rank++;
         buffStat.point += buffStat.upValue;
         return buffStat;
     }
 
-    public BuffStat BuffUse(BuffStat buffStat)
-    {
-        buffStat.rank = 0;
-        buffStat.point += buffStat.useValue;
-        return buffStat;
-    }
+    //public BuffStat BuffUse(BuffStat buffStat)
+    //{
+    //    buffStat.rank = 0;
+    //    buffStat.point += buffStat.useValue;
+    //    return buffStat;
+    //}
 
     // 굳이 버프를 동적으로 생성해줘야 함? 미리 밖으로 꺼내두고 bool이나 setactive로 buffdata 탐색해서 처리해주면 되는거 아님?
     public void RemoveSomthing(char buffCode) 
@@ -198,6 +216,16 @@ public class BuffManager : MonoBehaviour
     public Dictionary<char,CardInfo> InfoToGenerate()
     {
         return allCardInfoArchive;
+    }
+
+    public Dictionary<char, AttackStatus> AttackStatToGenerate()
+    {
+        return allAttackStatArchive;
+    }
+
+    public Dictionary<char, AttackCardInfo> AttackInfoToGenerate()
+    {
+        return allAttackCardInfoArchive;
     }
 }
 

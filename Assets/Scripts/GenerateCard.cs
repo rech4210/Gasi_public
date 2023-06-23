@@ -12,7 +12,12 @@ public class GenerateCard : MonoBehaviour
     private char buffCode;
     private Dictionary<char, BuffStat> statGenerateDic;
     private Dictionary<char, CardInfo> infoGenerateDic;
+    private Dictionary<char, AttackStatus> attackStatusGenerateDic;
+    private Dictionary<char, AttackCardInfo> attacInfoGenerateDic;
+
     public GameObject cardPrefab;
+    public GameObject attackCardPrefab;
+
     StatusEffect buffEffect;
     //추후 카드 프리팹에 들어갈 요소, 이미지 들을 정리할 구조체가 필요할듯.
 
@@ -28,17 +33,16 @@ public class GenerateCard : MonoBehaviour
     private void Start()
     {
         graphicRaycaster = GetComponent<GraphicRaycaster>();
-        
 
         if (GameObject.FindWithTag("BuffManager")
             .TryGetComponent<BuffManager>(out BuffManager buffManager))
         {
-            //------이 부분, 버프 데이터가 삭제될 경우 최신화가 아마 안될거임.. 이 부분 버프매니저에서 수정------//
             this.statGenerateDic = buffManager.StatToGenerate();
             this.infoGenerateDic = buffManager.InfoToGenerate();
-
+            this.attackStatusGenerateDic = buffManager.AttackStatToGenerate();
+            this.attacInfoGenerateDic = buffManager.AttackInfoToGenerate();
         }
-        Generate();
+        BuffGenerate();
     }
 
     // 이 부분에서 생성을 어떻게 처리할지?
@@ -57,7 +61,7 @@ public class GenerateCard : MonoBehaviour
     */
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) /*스페이스바로도*/)
         {
             pointerEventData = new PointerEventData(eventSystem);
             pointerEventData.position = Input.mousePosition;
@@ -69,15 +73,14 @@ public class GenerateCard : MonoBehaviour
             //중복 누름에 대한 우려 존재
             foreach (var result in raycastResults) 
             {
-                if(result.gameObject.transform.parent.TryGetComponent<StatusEffect>(out StatusEffect component))
+                if(result.gameObject.transform.parent.TryGetComponent<StatusEffect>(out StatusEffect statusEffect))
                 {
-                    buffEffect = component;
+                    buffEffect = statusEffect;
                     buffEffect.OnChecked();
                 }
-                else if(result.gameObject.transform.parent.TryGetComponent<AbstractAttack>(out AbstractAttack component2))
+                else if(result.gameObject.transform.parent.TryGetComponent<AbstractAttack>(out AbstractAttack attack))
                 {
-
-                    Debug.Log("찾을수 없는 컴포넌트 대상");
+                    attack.OnChecked();
                 }
                 
             }
@@ -87,29 +90,70 @@ public class GenerateCard : MonoBehaviour
     // 고려 사항
     /* 1. 카드 개수
      * 2. 코드 지급 확률 계산
-     * 3. 
+     * 3. 카드 생성 시간
      * 
      */
-    void Generate() // -> 여기에 특수, 악마, 천사, 일반카드 재사용하도록 짜기
+    void BuffGenerate() // -> 여기에 특수, 악마, 천사, 일반카드 재사용하도록 짜기
     {
         for (int i = 0; i < cardCount; i++)
         {
             var cardObj = Instantiate(cardPrefab,this.transform);
             //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
             // 생성된 카드들 배치하는것도 만들어야 함.
-            buffCode = (char)0;
+            char _buffCode = (char)0;
 
-            if (infoGenerateDic.TryGetValue(buffCode, out CardInfo cardInfo))
+            if (infoGenerateDic.TryGetValue(_buffCode, out CardInfo cardInfo))
             {
                 cardObj.GetComponent<StatusEffect>()
                 .GetRandomCodeWithInfo(buffCode, cardInfo);
+                //스탯을 어떻게 적용시켜줄건지?
             }
             else Debug.Log("Missing value");
             
             //Will be change
         }
+    }
 
-        
+    void AttackGenerate()
+    {
+        //카드 카운트 수정
+        for (int i = 0; i < cardCount; i++)
+        {
+            var cardObj = Instantiate(attackCardPrefab, this.transform);
+
+
+            //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
+            char _attackCode = (char)0;
+            switch (attackStatusGenerateDic[_attackCode].attackType)
+            {
+                case AttackType.laser:
+                    cardObj.AddComponent<LaserAttack>();
+                    break;
+                case AttackType.guided:
+                    cardObj.AddComponent<TrapAttack>();
+                    break;
+                case AttackType.bullet:
+                    cardObj.AddComponent<BulletAttack>();
+                    break;
+                case AttackType.trap:
+                    cardObj.AddComponent<TrapAttack>();
+                    break;
+                default:
+                    Debug.Log("There is no maching attack type");
+                    break;
+            }
+
+            // 어택 데이터 어떻게 처리할건지? 여기서 가져올거임?
+            if (attacInfoGenerateDic.TryGetValue(_attackCode, out AttackCardInfo attacinfo))
+            {
+                cardObj.GetComponent<AbstractAttack>().GetRandomCodeWithInfo(_attackCode,attacinfo);
+            }
+            else Debug.Log("Missing value");
+
+            //Will be change
+        }
+
+
         //for (int i = 0; i < 3; i++)
         //{
         //    buffStorage = (BuffEnumStorage)Random.Range(0, buffStorageLength);
