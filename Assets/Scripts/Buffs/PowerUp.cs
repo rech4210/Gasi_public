@@ -8,14 +8,13 @@ public class PowerUp : StatusEffect/*, IBuff*/
     // Card Generate -> search BuffContainer -> add buffcode in card
     // -> click ->  
     char buffCode;
-
     CardInfo cardInfo;
-    CardInfo _CardInfo
-    { /*호버 정보표기*/ get { return cardInfo; }
-      /*카드 변화 리플렉션*/ set { cardInfo = value; Init(); } }
+    BuffStat buffStat;
 
-    //BuffStat stat; // 각 카드가 data를 가지고 있어서 생기는 문제임 그냥. -> 버프 매니저에서 일괄적으로 버프 상태를 관리하도록 해야함.
-    //BuffData data;
+    //CardInfo _CardInfo
+    //{ /*호버 정보표기*/ get { return cardInfo; }
+    //  /*카드 변화 리플렉션*/ set { cardInfo = value; Init(); } }
+
 
     private void Start()
     {
@@ -28,14 +27,8 @@ public class PowerUp : StatusEffect/*, IBuff*/
         // 여기에 연산하는 기능?
     }
 
-    public override void GetRandomCodeWithInfo(char buffCode, CardInfo cardInfo )
-    { this.buffCode = buffCode; _CardInfo = cardInfo; }
-
-    //card generate
-    public override void Init()
-    {
-        SetCardInfo();
-    }
+    public override void GetRandomCodeWithInfo(char buffCode, CardInfo cardInfo, BuffStat buffStat )
+    { this.buffCode = buffCode; this.cardInfo = cardInfo; this.buffStat = buffStat; }
 
     public override void SetCardInfo()
     {
@@ -43,7 +36,7 @@ public class PowerUp : StatusEffect/*, IBuff*/
         if (this.transform.GetChild(0).GetChild(1)
             .TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI buffname))
         {
-            buffname.text = cardInfo.BuffEnumName;
+            buffname.text = cardInfo.cardName;
         }
         else Debug.LogError("Not Setted Object You're null!!");
 
@@ -65,10 +58,10 @@ public class PowerUp : StatusEffect/*, IBuff*/
         if (this.transform.GetChild(0).GetChild(0).TryGetComponent<Image>(out Image frontImage))
         {
 
-            frontImage.sprite = Resources.Load<Sprite>(Path.Combine("CardResource/", cardInfo.FRImage));
+            frontImage.sprite = Resources.Load<Sprite>(Path.Combine("BuffCardResource/", cardInfo.fRImage));
             if (frontImage.sprite == null)
             {
-                Debug.Log($"There is no resource__{cardInfo.FRImage} at: " + Path.Combine(Application.dataPath + "/CardResource/", ""));
+                Debug.Log($"There is no resource__{cardInfo.fRImage} at: " + Path.Combine(Application.dataPath + "/BuffCardResource/", ""));
             }
         }
         else
@@ -79,10 +72,10 @@ public class PowerUp : StatusEffect/*, IBuff*/
         if (this.transform.GetChild(0).TryGetComponent<Image>(out Image backImage))
         {
 
-            backImage.sprite = Resources.Load<Sprite>(Path.Combine("CardResource/", cardInfo.BGImage));
+            backImage.sprite = Resources.Load<Sprite>(Path.Combine("BuffCardResource/", cardInfo.bGImage));
             if (backImage.sprite == null)
             {
-                Debug.Log($"There is no resource__{cardInfo.BGImage} at: " + Path.Combine(Application.dataPath + "/CardResource/", ""));
+                Debug.Log($"There is no resource__{cardInfo.bGImage} at: " + Path.Combine(Application.dataPath + "/BuffCardResource/", ""));
             }
         }
         else

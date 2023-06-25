@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine;
 public class BuffManager : MonoBehaviour
 {
@@ -31,6 +33,8 @@ public class BuffManager : MonoBehaviour
         //?_?
         allBuffStatArchive.Clear();
         allCardInfoArchive.Clear();
+        allAttackStatArchive.Clear();
+        allAttackCardInfoArchive.Clear();
 
         containBuffDictionary.Clear();
 
@@ -48,7 +52,8 @@ public class BuffManager : MonoBehaviour
         //    throw e;
         //}
 
-        JsonParsing();
+        //JsonParsing();
+        JsonAttackParsing();
     }
 
     private void Start()
@@ -76,7 +81,7 @@ public class BuffManager : MonoBehaviour
 
         for (int i = 0; i < buffCounts; i++)
         {
-            BuffData buff = new BuffData((char)i, new BuffStat(1, 1, 1, 1), new CardInfo("1", "1", "1", "1", "1"));
+            BuffData buff = new BuffData((char)i, new BuffStat(1, 1, 1, 1), new CardInfo(BuffStatEnum.empty,"1", "1", "1", "1", "1"));
 
             buffdata.buff[i] = buff;
         }
@@ -86,16 +91,17 @@ public class BuffManager : MonoBehaviour
 
     public void SaveAttackJson()
     {
-        path = Path.Combine(Application.dataPath + "/Json/", "AttackData.json");
+        path = Path.Combine(Application.dataPath + "/Json/", "AttackData.json") ?? null;
         //string jsonData = null;
+        if (path == null) return;
 
         File.WriteAllText(path, "");
 
         AttackStructure structure = new AttackStructure();
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 10; i++)
         {
-            AttackData attackData = new AttackData((char)i,new AttackStatus(AttackType.bullet,1,1,1,1),new AttackCardInfo("1", "1", "1", "1", "1"));
+            AttackData attackData = new AttackData((char)i,new AttackStatus(AttackType.bullet,1,1,1,1),new AttackCardInfo(AttackStatEnum.empty,"1", "1", "1", "1", "1"));
 
             structure.attackDatas[i] = attackData;
 
@@ -121,7 +127,7 @@ public class BuffManager : MonoBehaviour
             allCardInfoArchive.Add(_buffData.buff[i].buffCode, _buffData.buff[i].cardInfo);
 
             Debug.Log(allBuffStatArchive[_buffData.buff[i].buffCode].point);
-            Debug.Log(allCardInfoArchive[_buffData.buff[i].buffCode].BuffEnumName);
+            Debug.Log(allCardInfoArchive[_buffData.buff[i].buffCode].cardName);
 
         }
     }
@@ -137,13 +143,13 @@ public class BuffManager : MonoBehaviour
         AttackStructure _attackStruct = JsonUtility.FromJson<AttackStructure>(jsonData);
 
 
-        for (int i = 0; i < buffCounts; i++)
+        for (int i = 0; i < 10; i++)
         {
             allAttackStatArchive.Add(_attackStruct.attackDatas[i].attackCode, _attackStruct.attackDatas[i].attackStatus);
             allAttackCardInfoArchive.Add(_attackStruct.attackDatas[i].attackCode, _attackStruct.attackDatas[i].attackInfo);
 
-            Debug.Log(allBuffStatArchive[_attackStruct.attackDatas[i].attackCode].point);
-            Debug.Log(allCardInfoArchive[_attackStruct.attackDatas[i].attackCode].BuffEnumName);
+            Debug.Log(allAttackStatArchive[_attackStruct.attackDatas[i].attackCode].point);
+            Debug.Log(allAttackCardInfoArchive[_attackStruct.attackDatas[i].attackCode].attackName);
 
         }
     }
@@ -172,9 +178,9 @@ public class BuffManager : MonoBehaviour
         else
         {
             containBuffDictionary.Add(buffCode, allBuffStatArchive[buffCode]); //각각에 인스턴스로 존재해버림, 이 데이터 값들을 버프매니저에서 통합으로 관리해야함.
-            Debug.Log("없는 버프 추가 : " + allCardInfoArchive[buffCode].BuffEnumName + " " + "현재 버프 갯수:"+ containBuffDictionary.Count);
+            Debug.Log("없는 버프 추가 : " + allCardInfoArchive[buffCode].cardName + " " + "현재 버프 갯수:"+ containBuffDictionary.Count);
         }
-        Debug.Log($"대상 버프 : {allCardInfoArchive[buffCode].BuffEnumName}, " +
+        Debug.Log($"대상 버프 : {allCardInfoArchive[buffCode].cardName}, " +
             $"스탯 상승 : {containBuffDictionary[buffCode].point}, " +
             $"랭크 : {containBuffDictionary[buffCode].rank}");
     }

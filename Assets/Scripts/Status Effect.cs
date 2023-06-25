@@ -15,7 +15,6 @@ public abstract class StatusEffect : MonoBehaviour, ISetCardInfo/*, IStatusEffec
     //private int _useBuffValue;
     //public int useBuffValue { get { return _rank; } protected set { _rank = value; } }
 
-    public abstract void Init();
     public abstract void OnChecked();
     protected void FindBuffManager(BuffManager buff)
     {
@@ -33,7 +32,7 @@ public abstract class StatusEffect : MonoBehaviour, ISetCardInfo/*, IStatusEffec
             throw e;
         }
     }
-    public abstract void GetRandomCodeWithInfo(char buffCode, CardInfo cardInfo);
+    public abstract void GetRandomCodeWithInfo(char buffCode, CardInfo cardInfo, BuffStat buffStat);
 
     public abstract void SetCardInfo();
 

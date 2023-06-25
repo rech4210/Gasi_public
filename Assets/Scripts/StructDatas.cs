@@ -25,6 +25,17 @@ public class Structure
 
 }
 
+
+[Serializable]
+public enum BuffStatEnum
+{
+    health,
+    speed,
+    endurance,
+    empty
+}
+
+
 [Serializable]
 public class BuffData
 {
@@ -34,7 +45,7 @@ public class BuffData
 
     public void Print()
     {
-        UnityEngine.Debug.Log($"code:{buffCode},{cardInfo.BuffEnumName},{stat.point}");
+        UnityEngine.Debug.Log($"code:{buffCode},{cardInfo.cardName},{stat.point}");
     }
     public BuffData(char buffCode, BuffStat stat, CardInfo cardInfo)
     {
@@ -46,16 +57,18 @@ public class BuffData
 [Serializable]
 public class CardInfo
 {
-    public string BuffEnumName;
-    public string BGImage;
-    public string FRImage;
+    public BuffStatEnum buffType;
+    public string cardName;
+    public string bGImage;
+    public string fRImage;
     public string information; // 공격이 ... 만큼... 한다. 변화된 수치도 표기
     public string description; //발이 느려진다.. ex
-    public CardInfo(string buffEnumName, string bGImage, string fRImage, string information, string description)
+    public CardInfo(BuffStatEnum bufftype,string cardName, string bGImage, string fRImage, string information, string description)
     {
-        BuffEnumName = buffEnumName;
-        BGImage = bGImage;
-        FRImage = fRImage;
+        this.buffType = bufftype;
+        this.cardName = cardName;
+        this.bGImage = bGImage;
+        this.fRImage = fRImage;
         this.information = information;
         this.description = description;
     }
@@ -88,6 +101,11 @@ public struct BuffStat
 public class AttackStructure
 {
     public AttackData[] attackDatas;
+
+    public AttackStructure()
+    {
+        attackDatas = new AttackData[10];
+    }
 }
 
 [Serializable]
@@ -103,6 +121,16 @@ public class AttackData
         attackStatus = status;
         attackInfo = info;
     }
+}
+
+
+[Serializable]
+public enum AttackStatEnum
+{
+    duration,
+    scale,
+    damage,
+    empty
 }
 
 [Serializable]
@@ -137,16 +165,18 @@ public struct AttackStatus
 [Serializable]
 public class AttackCardInfo
 {
-    public string attackEnumNmae;
-    public string BGImage;
-    public string FRImage;
+    public AttackStatEnum buffType;
+    public string attackName;
+    public string bGImage;
+    public string fRImage;
     public string information; // 공격이 ... 만큼... 한다. 변화된 수치도 표기
     public string description; //발이 느려진다.. ex
-    public AttackCardInfo(string attackEnumNmae, string bGImage, string fRImage, string information, string description)
+    public AttackCardInfo(AttackStatEnum bufftype,string attackBuffName, string bGImage, string fRImage, string information, string description)
     {
-        this.attackEnumNmae = attackEnumNmae;
-        BGImage = bGImage;
-        FRImage = fRImage;
+        buffType = bufftype;
+        this.attackName = attackBuffName;
+        this.bGImage = bGImage;
+        this.fRImage = fRImage;
         this.information = information;
         this.description = description;
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,6 +10,7 @@ using UnityEngine.UI;
 
 public class GenerateCard : MonoBehaviour
 {
+    private float timeSinceStart;
     private char buffCode;
     private Dictionary<char, BuffStat> statGenerateDic;
     private Dictionary<char, CardInfo> infoGenerateDic;
@@ -32,6 +34,7 @@ public class GenerateCard : MonoBehaviour
 
     private void Start()
     {
+        
         graphicRaycaster = GetComponent<GraphicRaycaster>();
 
         if (GameObject.FindWithTag("BuffManager")
@@ -42,7 +45,8 @@ public class GenerateCard : MonoBehaviour
             this.attackStatusGenerateDic = buffManager.AttackStatToGenerate();
             this.attacInfoGenerateDic = buffManager.AttackInfoToGenerate();
         }
-        BuffGenerate();
+
+        AttackGenerate();
     }
 
     // 이 부분에서 생성을 어떻게 처리할지?
@@ -61,6 +65,10 @@ public class GenerateCard : MonoBehaviour
     */
     private void Update()
     {
+        if ((timeSinceStart  = Time.realtimeSinceStartup)% 30 == 0)
+        {
+            
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0) /*스페이스바로도*/)
         {
             pointerEventData = new PointerEventData(eventSystem);
@@ -82,7 +90,8 @@ public class GenerateCard : MonoBehaviour
                 {
                     attack.OnChecked();
                 }
-                
+                else
+                { Debug.Log("not defined raytarget"); }
             }
         }
     }
@@ -102,10 +111,12 @@ public class GenerateCard : MonoBehaviour
             // 생성된 카드들 배치하는것도 만들어야 함.
             char _buffCode = (char)0;
 
+            var targetCard = cardObj.GetComponent<StatusEffect>() ??  null;
+
             if (infoGenerateDic.TryGetValue(_buffCode, out CardInfo cardInfo))
             {
-                cardObj.GetComponent<StatusEffect>()
-                .GetRandomCodeWithInfo(buffCode, cardInfo);
+                targetCard?.GetRandomCodeWithInfo(buffCode, cardInfo, statGenerateDic[buffCode]);
+                targetCard?.SetCardInfo();
                 //스탯을 어떻게 적용시켜줄건지?
             }
             else Debug.Log("Missing value");
@@ -124,19 +135,20 @@ public class GenerateCard : MonoBehaviour
 
             //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
             char _attackCode = (char)0;
+            AbstractAttack targetCard = null;
             switch (attackStatusGenerateDic[_attackCode].attackType)
             {
                 case AttackType.laser:
-                    cardObj.AddComponent<LaserAttack>();
+                    targetCard = cardObj.AddComponent<LaserAttack>();
                     break;
                 case AttackType.guided:
-                    cardObj.AddComponent<TrapAttack>();
+                    targetCard = cardObj.AddComponent<TrapAttack>();
                     break;
                 case AttackType.bullet:
-                    cardObj.AddComponent<BulletAttack>();
+                    targetCard = cardObj.AddComponent<BulletAttack>();
                     break;
                 case AttackType.trap:
-                    cardObj.AddComponent<TrapAttack>();
+                    targetCard = cardObj.AddComponent<TrapAttack>();
                     break;
                 default:
                     Debug.Log("There is no maching attack type");
@@ -146,7 +158,8 @@ public class GenerateCard : MonoBehaviour
             // 어택 데이터 어떻게 처리할건지? 여기서 가져올거임?
             if (attacInfoGenerateDic.TryGetValue(_attackCode, out AttackCardInfo attacinfo))
             {
-                cardObj.GetComponent<AbstractAttack>().GetRandomCodeWithInfo(_attackCode,attacinfo);
+                targetCard?.GetRandomCodeWithInfo(_attackCode, attacinfo, attackStatusGenerateDic[_attackCode]);
+                targetCard?.SetCardInfo();
             }
             else Debug.Log("Missing value");
 
