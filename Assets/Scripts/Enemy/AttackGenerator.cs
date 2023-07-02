@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AttackGenerator : MonoBehaviour
@@ -39,10 +36,19 @@ public class AttackGenerator : MonoBehaviour
         }
     }
 
+
+    Vector3 RandomPose()
+    {
+        return new Vector3(
+        UnityEngine.Random.Range(17f, -17f),
+        UnityEngine.Random.Range(0, 0),
+        UnityEngine.Random.Range(1.2f, -20f));
+    }
+
     public void Generate(AttackStatus status)
     {
         Debug.Log(((int)status.attackType).ToString());
-        var obj = Instantiate(attackObjectPrefab[(int)status.attackType], this.transform.position,this.transform.rotation);
+        var obj = Instantiate(attackObjectPrefab[(int)status.attackType], RandomPose(),this.transform.rotation);
         attackObjects.Add(obj);
 
         var component = obj.GetComponent<AttackFunc>();
@@ -64,7 +70,7 @@ public class AttackGenerator : MonoBehaviour
         //삭제해질 경우 해당 부분에서 에러가 발생할 여지가 있다. 수정
         foreach (var obj in objectsComponent) 
         {
-            if (obj.attackType == status.attackType) 
+            if (obj._AttackType == status.attackType) 
             {
                 obj.GetComponent<AttackFunc>()?.CalcStat(status,info);
             }
@@ -79,7 +85,7 @@ public class AttackGenerator : MonoBehaviour
     {
         foreach (var obj in objectsComponent)
         {
-            if (obj.attackType == status.attackType)
+            if (obj._AttackType == status.attackType)
             {
                 obj.GetComponent<AttackFunc>()?.Invoke(skill,0);
             }

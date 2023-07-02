@@ -5,6 +5,7 @@ public class BulletAttack : AbstractAttack
     {
         FindAttackGenerator(attackGenerator);
     }
+    // 온체크시 버프 매니저에게 영향을 줘야함.수정? 어택 제너레이터에서 해야할듯.
     public override void OnChecked()
     {
         if ((int)_AttackCardInfo.attackCardEnum > skillCheckNum)
@@ -20,6 +21,8 @@ public class BulletAttack : AbstractAttack
         {
             attackGenerator.IncreaseTargetStat(_AttackStatus, _AttackCardInfo);
         }
+
+        this.gameObject.SetActive(false);
     }
 
     public override void SetCardInfo()

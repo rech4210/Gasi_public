@@ -37,7 +37,7 @@ public class BuffManager : MonoBehaviour
 
         containBuffDictionary.Clear();
         //SaveBuffJson();
-        SaveAttackJson();
+        //SaveAttackJson();
 
         //트라이 캐치 구문이 존나 어색한데?
         //try

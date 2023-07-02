@@ -2,7 +2,17 @@ using UnityEngine;
 
 public abstract class AttackFunc : MonoBehaviour, IUseSkill
 {
-    public AttackType attackType;
+    AttackType attackType;
+
+    protected void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        //var rotationMatrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
+        //Gizmos.matrix = rotationMatrix;
+        Gizmos.DrawRay(this.transform.position, _Player.transform.position - transform.position);
+    }
+
+    public AttackType _AttackType { get { return attackType;} set {attackType = value;} }
     private GameObject player;
     public GameObject _Player {protected get { return player;} set { player = value; } }
     public abstract void Skill_1();

@@ -11,17 +11,17 @@
             },
             "attackInfo": {
                 "attackCardEnum": 0,
-                "attackName": "1",
-                "bGImage": "1",
-                "fRImage": "1",
-                "information": "1",
-                "description": "1"
+                "attackName": "Laser Attack",
+                "bGImage": "Laser",
+                "fRImage": "Laser_f",
+                "information": "Spawn Laser Object",
+                "description": "In time the Spark explosed"
             }
         },
         {
             "attackCode": 1,
             "attackStatus": {
-                "attackType": 0,
+                "attackType": 1,
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
@@ -29,17 +29,17 @@
             },
             "attackInfo": {
                 "attackCardEnum": 0,
-                "attackName": "1",
-                "bGImage": "1",
-                "fRImage": "1",
-                "information": "1",
-                "description": "1"
+                "attackName": "Guided Attack",
+                "bGImage": "Laser",
+                "fRImage": "Guided",
+                "information": "Spawn Guided Object",
+                "description": "They chase me!"
             }
         },
         {
             "attackCode": 2,
             "attackStatus": {
-                "attackType": 0,
+                "attackType": 2,
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
@@ -47,17 +47,17 @@
             },
             "attackInfo": {
                 "attackCardEnum": 0,
-                "attackName": "1",
-                "bGImage": "1",
-                "fRImage": "1",
-                "information": "1",
-                "description": "1"
+                "attackName": "Bullet Attack",
+                "bGImage": "Laser",
+                "fRImage": "Bullet",
+                "information": "Spawn Bullet Object",
+                "description": "pshwwwww"
             }
         },
         {
             "attackCode": 3,
             "attackStatus": {
-                "attackType": 0,
+                "attackType": 3,
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
@@ -65,11 +65,11 @@
             },
             "attackInfo": {
                 "attackCardEnum": 0,
-                "attackName": "1",
-                "bGImage": "1",
-                "fRImage": "1",
-                "information": "1",
-                "description": "1"
+                "attackName": "Trap Attack",
+                "bGImage": "Laser",
+                "fRImage": "Trap",
+                "information": "Spawn Trap Object",
+                "description": "be careful"
             }
         },
         {
@@ -83,11 +83,11 @@
             },
             "attackInfo": {
                 "attackCardEnum": 0,
-                "attackName": "1",
-                "bGImage": "1",
-                "fRImage": "1",
-                "information": "1",
-                "description": "1"
+                "attackName": "Laser Attack",
+                "bGImage": "Laser",
+                "fRImage": "Laser_f",
+                "information": "Spawn Laser Object",
+                "description": "In time the Spark explosed"
             }
         },
         {

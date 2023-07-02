@@ -1,12 +1,18 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Trap : AttackFunc , IUseSkill
 {
-    AttackType type = AttackType.trap;
-    private void Update()
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    //var rotationMatrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
+    //    //Gizmos.matrix = rotationMatrix;
+    //    Gizmos.DrawRay(this.transform.position, transform.position - _Player.transform.position);
+    //}
+    private void FixedUpdate()
     {
-        transform.rotation = Quaternion.LookRotation(_Player.transform.position);
-
+        transform.rotation = Quaternion.LookRotation(_Player.transform.position - transform.position);
     }
 
     public override void CalcStat(AttackStatus status, AttackCardInfo info)

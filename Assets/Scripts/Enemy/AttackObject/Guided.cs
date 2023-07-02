@@ -2,13 +2,17 @@ using UnityEngine;
 
 public class Guided : AttackFunc, IUseSkill
 {
-    AttackType type = AttackType.guided;
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    //var rotationMatrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
+    //    //Gizmos.matrix = rotationMatrix;
+    //    Gizmos.DrawRay(this.transform.position, transform.position - _Player.transform.position);
 
-
-    private void Update()
+    //}
+    private void FixedUpdate()
     {
-        transform.rotation = Quaternion.LookRotation(_Player.transform.position);
-
+        transform.rotation = Quaternion.LookRotation(_Player.transform.position - transform.position);
     }
     public override void CalcStat(AttackStatus status, AttackCardInfo info)
     {

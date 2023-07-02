@@ -125,14 +125,16 @@ public class GenerateCard : MonoBehaviour
 
     void AttackGenerate()
     {
+        
         //카드 카운트 수정
         for (int i = 0; i < cardCount; i++)
         {
             var cardObj = Instantiate(attackCardPrefab, this.transform);
 
+            cardObj.GetComponent<RectTransform>().anchoredPosition = new Vector2((-210 + (i * 140)),0f) ;
 
             //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
-            char _attackCode = (char)0;
+            char _attackCode = (char)UnityEngine.Random.Range(0,3);
             AbstractAttack targetCard = null;
             switch (attackStatusGenerateDic[_attackCode].attackType)
             {

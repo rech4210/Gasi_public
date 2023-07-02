@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class Laser : AttackFunc, IUseSkill
 {
-    AttackType type = AttackType.laser;
 
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    //var rotationMatrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
+    //    //Gizmos.matrix = rotationMatrix;
+    //    Gizmos.DrawRay(this.transform.position, transform.position - _Player.transform.position);
+
+    //}
     private void FixedUpdate()
     {
-        if (_Player == null)
-        {
-            Debug.Log("null");
-        }
         transform.rotation = Quaternion.LookRotation(_Player.transform.position - transform.position);
     }
     public override void CalcStat(AttackStatus status, AttackCardInfo info)
