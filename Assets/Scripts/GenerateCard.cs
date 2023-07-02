@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-
 //json 파일 문자 경로로 스프라이트 가져오기
-
 
 public class GenerateCard : MonoBehaviour
 {
@@ -159,6 +157,7 @@ public class GenerateCard : MonoBehaviour
             if (attacInfoGenerateDic.TryGetValue(_attackCode, out AttackCardInfo attacinfo))
             {
                 targetCard?.GetRandomCodeWithInfo(_attackCode, attacinfo, attackStatusGenerateDic[_attackCode]);
+                Debug.Log(targetCard?._AttackCardInfo.attackCardEnum);
                 targetCard?.SetCardInfo();
             }
             else Debug.Log("Missing value");

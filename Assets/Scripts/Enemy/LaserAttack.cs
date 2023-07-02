@@ -1,25 +1,33 @@
 
-using System.IO;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-public class LaserAttack : AbstractAttack , IUseSkill
-{
 
-    AttackType attackType = AttackType.laser;
+public class LaserAttack : AbstractAttack
+{
+    
+    public void Start()
+    {
+        FindAttackGenerator(attackGenerator);
+    }
+    // 온체크시 버프 매니저에게 영향을 줘야함.수정? 어택 제너레이터에서 해야할듯.
     public override void OnChecked()
     {
-        throw new System.NotImplementedException();
-    }
-    public void Skill_1()
-    {
-        DoubleLaser();
+        if ((int)_AttackCardInfo.attackCardEnum > skillCheckNum)
+        {
+            Skill();
+        }
+        else if (_AttackCardInfo.attackCardEnum == AttackCardEnum.generate)
+        {
+            attackGenerator?.Generate(_AttackStatus);
+        }
+        // 조건 바꿔야할듯? 수정
+        else if((int)_AttackCardInfo.attackCardEnum < skillCheckNum)
+        {
+            attackGenerator.IncreaseTargetStat(_AttackStatus, _AttackCardInfo);
+        }
+
+        this.gameObject.SetActive(false);
     }
 
-    public void DoubleLaser()
-    {
-
-    }
     public override void SetCardInfo()
     {
         base.SetCardInfo();

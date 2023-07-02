@@ -1,21 +1,26 @@
-using System.IO;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-public class BulletAttack : AbstractAttack, IUseSkill
+
+public class BulletAttack : AbstractAttack
 {
-    AttackType attackType = AttackType.bullet;
+    public void Start()
+    {
+        FindAttackGenerator(attackGenerator);
+    }
     public override void OnChecked()
     {
-
-        throw new System.NotImplementedException();
+        if ((int)_AttackCardInfo.attackCardEnum > skillCheckNum)
+        {
+            Skill();
+        }
+        else if (_AttackCardInfo.attackCardEnum == AttackCardEnum.generate)
+        {
+            attackGenerator?.Generate(_AttackStatus);
+        }
+        // 조건 바꿔야할듯? 수정
+        else if ((int)_AttackCardInfo.attackCardEnum < skillCheckNum)
+        {
+            attackGenerator.IncreaseTargetStat(_AttackStatus, _AttackCardInfo);
+        }
     }
-
-    public void Skill_1()
-    {
-        throw new System.NotImplementedException();
-    }
-
 
     public override void SetCardInfo()
     {

@@ -3,14 +3,14 @@
         {
             "attackCode": 0,
             "attackStatus": {
-                "attackType": 2,
+                "attackType": 0,
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
                 "scale": 1.0
             },
             "attackInfo": {
-                "buffType": 3,
+                "attackCardEnum": 0,
                 "attackName": "1",
                 "bGImage": "1",
                 "fRImage": "1",
@@ -21,14 +21,14 @@
         {
             "attackCode": 1,
             "attackStatus": {
-                "attackType": 2,
+                "attackType": 0,
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
                 "scale": 1.0
             },
             "attackInfo": {
-                "buffType": 3,
+                "attackCardEnum": 0,
                 "attackName": "1",
                 "bGImage": "1",
                 "fRImage": "1",
@@ -39,14 +39,14 @@
         {
             "attackCode": 2,
             "attackStatus": {
-                "attackType": 2,
+                "attackType": 0,
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
                 "scale": 1.0
             },
             "attackInfo": {
-                "buffType": 3,
+                "attackCardEnum": 0,
                 "attackName": "1",
                 "bGImage": "1",
                 "fRImage": "1",
@@ -57,14 +57,14 @@
         {
             "attackCode": 3,
             "attackStatus": {
-                "attackType": 2,
+                "attackType": 0,
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
                 "scale": 1.0
             },
             "attackInfo": {
-                "buffType": 3,
+                "attackCardEnum": 0,
                 "attackName": "1",
                 "bGImage": "1",
                 "fRImage": "1",
@@ -75,14 +75,14 @@
         {
             "attackCode": 4,
             "attackStatus": {
-                "attackType": 2,
+                "attackType": 0,
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
                 "scale": 1.0
             },
             "attackInfo": {
-                "buffType": 3,
+                "attackCardEnum": 0,
                 "attackName": "1",
                 "bGImage": "1",
                 "fRImage": "1",
@@ -93,14 +93,14 @@
         {
             "attackCode": 5,
             "attackStatus": {
-                "attackType": 2,
+                "attackType": 0,
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
                 "scale": 1.0
             },
             "attackInfo": {
-                "buffType": 3,
+                "attackCardEnum": 0,
                 "attackName": "1",
                 "bGImage": "1",
                 "fRImage": "1",
@@ -111,14 +111,14 @@
         {
             "attackCode": 6,
             "attackStatus": {
-                "attackType": 2,
+                "attackType": 0,
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
                 "scale": 1.0
             },
             "attackInfo": {
-                "buffType": 3,
+                "attackCardEnum": 0,
                 "attackName": "1",
                 "bGImage": "1",
                 "fRImage": "1",
@@ -129,14 +129,14 @@
         {
             "attackCode": 7,
             "attackStatus": {
-                "attackType": 2,
+                "attackType": 0,
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
                 "scale": 1.0
             },
             "attackInfo": {
-                "buffType": 3,
+                "attackCardEnum": 0,
                 "attackName": "1",
                 "bGImage": "1",
                 "fRImage": "1",
@@ -147,14 +147,14 @@
         {
             "attackCode": 8,
             "attackStatus": {
-                "attackType": 2,
+                "attackType": 0,
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
                 "scale": 1.0
             },
             "attackInfo": {
-                "buffType": 3,
+                "attackCardEnum": 0,
                 "attackName": "1",
                 "bGImage": "1",
                 "fRImage": "1",
@@ -165,14 +165,14 @@
         {
             "attackCode": 9,
             "attackStatus": {
-                "attackType": 2,
+                "attackType": 0,
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
                 "scale": 1.0
             },
             "attackInfo": {
-                "buffType": 3,
+                "attackCardEnum": 0,
                 "attackName": "1",
                 "bGImage": "1",
                 "fRImage": "1",

@@ -10,6 +10,8 @@
  * 
  */
 #region 버프 종류, 버프 데이터
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 using System;
 
 
@@ -102,6 +104,7 @@ public class AttackStructure
 {
     public AttackData[] attackDatas;
 
+    // 배열 길이 수정할것
     public AttackStructure()
     {
         attackDatas = new AttackData[10];
@@ -123,14 +126,16 @@ public class AttackData
     }
 }
 
-
 [Serializable]
-public enum AttackStatEnum
+public enum AttackCardEnum
 {
+    generate,
     duration,
     scale,
     damage,
-    empty
+    skill_1 = 100,
+    skill_2 = 101,
+    skill_3 = 102
 }
 
 [Serializable]
@@ -139,8 +144,7 @@ public enum AttackType
     laser,
     guided,
     bullet,
-    trap,
-    Upgrade
+    trap
 }
 
 [Serializable]
@@ -165,15 +169,15 @@ public struct AttackStatus
 [Serializable]
 public class AttackCardInfo
 {
-    public AttackStatEnum buffType;
+    public AttackCardEnum attackCardEnum;
     public string attackName;
     public string bGImage;
     public string fRImage;
     public string information; // 공격이 ... 만큼... 한다. 변화된 수치도 표기
     public string description; //발이 느려진다.. ex
-    public AttackCardInfo(AttackStatEnum bufftype,string attackBuffName, string bGImage, string fRImage, string information, string description)
+    public AttackCardInfo(AttackCardEnum attackCardEnum, string attackBuffName, string bGImage, string fRImage, string information, string description)
     {
-        buffType = bufftype;
+        this.attackCardEnum = attackCardEnum;
         this.attackName = attackBuffName;
         this.bGImage = bGImage;
         this.fRImage = fRImage;

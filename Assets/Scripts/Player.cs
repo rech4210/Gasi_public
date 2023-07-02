@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class Player : MonoBehaviour
 {
@@ -12,6 +16,7 @@ public class Player : MonoBehaviour
 
     Vector3 normalizedVector; // 노말라이즈 변수
     private Dictionary<KeyCode, Vector3> keyValuePairs = new Dictionary<KeyCode, Vector3>();
+    
 
     void Start()
     {

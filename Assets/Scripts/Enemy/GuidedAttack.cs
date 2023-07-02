@@ -1,21 +1,31 @@
-using System.IO;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-public class GuidedAttack : AbstractAttack, IUseSkill
+
+public class GuidedAttack : AbstractAttack
 {
-
-    AttackType attackType = AttackType.guided;
-
-    public void Skill_1()
+    public void Start()
     {
-        throw new System.NotImplementedException();
+        FindAttackGenerator(attackGenerator);
     }
     public override void OnChecked()
     {
-        throw new System.NotImplementedException();
+        if ((int)_AttackCardInfo.attackCardEnum > skillCheckNum)
+        {
+            Skill();
+        }
+        else if (_AttackCardInfo.attackCardEnum == AttackCardEnum.generate)
+        {
+            attackGenerator?.Generate(_AttackStatus);
+        }
+        // 조건 바꿔야할듯? 수정
+        else if ((int)_AttackCardInfo.attackCardEnum < skillCheckNum)
+        {
+            attackGenerator.IncreaseTargetStat(_AttackStatus, _AttackCardInfo);
+        }
     }
 
+    public override void SetCardInfo()
+    {
+        base.SetCardInfo();
+    }
     //public override void SetCardInfo()
     //{
     //    if (this.transform.GetChild(0).GetChild(1)
@@ -75,8 +85,4 @@ public class GuidedAttack : AbstractAttack, IUseSkill
     //    //data = buffManager.SetBuffData(buffCode, stat);
     //    //Debug.Log(stat);
     //}
-    public override void SetCardInfo()
-    {
-        base.SetCardInfo();
-    }
 }

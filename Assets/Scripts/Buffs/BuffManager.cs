@@ -1,10 +1,9 @@
-using System;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
 using UnityEngine;
+
 public class BuffManager : MonoBehaviour
 {
     //use char type to buff code
@@ -37,9 +36,9 @@ public class BuffManager : MonoBehaviour
         allAttackCardInfoArchive.Clear();
 
         containBuffDictionary.Clear();
-
-
+        //SaveBuffJson();
         SaveAttackJson();
+
         //트라이 캐치 구문이 존나 어색한데?
         //try
         //{
@@ -52,7 +51,7 @@ public class BuffManager : MonoBehaviour
         //    throw e;
         //}
 
-        //JsonParsing();
+        JsonParsing();
         JsonAttackParsing();
     }
 
@@ -68,6 +67,8 @@ public class BuffManager : MonoBehaviour
      * 3. temp 함수 부분에서 json 파싱하는 부분을 만들어줘야할듯.
      */
 
+    [JsonConverter(typeof(StringEnumConverter))]
+    public BuffStatEnum statEnum { get; set; }
 
     #region 제이슨 파싱
     public void SaveBuffJson()
@@ -81,14 +82,18 @@ public class BuffManager : MonoBehaviour
 
         for (int i = 0; i < buffCounts; i++)
         {
-            BuffData buff = new BuffData((char)i, new BuffStat(1, 1, 1, 1), new CardInfo(BuffStatEnum.empty,"1", "1", "1", "1", "1"));
+            BuffData buff = new BuffData((char)i, new BuffStat(1, 1, 1, 1), new CardInfo(statEnum = BuffStatEnum.empty, "1", "1", "1", "1", "1"));
 
             buffdata.buff[i] = buff;
         }
         string jsonData = JsonUtility.ToJson(buffdata, true);
         File.WriteAllText(path, jsonData);
     }
-
+    //어떻게 처리?
+    [JsonConverter(typeof(StringEnumConverter))]
+    public AttackType attackType { get; set; }
+    [JsonConverter(typeof(StringEnumConverter))]
+    public AttackCardEnum attackEnum { get; set; }
     public void SaveAttackJson()
     {
         path = Path.Combine(Application.dataPath + "/Json/", "AttackData.json") ?? null;
@@ -101,7 +106,7 @@ public class BuffManager : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            AttackData attackData = new AttackData((char)i,new AttackStatus(AttackType.bullet,1,1,1,1),new AttackCardInfo(AttackStatEnum.empty,"1", "1", "1", "1", "1"));
+            AttackData attackData = new AttackData((char)i,new AttackStatus(attackType, 1,1,1,1),new AttackCardInfo(attackEnum, "1", "1", "1", "1", "1"));
 
             structure.attackDatas[i] = attackData;
 
