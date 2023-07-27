@@ -27,4 +27,11 @@ public abstract class AttackFunc : MonoBehaviour, IUseSkill
     public abstract void Skill_2();
     public abstract void Skill_3();
 
+    protected abstract void ExcuteAttack();
+
+    protected virtual void OnHited()
+    {
+        _Player.GetComponent<PlayerStat>();
+    }
+
 }

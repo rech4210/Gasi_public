@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8465454597924133142}
   - component: {fileID: 9033518966020958367}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: LaserTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,7 +94,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 7810141735996016981}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1

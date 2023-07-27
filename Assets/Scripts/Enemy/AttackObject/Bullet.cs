@@ -1,16 +1,18 @@
+using System.Collections;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class Bullet : AttackFunc
 {
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.yellow;
-    //    //var rotationMatrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
-    //    //Gizmos.matrix = rotationMatrix;
-    //    Gizmos.DrawRay(this.transform.position, transform.position - _Player.transform.position);
+    [SerializeField] GameObject attackObject;
 
-    //}
+    void Start()
+    {
+        StartCoroutine(Attack());
+    }
+    private void Update()
+    {
+        //ExcuteAttack();
+    }
     private void FixedUpdate()
     {
         transform.rotation = Quaternion.LookRotation(_Player.transform.position - transform.position);
@@ -21,10 +23,6 @@ public class Bullet : AttackFunc
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
     public override void Skill_1()
     {
         throw new System.NotImplementedException();
@@ -38,5 +36,21 @@ public class Bullet : AttackFunc
     public override void Skill_3()
     {
         throw new System.NotImplementedException();
+    }
+
+    IEnumerator Attack()
+    {
+        while (true)
+        {
+            ExcuteAttack();
+            yield return new WaitForSeconds(0.5f);
+        }
+
+    }
+    protected override void ExcuteAttack()
+    {
+        //Instantiate(attackObject,transform);
+        Instantiate(attackObject, transform.position + transform.forward ,transform.rotation);
+
     }
 }

@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class Guided : AttackFunc, IUseSkill
 {
+    private void Update()
+    {
+        ExcuteAttack();
+    }
     //private void OnDrawGizmos()
     //{
     //    Gizmos.color = Color.yellow;
@@ -36,5 +40,8 @@ public class Guided : AttackFunc, IUseSkill
     public override void Skill_3()
     {
         throw new System.NotImplementedException();
+    }
+    protected override void ExcuteAttack()
+    {
     }
 }

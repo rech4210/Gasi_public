@@ -20,6 +20,8 @@ public class BuffManager : MonoBehaviour
 
     private Dictionary<char, AttackStatus> containAttackStatDictionary = new();
 
+    SelectEvent selectEvent;
+
 
     string path = null;
 
@@ -57,7 +59,12 @@ public class BuffManager : MonoBehaviour
 
     private void Start()
     {
-
+        TimeEvent.instance.ExecuteEvent();
+        DeadEvents.instance.ExecuteEvent();
+        TimeEvent.instance.ExecuteEvent();
+    }
+    private void Update()
+    {
 
     }
 
@@ -131,8 +138,8 @@ public class BuffManager : MonoBehaviour
             allBuffStatArchive.Add(_buffData.buff[i].buffCode, _buffData.buff[i].stat);
             allCardInfoArchive.Add(_buffData.buff[i].buffCode, _buffData.buff[i].cardInfo);
 
-            Debug.Log(allBuffStatArchive[_buffData.buff[i].buffCode].point);
-            Debug.Log(allCardInfoArchive[_buffData.buff[i].buffCode].cardName);
+            //Debug.Log(allBuffStatArchive[_buffData.buff[i].buffCode].point);
+            //Debug.Log(allCardInfoArchive[_buffData.buff[i].buffCode].cardName);
 
         }
     }
@@ -153,8 +160,8 @@ public class BuffManager : MonoBehaviour
             allAttackStatArchive.Add(_attackStruct.attackDatas[i].attackCode, _attackStruct.attackDatas[i].attackStatus);
             allAttackCardInfoArchive.Add(_attackStruct.attackDatas[i].attackCode, _attackStruct.attackDatas[i].attackInfo);
 
-            Debug.Log(allAttackStatArchive[_attackStruct.attackDatas[i].attackCode].point);
-            Debug.Log(allAttackCardInfoArchive[_attackStruct.attackDatas[i].attackCode].attackName);
+            //Debug.Log(allAttackStatArchive[_attackStruct.attackDatas[i].attackCode].point);
+            //Debug.Log(allAttackCardInfoArchive[_attackStruct.attackDatas[i].attackCode].attackName);
 
         }
     }
