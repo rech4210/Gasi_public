@@ -8,8 +8,9 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo,ICardSkill
     protected int skillCheckNum = 100;
 
     protected AttackGenerator attackGenerator;
+    protected BuffManager buffManager;
 
-    char attackCode;
+    protected char attackCode;
     AttackType attackType;
     AttackStatus attackStatus;
     AttackCardInfo attackInfo;
@@ -22,14 +23,19 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo,ICardSkill
 
     
 
-    protected void FindAttackGenerator(AttackGenerator attackGenerator)
+    protected void FindBuffWithAttackGenerator()
     {
         try
         {
             if (GameObject.FindWithTag("AttackGenerator")
-            .TryGetComponent<AttackGenerator>(out AttackGenerator attack))
+            .TryGetComponent(out AttackGenerator attack))
             {
                 this.attackGenerator = attack;
+            }
+            if (GameObject.FindWithTag("BuffManager")
+            .TryGetComponent(out BuffManager buff))
+            {
+                this.buffManager = buff;
             }
         }
         catch (System.NullReferenceException e)
@@ -80,6 +86,13 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo,ICardSkill
             .TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI description))
         {
             description.text = attackInfo.description;
+        }
+        else Debug.LogError("Not Setted Object You're null!!");
+
+        if (this.transform.GetChild(0).GetChild(4)
+            .TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI rank))
+        {
+            rank.text = ""+attackStatus.rank;
         }
         else Debug.LogError("Not Setted Object You're null!!");
 

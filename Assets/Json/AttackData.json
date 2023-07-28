@@ -7,7 +7,8 @@
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
-                "scale": 1.0
+                "scale": 1.0,
+                "speed": 1.0
             },
             "attackInfo": {
                 "attackCardEnum": 0,
@@ -25,7 +26,8 @@
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
-                "scale": 1.0
+                "scale": 1.0,
+                "speed": 1.0
             },
             "attackInfo": {
                 "attackCardEnum": 0,
@@ -41,9 +43,10 @@
             "attackStatus": {
                 "attackType": 2,
                 "rank": 1,
-                "point": 1,
+                "point": 5,
                 "duration": 1.0,
-                "scale": 1.0
+                "scale": 1.0,
+                "speed": 7.0
             },
             "attackInfo": {
                 "attackCardEnum": 0,
@@ -59,9 +62,11 @@
             "attackStatus": {
                 "attackType": 3,
                 "rank": 1,
-                "point": 1,
-                "duration": 1.0,
-                "scale": 1.0
+                "point": 10,
+                "duration": 5.0,
+                "scale": 1.0,
+                "speed": 1.0
+                
             },
             "attackInfo": {
                 "attackCardEnum": 0,
@@ -79,7 +84,8 @@
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
-                "scale": 1.0
+                "scale": 1.0,
+                "speed": 1.0
             },
             "attackInfo": {
                 "attackCardEnum": 0,
@@ -97,7 +103,8 @@
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
-                "scale": 1.0
+                "scale": 1.0,
+                "speed": 1.0
             },
             "attackInfo": {
                 "attackCardEnum": 0,
@@ -115,7 +122,8 @@
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
-                "scale": 1.0
+                "scale": 1.0,
+                "speed": 1.0
             },
             "attackInfo": {
                 "attackCardEnum": 0,
@@ -133,7 +141,8 @@
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
-                "scale": 1.0
+                "scale": 1.0,
+                "speed": 1.0
             },
             "attackInfo": {
                 "attackCardEnum": 0,
@@ -151,7 +160,8 @@
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
-                "scale": 1.0
+                "scale": 1.0,
+                "speed": 1.0
             },
             "attackInfo": {
                 "attackCardEnum": 0,
@@ -169,7 +179,8 @@
                 "rank": 1,
                 "point": 1,
                 "duration": 1.0,
-                "scale": 1.0
+                "scale": 1.0,
+                "speed": 1.0
             },
             "attackInfo": {
                 "attackCardEnum": 0,

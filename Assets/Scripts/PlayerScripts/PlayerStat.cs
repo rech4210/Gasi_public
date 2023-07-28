@@ -1,21 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
 public struct PlayerStatStruct
 {
-    float health;
-    float defence;
-    float speed;
-    float will;
+    public float health;
+    public float defence;
+    public float speed;
+    public float will;
+
+    public PlayerStatStruct(float health, float defence, float speed, float will, float damage, float avoid, float block)
+    {
+        this.health = health;
+        this.defence = defence;
+        this.speed = speed;
+        this.will = will;
+        this.damage = damage;
+        this.avoidness = avoid;
+        this.blockness = block;
+    }
 
     // when it activated
-    float damage;
-    float avoidness;
-    float blockness;
-
-
+    public float damage;
+    public float avoidness;
+    public float blockness;
 }
 public struct PlayerAbilityStruct
 {
@@ -27,16 +34,20 @@ public struct PlayerAbilityStruct
 }
 public class PlayerStat : MonoBehaviour
 {
-    PlayerStat playerStat;
+    PlayerStatStruct playerStat;
     public void GetDamaged(float dmg)
     {
-        //playerStat.he
+        playerStat.health -= dmg;
+        Debug.Log(playerStat.health);
+        if (playerStat.health <= 0f)
+        {
+            DeadEvents.instance.ExecuteEvent();
+        }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        playerStat = new PlayerStat();
+        playerStat = new PlayerStatStruct(50,3,15,0,0,0,0);
     }
 
     // Update is called once per frame
@@ -44,4 +55,24 @@ public class PlayerStat : MonoBehaviour
     {
         
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Background")) { }
+
+        else
+        {
+            Destroy(other.gameObject);
+            GetDamaged(other.gameObject.GetComponent<AtkObjStat>().Point);
+        }
+    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Background")) { }
+
+    //    else 
+    //    {
+    //        Destroy(collision.gameObject);
+    //        GetDamaged(atk.point);
+    //    }
+    //}
 }

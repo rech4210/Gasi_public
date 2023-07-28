@@ -10,10 +10,20 @@ public class GenerateCard : MonoBehaviour
 {
     private float timeSinceStart;
     private char buffCode;
+
+    BuffManager buffManager;
     private Dictionary<char, BuffStat> statGenerateDic;
     private Dictionary<char, CardInfo> infoGenerateDic;
+
     private Dictionary<char, AttackStatus> attackStatusGenerateDic;
     private Dictionary<char, AttackCardInfo> attacInfoGenerateDic;
+
+
+
+    private Dictionary<char, BuffStat> containStatGenerateDic;
+    private Dictionary<char, AttackStatus> containAttackStatusGenerateDic;
+
+    //수정: 전체 카드덱 말고 현재 가진 카드덱 기준으로 다시 생성하도록
 
     public GameObject cardPrefab;
     public GameObject attackCardPrefab;
@@ -38,6 +48,7 @@ public class GenerateCard : MonoBehaviour
         if (GameObject.FindWithTag("BuffManager")
             .TryGetComponent<BuffManager>(out BuffManager buffManager))
         {
+            this.buffManager = buffManager;
             this.statGenerateDic = buffManager.StatToGenerate();
             this.infoGenerateDic = buffManager.InfoToGenerate();
             this.attackStatusGenerateDic = buffManager.AttackStatToGenerate();
@@ -102,6 +113,9 @@ public class GenerateCard : MonoBehaviour
      */
     void BuffGenerate() // -> 여기에 특수, 악마, 천사, 일반카드 재사용하도록 짜기
     {
+
+        // 수정 : 현재 값으로 카드 추출하도록 조건 추가하기
+        containStatGenerateDic = buffManager.ContainStatToGenerate();
         for (int i = 0; i < cardCount; i++)
         {
             var cardObj = Instantiate(cardPrefab,this.transform);
@@ -125,7 +139,10 @@ public class GenerateCard : MonoBehaviour
 
     void AttackGenerate()
     {
-        
+        // 수정 : 현재 값으로 카드 추출하도록 조건 추가하기
+
+        containAttackStatusGenerateDic = buffManager.ContainAttackStatToGenerate();
+
         //카드 카운트 수정
         for (int i = 0; i < cardCount; i++)
         {
@@ -134,7 +151,7 @@ public class GenerateCard : MonoBehaviour
             cardObj.GetComponent<RectTransform>().anchoredPosition = new Vector2((-210 + (i * 140)),0f) ;
 
             //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
-            char _attackCode = (char)UnityEngine.Random.Range(0,3);
+            char _attackCode = (char)UnityEngine.Random.Range(0,4);
             AbstractAttack targetCard = null;
             switch (attackStatusGenerateDic[_attackCode].attackType)
             {
@@ -151,22 +168,28 @@ public class GenerateCard : MonoBehaviour
                     targetCard = cardObj.AddComponent<TrapAttack>();
                     break;
                 default:
-                    Debug.Log("There is no maching attack type");
+                    Debug.Log("There is no maching attack type 정의되지 않은 카드입니다");
                     break;
             }
 
-            // 어택 데이터 어떻게 처리할건지? 여기서 가져올거임?
-            if (attacInfoGenerateDic.TryGetValue(_attackCode, out AttackCardInfo attacinfo))
+
+            // 현재 딕셔너리에 값이 저장된 이력이 있다면.
+            // 단, 상승 스탯카드는 공격 타겟이 존재할때 사용
+            if (containAttackStatusGenerateDic.TryGetValue(_attackCode, out AttackStatus containAttackStat))
+            {
+                targetCard?.GetRandomCodeWithInfo(_attackCode, attacInfoGenerateDic[_attackCode], containAttackStat);
+                Debug.Log(targetCard?._AttackCardInfo.attackCardEnum);
+                targetCard?.SetCardInfo();
+            }
+            else if (attacInfoGenerateDic.TryGetValue(_attackCode, out AttackCardInfo attacinfo))
             {
                 targetCard?.GetRandomCodeWithInfo(_attackCode, attacinfo, attackStatusGenerateDic[_attackCode]);
                 Debug.Log(targetCard?._AttackCardInfo.attackCardEnum);
                 targetCard?.SetCardInfo();
             }
-            else Debug.Log("Missing value");
 
             //Will be change
         }
-
 
         //for (int i = 0; i < 3; i++)
         //{

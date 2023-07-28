@@ -3,7 +3,9 @@ using UnityEngine;
 public abstract class AttackFunc : MonoBehaviour, IUseSkill
 {
     AttackType attackType;
+    AttackStatus attackStatus;
 
+    [SerializeField] protected GameObject attackObject;
     protected void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -13,9 +15,17 @@ public abstract class AttackFunc : MonoBehaviour, IUseSkill
     }
 
     public AttackType _AttackType { get { return attackType;} set {attackType = value;} }
+    public AttackStatus _AttackStatus { protected get { return attackStatus;} set { attackStatus = value;} }
+
+    public int _Point { protected get { return attackStatus.point; } set { attackStatus.point = value; } }
+    public float _Duration { protected get { return attackStatus.duration; } set { attackStatus.duration = value; } }
+    public float _Scale { protected get { return attackStatus.scale; } set { attackStatus.scale = value; } }
+    public float _Speed { protected get { return attackStatus.speed; } set { attackStatus.speed = value; } }
+    public int _Rank { protected get { return attackStatus.rank; } set { attackStatus.rank = value; } }
+
+
     private GameObject player;
     public GameObject _Player {protected get { return player;} set { player = value; } }
-    public abstract void Skill_1();
 
     public abstract void CalcStat(AttackStatus status, AttackCardInfo info);
 
@@ -23,6 +33,7 @@ public abstract class AttackFunc : MonoBehaviour, IUseSkill
     {
         Quaternion.LookRotation(player.transform.position);
     }
+    public abstract void Skill_1();
 
     public abstract void Skill_2();
     public abstract void Skill_3();

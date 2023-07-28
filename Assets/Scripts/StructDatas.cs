@@ -132,7 +132,8 @@ public enum AttackCardEnum
     generate,
     duration,
     scale,
-    damage,
+    point,
+    speed, // 최근에 추가된것, 수정할것 Json 파일
     skill_1 = 100,
     skill_2 = 101,
     skill_3 = 102
@@ -155,14 +156,16 @@ public struct AttackStatus
     public int point;
     public float duration;
     public float scale;
+    public float speed;
 
-    public AttackStatus(AttackType attackType, int rank, int point, float duration, float scale)
+    public AttackStatus(AttackType attackType, int rank, int point, float duration, float scale, float speed)
     {
         this.attackType = attackType;
         this.rank = rank;
         this.point = point;
         this.duration = duration;
         this.scale = scale;
+        this.speed = speed;
     }
 }
 

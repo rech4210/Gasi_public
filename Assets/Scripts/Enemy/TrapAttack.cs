@@ -3,10 +3,9 @@ using Unity.VisualScripting;
 
 public class TrapAttack : AbstractAttack
 {
-
     public void Start()
     {
-        FindAttackGenerator(attackGenerator);
+        FindBuffWithAttackGenerator();
     }
     // 온체크시 버프 매니저에게 영향을 줘야함.수정? 어택 제너레이터에서 해야할듯.
     public override void OnChecked()
@@ -24,6 +23,7 @@ public class TrapAttack : AbstractAttack
         {
             attackGenerator.IncreaseTargetStat(_AttackStatus, _AttackCardInfo);
         }
+        buffManager.AddorUpdateAttackDictionary(attackCode,_AttackStatus);
 
         this.gameObject.SetActive(false);
     }

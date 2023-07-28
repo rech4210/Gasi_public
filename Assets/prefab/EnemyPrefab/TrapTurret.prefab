@@ -111,3 +111,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3796eb08d88ee049bff7c53433a07cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackObject: {fileID: 1111791112838188191, guid: 343a9d251a9fbb54d9a283e7d68aee3f,
+    type: 3}

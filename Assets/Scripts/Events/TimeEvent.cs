@@ -15,7 +15,7 @@ public class TimeEvent : Events<TimeEvent>
     private void Time_1(TimeEvent events)
     {
         Debug.Log("Time_1");
-        //Time.timeScale = 0.5f;
+        Time.timeScale = 0;
     }
     private void Time_2(TimeEvent @event)
     {

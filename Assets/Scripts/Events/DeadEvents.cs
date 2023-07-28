@@ -9,7 +9,7 @@ public class DeadEvents : Events<DeadEvents>
         if (OnExecute?.Method == null)
         {
             OnExecute += Dead_1;
-            OnExecute += Dead_1;
+            OnExecute += Dead_2;
         }
     }
 
@@ -18,6 +18,7 @@ public class DeadEvents : Events<DeadEvents>
     private void Dead_1(DeadEvents @event )
     {
         Debug.Log("Dead_1");
+        TimeEvent.instance.ExecuteEvent();
     }
     private void Dead_2(DeadEvents @event)
     {

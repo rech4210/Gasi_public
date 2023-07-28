@@ -20,7 +20,6 @@ public class BuffManager : MonoBehaviour
 
     private Dictionary<char, AttackStatus> containAttackStatDictionary = new();
 
-    SelectEvent selectEvent;
 
 
     string path = null;
@@ -36,8 +35,9 @@ public class BuffManager : MonoBehaviour
         allCardInfoArchive.Clear();
         allAttackStatArchive.Clear();
         allAttackCardInfoArchive.Clear();
-
         containBuffDictionary.Clear();
+        containAttackStatDictionary.Clear();
+
         //SaveBuffJson();
         //SaveAttackJson();
 
@@ -59,9 +59,6 @@ public class BuffManager : MonoBehaviour
 
     private void Start()
     {
-        TimeEvent.instance.ExecuteEvent();
-        DeadEvents.instance.ExecuteEvent();
-        TimeEvent.instance.ExecuteEvent();
     }
     private void Update()
     {
@@ -113,7 +110,7 @@ public class BuffManager : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            AttackData attackData = new AttackData((char)i,new AttackStatus(attackType, 1,1,1,1),new AttackCardInfo(attackEnum, "1", "1", "1", "1", "1"));
+            AttackData attackData = new AttackData((char)i,new AttackStatus(attackType, 1,1,1,1,1),new AttackCardInfo(attackEnum, "1", "1", "1", "1", "1"));
 
             structure.attackDatas[i] = attackData;
 
@@ -185,7 +182,7 @@ public class BuffManager : MonoBehaviour
         {
             //method which use for player through out buffstat with buffcode
             containBuffDictionary[buffCode] = BuffUp(containBuffDictionary[buffCode]);
-            Debug.Log($"이미 존재합니다 랭크 증가");
+            Debug.Log($"이미 존재합니다 버프 랭크 증가");
         }
         else
         {
@@ -196,6 +193,25 @@ public class BuffManager : MonoBehaviour
             $"스탯 상승 : {containBuffDictionary[buffCode].point}, " +
             $"랭크 : {containBuffDictionary[buffCode].rank}");
     }
+    public void AddorUpdateAttackDictionary(char attackCode,AttackStatus attackStatus)
+    {
+        //과연 생성과 강화는 따로있는데 어떻게 딕셔너리 구분지어서 설정할건지?
+        if (containAttackStatDictionary.ContainsKey(attackCode))
+        {
+            //method which use for player through out buffstat with buffcode
+            containAttackStatDictionary[attackCode] = attackStatus;
+            Debug.Log($"랭크 증가");
+        }
+        else 
+        {
+            containAttackStatDictionary.Add(attackCode, allAttackStatArchive[attackCode]); //각각에 인스턴스로 존재해버림, 이 데이터 값들을 버프매니저에서 통합으로 관리해야함.
+            Debug.Log("없는 공격 추가 : " + allAttackCardInfoArchive[attackCode].attackName + " " + "현재 버프 갯수:" + containAttackStatDictionary.Count);
+        }
+        Debug.Log($"대상 공격 : {allAttackCardInfoArchive[attackCode].attackName}, " +
+            $"스탯 상승 : {containAttackStatDictionary[attackCode].point}, " +
+            $"랭크 : {containAttackStatDictionary[attackCode].rank}");
+    }
+
     // 플레이어 적용부 구현하기
 
     private BuffStat BuffUp(BuffStat buffStat)
@@ -226,6 +242,8 @@ public class BuffManager : MonoBehaviour
         return containBuffDictionary[buffCode];
     }
 
+
+
     public Dictionary<char, BuffStat> StatToGenerate()
     {
         return allBuffStatArchive;
@@ -245,7 +263,18 @@ public class BuffManager : MonoBehaviour
     {
         return allAttackCardInfoArchive;
     }
+    public Dictionary<char, BuffStat> ContainStatToGenerate()
+    {
+        return containBuffDictionary;
+    }
+
+    public Dictionary<char, AttackStatus> ContainAttackStatToGenerate()
+    {
+        return containAttackStatDictionary;
+    }
+
 }
+
 
 // This method use for Initialize of Buffdata
 //public BuffData SetBuffData(char buffCode, BuffStat data) 

@@ -56,6 +56,11 @@ public class AttackGenerator : MonoBehaviour
         Debug.Log(component.ToString());
         Debug.Log(attackTarget.ToString());
         component._Player = attackTarget;
+        component._AttackStatus = status;
+        //attackFunc에 카드 공격능력치와 추적 대상을 부여해줌.
+        //후에, AttackFunc를 상속받는 대상들에게 전달
+        //공격 개체들이 데이터를 받으면 파생된 탄막들에게 공격수치를 입력해줌.
+
         objectsComponent?.Add(component);
 
         //var _abstract = obj.GetComponent<AbstractAttack>();

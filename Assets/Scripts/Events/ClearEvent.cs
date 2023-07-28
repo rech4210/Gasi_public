@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class ClearAction : Events<ClearAction>
+public class ClearEvent : Events<ClearEvent>
 {
-    public ClearAction() : base() { }
+    public ClearEvent() : base() { }
 
     protected override void Execute()
     {
@@ -13,11 +13,11 @@ public class ClearAction : Events<ClearAction>
         }
     }
     // there is ExecuteEvent in Base
-    private void Clear_1(ClearAction @event)
+    private void Clear_1(ClearEvent @event)
     {
         Debug.Log("clear_1");
     }
-    private void Clear_2(ClearAction @event)
+    private void Clear_2(ClearEvent @event)
     {
         Debug.Log("clear_2");
     }
