@@ -59,8 +59,8 @@ public class LaserTurret : AttackFunc, IUseSkill
     }
     protected override void ExcuteAttack()
     {
-        ////Instantiate(attackObject,transform);
-        //var atkobj = Instantiate(attackObject, transform.position + transform.forward, transform.rotation);
-        //atkobj.GetComponent<AtkObjStat>().GetAtkObjPoint(_AttackStatus);
+        var atkobj = Instantiate(attackObject);
+        atkobj?.GetComponent<AtkObjStat>().GetAtkObjPoint(_AttackStatus);
+        atkobj.transform.position = _Player.transform.position;
     }
 }

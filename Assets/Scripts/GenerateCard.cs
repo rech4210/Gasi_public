@@ -159,7 +159,7 @@ public class GenerateCard : MonoBehaviour
                     targetCard = cardObj.AddComponent<LaserAttack>();
                     break;
                 case AttackType.guided:
-                    targetCard = cardObj.AddComponent<TrapAttack>();
+                    targetCard = cardObj.AddComponent<GuidedAttack>();
                     break;
                 case AttackType.bullet:
                     targetCard = cardObj.AddComponent<BulletAttack>();

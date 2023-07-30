@@ -36,6 +36,7 @@ public class PlayerStat : MonoBehaviour
     PlayerStatStruct playerStat;
     public void GetDamaged(float dmg)
     {
+        Debug.Log("타겟 데미지 :"+dmg);
         playerStat.health -= dmg;
         Debug.Log(playerStat.health);
         if (playerStat.health <= 0f)
@@ -65,11 +66,12 @@ public class PlayerStat : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Background")) { }
-
         else
         {
-            Destroy(other.gameObject);
-            GetDamaged(other.gameObject.GetComponent<AtkObjStat>().Point);
+            //예외처리?
+            var attackObject = other.gameObject.GetComponent<AtkObjStat>();
+            GetDamaged(attackObject.Point);
+            attackObject.OnHitTarget();
         }
     }
     //private void OnCollisionEnter(Collision collision)

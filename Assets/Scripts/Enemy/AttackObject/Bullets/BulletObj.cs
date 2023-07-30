@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BulletObj : AtkObjStat
@@ -6,6 +7,7 @@ public class BulletObj : AtkObjStat
     void Start()
     {
     }
+    
 
     // Update is called once per frame
     void Update()

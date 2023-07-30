@@ -18,4 +18,9 @@ public class AtkObjStat : MonoBehaviour
         
         //속도도 관리해줘야함
     }
+
+    public virtual void OnHitTarget()
+    {
+        Destroy(gameObject);
+    }
 }
