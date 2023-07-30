@@ -20,7 +20,9 @@ public class BuffManager : MonoBehaviour
 
     private Dictionary<char, AttackStatus> containAttackStatDictionary = new();
 
-
+    SelectEvent select;
+    TimeEvent timeEvent;
+    ClearEvent clearEvent;
 
     string path = null;
 
@@ -55,10 +57,23 @@ public class BuffManager : MonoBehaviour
 
         JsonParsing();
         JsonAttackParsing();
+
+
+
+        //시작 이벤트 관리
+        select = new TimeEvent();
+        select = new ClearEvent();
+        select = new DeadEvents();
+        select = new TransitionEvent();
+        select = new SoundEvent();
+        select = new UIEvent();
+        select = new TimeEvent();
+        
     }
 
     private void Start()
     {
+        
     }
     private void Update()
     {

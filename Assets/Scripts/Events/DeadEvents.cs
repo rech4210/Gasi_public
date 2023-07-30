@@ -1,8 +1,14 @@
 using UnityEngine;
 
-public class DeadEvents : Events<DeadEvents>
+public class DeadEvents : SelectEvent
 {
-    public DeadEvents() : base() { }
+    public DeadEvents() : base()
+    {
+
+    }
+
+    //static SelectEvent targetEvent;
+    public static SelectEvent Instance { get { return instance = new DeadEvents(); } }
 
     protected override void Execute()
     {
@@ -15,12 +21,12 @@ public class DeadEvents : Events<DeadEvents>
 
     // there is ExecuteEvent in Base
 
-    private void Dead_1(DeadEvents @event )
+    private void Dead_1(SelectEvent @event )
     {
         Debug.Log("Dead_1");
-        TimeEvent.instance.ExecuteEvent();
+        TimeEvent.Instance.ExecuteEvent();
     }
-    private void Dead_2(DeadEvents @event)
+    private void Dead_2(SelectEvent @event)
     {
         Debug.Log("Dead_2");
     }

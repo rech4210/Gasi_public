@@ -1,8 +1,15 @@
 using UnityEngine;
 
-public class TimeEvent : Events<TimeEvent>
+public class TimeEvent : SelectEvent
 {
-    public TimeEvent() : base( ) {}
+    public TimeEvent() : base()
+    {
+
+    }
+
+    //static SelectEvent targetEvent;
+    public static SelectEvent Instance { get { return instance = new TimeEvent(); } }
+
     protected override void Execute()
     {
         if (OnExecute?.Method == null)
@@ -12,12 +19,12 @@ public class TimeEvent : Events<TimeEvent>
         }
     }
 
-    private void Time_1(TimeEvent events)
+    private void Time_1(SelectEvent events)
     {
         Debug.Log("Time_1");
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
-    private void Time_2(TimeEvent @event)
+    private void Time_2(SelectEvent @event)
     {
         Debug.Log("Time_2");
     }

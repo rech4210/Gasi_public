@@ -1,8 +1,14 @@
 using UnityEngine;
 
-public class SoundEvent : Events<SoundEvent>
+public class SoundEvent : SelectEvent
 {
-    public SoundEvent() : base() { }
+    public SoundEvent() : base()
+    {
+
+    }
+
+    //static SelectEvent targetEvent;
+    public static SelectEvent Instance { get { return instance = new SoundEvent(); } }
 
     protected override void Execute()
     {
@@ -13,12 +19,12 @@ public class SoundEvent : Events<SoundEvent>
         }
     }
 
-    private void SoundFunc_1(SoundEvent @event)
+    private void SoundFunc_1(SelectEvent @event)
     {
         Debug.Log("SoundFunc_1");
         //Time.timeScale = 0.5f;
     }
-    private void SoundFunc_2(SoundEvent @event)
+    private void SoundFunc_2(SelectEvent @event)
     {
         Debug.Log("SoundFunc_2");
     }

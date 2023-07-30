@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public struct PlayerStatStruct
 {
     public float health;
@@ -41,19 +40,27 @@ public class PlayerStat : MonoBehaviour
         Debug.Log(playerStat.health);
         if (playerStat.health <= 0f)
         {
-            DeadEvents.instance.ExecuteEvent();
+            DeadEvents.Instance.ExecuteEvent();
         }
     }
 
     void Start()
     {
         playerStat = new PlayerStatStruct(50,3,15,0,0,0,0);
+
+        TimeEvent.Instance.ExecuteEvent();
+        ClearEvent.Instance.ExecuteEvent();
+        TimeEvent.Instance.ExecuteEvent();
+        TransitionEvent.Instance.ExecuteEvent();
+        DeadEvents.Instance.ExecuteEvent();
+        ClearEvent.Instance.ExecuteEvent() ;
+        UIEvent.Instance.ExecuteEvent();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
     private void OnTriggerEnter(Collider other)
     {
