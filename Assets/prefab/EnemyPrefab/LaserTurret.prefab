@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1690590748154796414}
   - component: {fileID: 8465454597924133142}
   - component: {fileID: 9033518966020958367}
+  - component: {fileID: -5327951197350712340}
   m_Layer: 0
   m_Name: LaserTurret
   m_TagString: Untagged
@@ -113,3 +114,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackObject: {fileID: 1294177105124841564, guid: 3e74d52f50be50e4e9beed1d45c514e0,
     type: 3}
+--- !u!114 &-5327951197350712340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7810141735996016981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 5c1ba931d037b2b48b0f218661f71544, type: 2}

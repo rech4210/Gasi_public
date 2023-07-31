@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1294177105124841566}
   - component: {fileID: 1294177105124841565}
   - component: {fileID: 3303293319414644675}
-  - component: {fileID: 86840566292556433}
   m_Layer: 8
   m_Name: laser
   m_TagString: Untagged
@@ -64,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ffc6ae139ebf84c42836f7934a980ed2, type: 2}
+  - {fileID: 2100000, guid: 89d8ba9d2eb454d469ae5fa57121f8da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,20 +110,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c9092509fe24024780955afeda7a5f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &86840566292556433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294177105124841564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 9686d380a9917cd4c967eef89c65c49b, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0

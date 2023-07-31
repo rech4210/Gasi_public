@@ -8,6 +8,7 @@ public class LaserObj : AtkObjStat
     float scaleSpeed = 5f;
     int count = 0 ;
     float time = 0;
+    Color emissionColor = new Color(0.5f, 0.5f, 0.5f);
 
     PlayerStat target;
     // Start is called before the first frame update
@@ -16,6 +17,7 @@ public class LaserObj : AtkObjStat
         laserMaterial = GetComponent<MeshRenderer>().material;
         transform.rotation = new Quaternion(0,Random.rotation.y,0,Random.rotation.w);
         StartCoroutine(LaserLock());
+        emissionColor *= 1.4f;
     }
 
     IEnumerator LaserLock()
@@ -38,12 +40,23 @@ public class LaserObj : AtkObjStat
 
 
         GetComponent<BoxCollider>().enabled = true;
+        laserMaterial.SetColor("_EmissionColor", emissionColor);
+        gameObject.GetComponent<MeshRenderer>().material.shader = laserMaterial.shader;
+        // 이궈궈던~~~~~!! 앞으로 변경사항 적용시킬땐 자기 자신 다시 넣어주자..
+        //laserMaterial.SetShaderPassEnabled("_EMISSION", false);
+        //laserMaterial.SetShaderPassEnabled("_EMISSION", true);
+
+
+
         var scale = transform.lossyScale;
         time = 0f;
         while (true)
         {
+
             time += Time.deltaTime;
             transform.localScale = scale * ((Mathf.Cos(Time.deltaTime * scaleSpeed)) * 1f + Random.Range(3,6f));
+            laserMaterial.SetColor("_EmissionColor", emissionColor);
+
             if (time > 0.4f)
             {
                 Destroy(gameObject);
