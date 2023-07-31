@@ -14,7 +14,7 @@ public class LaserObj : AtkObjStat
     void Start()
     {
         laserMaterial = GetComponent<MeshRenderer>().material;
-        transform.rotation = new Quaternion(0,Random.Range(0f,180f),0,0);
+        transform.rotation = new Quaternion(0,Random.rotation.y,0,Random.rotation.w);
         StartCoroutine(LaserLock());
     }
 
@@ -36,23 +36,26 @@ public class LaserObj : AtkObjStat
             yield return null;
         }
 
+
         GetComponent<BoxCollider>().enabled = true;
         var scale = transform.lossyScale;
         time = 0f;
         while (true)
         {
             time += Time.deltaTime;
-            if (time > 1f)
+            transform.localScale = scale * ((Mathf.Cos(Time.deltaTime * scaleSpeed)) * 1f + Random.Range(3,6f));
+            if (time > 0.4f)
             {
+                Destroy(gameObject);
                 break;
             }
-            transform.localScale = scale * ((Mathf.Cos(Time.deltaTime * scaleSpeed)) * 1f + 10f);
             yield return null;
         }
     }
 
     public override void OnHitTarget()
     {
+        target = GameObject.FindWithTag("Player").GetComponent<PlayerStat>();
         Debug.Log("레이저 타격");
     }
 
@@ -61,27 +64,22 @@ public class LaserObj : AtkObjStat
         
         if (other.gameObject.CompareTag("Player"))
         {
-            if (target == null)
-            {
-                target = other.GetComponent<PlayerStat>();
-            }
-
             var time = 0f;
-            while (true)
-            {
-                if (target== null)
-                {
-                    break;
-                }
+            //while (true)
+            //{
+            //    if (target== null)
+            //    {
+            //        break;
+            //    }
 
                 time = Time.deltaTime;
-                if (time > 0.1f)
+                if (time > 0.01f)
                 {
                     target.GetDamaged(point * 0.1f);
                     time = 0f;
                 }
 
-            }
+            //}
         }
 
     }
