@@ -50,6 +50,7 @@ public class PlayerStat : MonoBehaviour
         playerStat = new PlayerStatStruct(50,3,15,0,0,0,0);
 
         TimeEvent.Instance.ExecuteEvent();
+        
         ClearEvent.Instance.ExecuteEvent();
         TimeEvent.Instance.ExecuteEvent();
         TransitionEvent.Instance.ExecuteEvent();

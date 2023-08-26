@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class TimeEvent : SelectEvent
 {
+    float time;
+    public static new TimeEvent instance;
     public TimeEvent() : base()
     {
 
@@ -28,5 +30,8 @@ public class TimeEvent : SelectEvent
     {
         Debug.Log("Time_2");
     }
-
+    public void SaveTime(float time)
+    {
+        this.time = time;
+    }
 }
