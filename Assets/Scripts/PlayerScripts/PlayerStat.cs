@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public struct PlayerStatStruct
@@ -7,6 +8,8 @@ public struct PlayerStatStruct
     public float speed;
     public float will;
 
+    
+    
     public PlayerStatStruct(float health, float defence, float speed, float will, float damage, float avoid, float block)
     {
         this.health = health;
@@ -36,27 +39,20 @@ public class PlayerStat : MonoBehaviour
     PlayerStatStruct playerStat;
     public void GetDamaged(float dmg)
     {
-        Debug.Log("타겟 데미지 :"+dmg);
         playerStat.health -= dmg;
         Debug.Log(playerStat.health);
         if (playerStat.health <= 0f)
         {
+            isLive = false;
+
             DeadEvents.Instance.ExecuteEvent();
         }
     }
+    bool isLive = true;
 
     void Start()
     {
         playerStat = new PlayerStatStruct(50,3,15,0,0,0,0);
-
-        TimeEvent.Instance.ExecuteEvent();
-        
-        ClearEvent.Instance.ExecuteEvent();
-        TimeEvent.Instance.ExecuteEvent();
-        TransitionEvent.Instance.ExecuteEvent();
-        DeadEvents.Instance.ExecuteEvent();
-        ClearEvent.Instance.ExecuteEvent() ;
-        UIEvent.Instance.ExecuteEvent();
 
     }
 
@@ -67,7 +63,7 @@ public class PlayerStat : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Background")) { }
-        else
+        else if(isLive)
         {
             //예외처리?
             var attackObject = other.gameObject.GetComponent<AtkObjStat>();

@@ -1,16 +1,7 @@
 using UnityEngine;
 
-public class TransitionEvent : SelectEvent
+public class TransitionEvent : Events<TransitionEvent>
 {
-
-    public TransitionEvent() : base()
-    {
-
-    }
-
-    //static SelectEvent targetEvent;
-    public static SelectEvent Instance { get { return instance = new TransitionEvent(); } }
-
     protected override void Execute()
     {
         if (OnExecute?.Method == null)
@@ -22,11 +13,11 @@ public class TransitionEvent : SelectEvent
 
     // there is ExecuteEvent in Base
 
-    private void Trans_1(SelectEvent @event)
+    private void Trans_1()
     {
         Debug.Log("Trans_1");
     }
-    private void Trans_2(SelectEvent @event)
+    private void Trans_2()
     {
         Debug.Log("Trans_2");
     }

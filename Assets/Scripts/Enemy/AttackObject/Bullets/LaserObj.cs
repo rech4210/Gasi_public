@@ -74,7 +74,7 @@ public class LaserObj : AtkObjStat
 
     private void OnTriggerStay(Collider other)
     {
-        
+        //피격을 통합해서 관리해야할듯
         if (other.gameObject.CompareTag("Player"))
         {
             var time = 0f;

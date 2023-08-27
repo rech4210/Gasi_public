@@ -1,16 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
-public class UIEvent : SelectEvent
+public class UIEvent : Events<UIEvent>
 {
-    public UIEvent() : base()
-    {
-
-    }
-
-    //static SelectEvent targetEvent;
-    public static SelectEvent Instance { get { return instance = new UIEvent(); } }
     protected override void Execute()
     {
         if (OnExecute?.Method == null)
@@ -20,11 +12,11 @@ public class UIEvent : SelectEvent
         }
     }
 
-    private void UI_1(SelectEvent events)
+    private void UI_1()
     {
         Debug.Log("UI_1");
     }
-    private void UI_2(SelectEvent @event)
+    private void UI_2()
     {
         Debug.Log("UI_2");
     }

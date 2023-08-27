@@ -1,43 +1,35 @@
-using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class Events<T> where T : Events<T>, new()
+public abstract class Events<T> :MonoBehaviour where T : Events<T>
 {
-    public static T instance;
-    //public static T Instance { get { return CheckInstance(); } set { instance = value; } }
-    public Events()
+    protected void Start()
     {
-        if (instance != (T)this || instance == null)
-        {
-            instance = (T)this;
-        }
+        DontDestroyOnLoad(gameObject);
+        Debug.Log((T)this);
+        Execute(); // maybe Change?
     }
 
-    //public abstract T ChangeInstance(SelectEvent @event);
-    //{
-    //    if (instance == null)
-    //    {
-    //        Debug.LogError("There is no instance");
-    //        return null;
-    //    }
-    //    else
-    //    {
-    //        return instance;
-    //    }
-    //}
+    private static  T instance;
+    public static T Instance {
+        get 
+        {
+            if(instance == null)
+            {
+                instance = Object.FindObjectOfType(typeof(T)) as T;
+            }
+            return instance;
 
-    public static System.Action<T> OnExecute;
+        } 
+    }
+    protected System.Action OnExecute;
 
     protected abstract void Execute();
-    // make some method in here and Event Works
     public virtual void ExecuteEvent()
     {
-        OnExecute = null;
-        Execute(); // maybe Change?
-        Debug.Log(instance);
-        OnExecute?.Invoke((T)this);
+        OnExecute?.Invoke();
     }
+
 }
 
 

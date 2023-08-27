@@ -23,7 +23,7 @@ public class TrapAttack : AbstractAttack
         {
             attackGenerator.IncreaseTargetStat(_AttackStatus, _AttackCardInfo);
         }
-        buffManager.AddorUpdateAttackDictionary(attackCode,_AttackStatus);
+        attackGenerator.AddorUpdateAttackDictionary(attackCode,_AttackStatus);
 
         this.gameObject.SetActive(false);
     }

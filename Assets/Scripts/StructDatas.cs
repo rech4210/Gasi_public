@@ -10,21 +10,38 @@
  * 
  */
 #region 버프 종류, 버프 데이터
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 
 [Serializable]
-public class Structure
+public class BuffStructure : IDataLoader<char, BuffData>
 {
-    public BuffData[] buff;
+    public BuffData[] buffDatas;
 
-    public Structure()
+    public BuffStructure()
     {
-        buff = new BuffData[100];
+        buffDatas = new BuffData[100];
     }
 
+    public Dictionary<char, BuffData> MakeDict()
+    {
+        Dictionary<char, BuffData> dict = new();
+
+        foreach (var item in buffDatas)
+        {
+            if(item != null)
+            {
+                dict.Add(item.buffCode, item);
+            }
+        }
+        return dict;
+
+    }
+    public void Print()
+    {
+        
+    }
 }
 
 
@@ -39,7 +56,7 @@ public enum BuffStatEnum
 
 
 [Serializable]
-public class BuffData
+public class BuffData 
 {
     public char buffCode;
     public CardInfo cardInfo;
@@ -100,7 +117,7 @@ public struct BuffStat
 
 
 [Serializable]
-public class AttackStructure
+public class AttackStructure : IDataLoader<char, AttackData>
 {
     public AttackData[] attackDatas;
 
@@ -108,6 +125,20 @@ public class AttackStructure
     public AttackStructure()
     {
         attackDatas = new AttackData[10];
+    }
+
+
+    public Dictionary<char, AttackData> MakeDict()
+    {
+        Dictionary<char, AttackData> dict = new();
+        foreach (var item in attackDatas)
+        {
+            if (item != null)
+            {
+                dict.Add(item.attackCode, item);
+            }
+        }
+        return dict;
     }
 }
 
@@ -117,13 +148,18 @@ public class AttackData
     public char attackCode;
     public AttackStatus attackStatus;
     public  AttackCardInfo attackInfo;
-
+    public void Print()
+    {
+        UnityEngine.Debug.Log($"code:{attackCode},{attackInfo.attackName},{attackStatus.point}");
+    }
     public AttackData(char attackCode, AttackStatus status ,AttackCardInfo info)
     {
         this.attackCode = attackCode;
         attackStatus = status;
         attackInfo = info;
     }
+
+
 }
 
 [Serializable]

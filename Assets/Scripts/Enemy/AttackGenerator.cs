@@ -7,13 +7,41 @@ public class AttackGenerator : MonoBehaviour
     [SerializeField]
     private GameObject[] attackObjectPrefab;
 
+    private Dictionary<char, AttackData> allAttackStatArchive = new();
+    private Dictionary<char, AttackStatus> containAttackDict = new();
+
     private GameObject attackTarget;
     private List<GameObject> attackObjects = new List<GameObject>();
     private List<AttackFunc> objectsComponent = new List<AttackFunc>();
     //private List<AbstractAttack> attackObjList;
 
+    public void AddorUpdateAttackDictionary(char attackCode, AttackStatus attackStatus)
+    {
+        //과연 생성과 강화는 따로있는데 어떻게 딕셔너리 구분지어서 설정할건지?
+        if (containAttackDict.ContainsKey(attackCode))
+        {
+            //method which use for player through out buffstat with buffcode
+            containAttackDict[attackCode] = attackStatus;
+            Debug.Log($"랭크 증가");
+        }
+        else
+        {
+            containAttackDict.Add(attackCode, allAttackStatArchive[attackCode].attackStatus); //각각에 인스턴스로 존재해버림, 이 데이터 값들을 버프매니저에서 통합으로 관리해야함.
+            Debug.Log("없는 공격 추가 : " + allAttackStatArchive[attackCode].attackInfo.attackName + " " + "현재 버프 갯수:" + containAttackDict.Count);
+        }
+        Debug.Log($"대상 공격 : {allAttackStatArchive[attackCode].attackInfo.attackName}, " +
+            $"스탯 상승 : {containAttackDict[attackCode].point}, " +
+            $"랭크 : {containAttackDict[attackCode].rank}");
+    }
+    public Dictionary<char, AttackStatus> ContainAttackStatToGenerate()
+    {
+        return containAttackDict;
+    }
+
+
     private void Start()
     {
+        DataManager.Instance.ReturnDict(allAttackStatArchive);
         FindPlayer();
     }
 

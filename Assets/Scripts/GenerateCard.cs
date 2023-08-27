@@ -1,68 +1,63 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-//json 파일 문자 경로로 스프라이트 가져오기
-
 public class GenerateCard : MonoBehaviour
 {
     private float timeSinceStart;
-    private char buffCode;
 
     BuffManager buffManager;
-    private Dictionary<char, BuffStat> statGenerateDic;
-    private Dictionary<char, CardInfo> infoGenerateDic;
+    AttackGenerator attackGenerator;
 
-    private Dictionary<char, AttackStatus> attackStatusGenerateDic;
-    private Dictionary<char, AttackCardInfo> attacInfoGenerateDic;
+    private Dictionary<char, BuffData> buffArchive = new();
+    private Dictionary<char, AttackData> attackArchive = new();
 
-
-
-    private Dictionary<char, BuffStat> containStatGenerateDic;
-    private Dictionary<char, AttackStatus> containAttackStatusGenerateDic;
-
-    //수정: 전체 카드덱 말고 현재 가진 카드덱 기준으로 다시 생성하도록
+    private Dictionary<char, BuffStat> containStatGenerateDic = new();
+    private Dictionary<char, AttackStatus> containAttackStatusGenerateDic = new();
 
     public GameObject cardPrefab;
     public GameObject attackCardPrefab;
 
-    StatusEffect buffEffect;
     //추후 카드 프리팹에 들어갈 요소, 이미지 들을 정리할 구조체가 필요할듯.
 
-    public int cardCount;
-
+    public int cardCount; // 이거 값 public임을 명심하자.
+    #region start 함수와 point 정의
     GraphicRaycaster graphicRaycaster;
     PointerEventData pointerEventData;
 
     [SerializeField]
     EventSystem eventSystem;
 
-
     private void Start()
     {
-        
         graphicRaycaster = GetComponent<GraphicRaycaster>();
 
-        if (GameObject.FindWithTag("BuffManager")
-            .TryGetComponent<BuffManager>(out BuffManager buffManager))
+        buffArchive = DataManager.Instance.ReturnDict(buffArchive);
+        attackArchive = DataManager.Instance.ReturnDict(attackArchive);
+        try
         {
-            this.buffManager = buffManager;
-            this.statGenerateDic = buffManager.StatToGenerate();
-            this.infoGenerateDic = buffManager.InfoToGenerate();
-            this.attackStatusGenerateDic = buffManager.AttackStatToGenerate();
-            this.attacInfoGenerateDic = buffManager.AttackInfoToGenerate();
+            if (GameObject.FindWithTag("AttackGenerator")
+            .TryGetComponent(out AttackGenerator attack))
+            {
+                this.attackGenerator = attack;
+            }
+            if (GameObject.FindWithTag("BuffManager")
+            .TryGetComponent(out BuffManager buff))
+            {
+                this.buffManager = buff;
+            }
+        }
+        catch (System.NullReferenceException e)
+        {
+            Debug.LogError($"에러 대상:{this.name}$에러 내용: {e.Message}");
+            throw e;
         }
 
         AttackGenerate();
     }
 
-    // 이 부분에서 생성을 어떻게 처리할지?
-
-    // 1. attack과 buff 생성기의 함수를 따로 만들어 처리한다.
-    // 2. 분기로 처리한다.
-    // 3. 나누지 않고 하나의 오브젝트를 받고, Add 컴포넌트 처리
+    #endregion
 
     // 어택 제너레이트 고려해야 할 점.
     /*
@@ -92,8 +87,7 @@ public class GenerateCard : MonoBehaviour
             {
                 if(result.gameObject.transform.parent.TryGetComponent<StatusEffect>(out StatusEffect statusEffect))
                 {
-                    buffEffect = statusEffect;
-                    buffEffect.OnChecked();
+                    statusEffect.OnChecked();
                 }
                 else if(result.gameObject.transform.parent.TryGetComponent<AbstractAttack>(out AbstractAttack attack))
                 {
@@ -113,8 +107,6 @@ public class GenerateCard : MonoBehaviour
      */
     void BuffGenerate() // -> 여기에 특수, 악마, 천사, 일반카드 재사용하도록 짜기
     {
-
-        // 수정 : 현재 값으로 카드 추출하도록 조건 추가하기
         containStatGenerateDic = buffManager.ContainStatToGenerate();
         for (int i = 0; i < cardCount; i++)
         {
@@ -122,18 +114,20 @@ public class GenerateCard : MonoBehaviour
             //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
             // 생성된 카드들 배치하는것도 만들어야 함.
             char _buffCode = (char)0;
+            var data = buffArchive[_buffCode];
 
             var targetCard = cardObj.GetComponent<StatusEffect>() ??  null;
-
-            if (infoGenerateDic.TryGetValue(_buffCode, out CardInfo cardInfo))
+            if(containStatGenerateDic.TryGetValue(_buffCode, out BuffStat stat) /*&& containStatGenerateDic[_buffCode].rank > 0*/)
             {
-                targetCard?.GetRandomCodeWithInfo(buffCode, cardInfo, statGenerateDic[buffCode]);
+                targetCard?.GetRandomCodeWithInfo(_buffCode, data.cardInfo, stat);
+                targetCard?.SetCardInfo();
+            }
+            else
+            {
+                targetCard?.GetRandomCodeWithInfo(_buffCode, data.cardInfo, data.stat);
                 targetCard?.SetCardInfo();
                 //스탯을 어떻게 적용시켜줄건지?
             }
-            else Debug.Log("Missing value");
-            
-            //Will be change
         }
     }
 
@@ -141,23 +135,26 @@ public class GenerateCard : MonoBehaviour
     {
         // 수정 : 현재 값으로 카드 추출하도록 조건 추가하기
 
-        containAttackStatusGenerateDic = buffManager.ContainAttackStatToGenerate();
+        containAttackStatusGenerateDic = attackGenerator.ContainAttackStatToGenerate();
 
         //카드 카운트 수정
         for (int i = 0; i < cardCount; i++)
         {
             var cardObj = Instantiate(attackCardPrefab, this.transform);
-
-            cardObj.GetComponent<RectTransform>().anchoredPosition = new Vector2((-210 + (i * 140)),0f) ;
+            cardObj.GetComponent<RectTransform>().anchoredPosition = new Vector2((-210 + (i * 140)),0f);
 
             //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
             char _attackCode = (char)UnityEngine.Random.Range(0,4);
+
+            var data = attackArchive[_attackCode];
+
             AbstractAttack targetCard = null;
-            switch (attackStatusGenerateDic[_attackCode].attackType)
+
+            switch (data.attackStatus.attackType)
             {
                 case AttackType.laser:
-                    targetCard = cardObj.AddComponent<LaserAttack>();
-                    break;
+                targetCard = cardObj.AddComponent<LaserAttack>();
+                break;
                 case AttackType.guided:
                     targetCard = cardObj.AddComponent<GuidedAttack>();
                     break;
@@ -172,32 +169,21 @@ public class GenerateCard : MonoBehaviour
                     break;
             }
 
-
             // 현재 딕셔너리에 값이 저장된 이력이 있다면.
             // 단, 상승 스탯카드는 공격 타겟이 존재할때 사용
             if (containAttackStatusGenerateDic.TryGetValue(_attackCode, out AttackStatus containAttackStat))
             {
-                targetCard?.GetRandomCodeWithInfo(_attackCode, attacInfoGenerateDic[_attackCode], containAttackStat);
+                targetCard?.GetRandomCodeWithInfo(_attackCode, data.attackInfo, containAttackStat);
                 Debug.Log(targetCard?._AttackCardInfo.attackCardEnum);
                 targetCard?.SetCardInfo();
             }
-            else if (attacInfoGenerateDic.TryGetValue(_attackCode, out AttackCardInfo attacinfo))
+            else
             {
-                targetCard?.GetRandomCodeWithInfo(_attackCode, attacinfo, attackStatusGenerateDic[_attackCode]);
+                targetCard?.GetRandomCodeWithInfo(_attackCode, data.attackInfo, data.attackStatus);
                 Debug.Log(targetCard?._AttackCardInfo.attackCardEnum);
                 targetCard?.SetCardInfo();
             }
 
-            //Will be change
         }
-
-        //for (int i = 0; i < 3; i++)
-        //{
-        //    buffStorage = (BuffEnumStorage)Random.Range(0, buffStorageLength);
-        //    var d = Instantiate(cardPrefab, buffManager.transform);
-
-        //    var asd = buffManager.ReturnBuff(buffStorage);
-
-        //}
     }
 }
