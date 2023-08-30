@@ -1,42 +1,17 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public struct PlayerStatStruct
-{
-    public float health;
-    public float defence;
-    public float speed;
-    public float will;
 
-    
-    
-    public PlayerStatStruct(float health, float defence, float speed, float will, float damage, float avoid, float block)
-    {
-        this.health = health;
-        this.defence = defence;
-        this.speed = speed;
-        this.will = will;
-        this.damage = damage;
-        this.avoidness = avoid;
-        this.blockness = block;
-    }
-
-    // when it activated
-    public float damage;
-    public float avoidness;
-    public float blockness;
-}
-public struct PlayerAbilityStruct
-{
-    int indurance;
-    int luck;
-    int agility;
-    int wisdom;
-    int faith;
-}
 public class PlayerStat : MonoBehaviour
 {
     PlayerStatStruct playerStat;
+
+
+    // this section must be proteted so it will be use action type
+    public void UpdatePlayerStat(PlayerStatStruct stat) // here data is buff or attack debuff
+    {
+        playerStat = stat;
+        DataManager.Instance.UpdatePlayerData(playerStat,this);
+    }
     public void GetDamaged(float dmg)
     {
         playerStat.health -= dmg;
@@ -50,9 +25,12 @@ public class PlayerStat : MonoBehaviour
     }
     bool isLive = true;
 
-    void Start()
+    void Awake()
     {
-        playerStat = new PlayerStatStruct(50,3,15,0,0,0,0);
+        //if manage this in db manager, it will be awake data
+        DataManager.Instance.PlayerStatDele = UpdatePlayerStat; // this calc need
+        DataManager.Instance.PlayerStatDele?.Invoke(new PlayerStatStruct(50, 3, 15, 0, 0, 0, 0,0,0));
+
 
     }
 

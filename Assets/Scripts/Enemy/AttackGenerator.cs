@@ -15,17 +15,18 @@ public class AttackGenerator : MonoBehaviour
     private List<AttackFunc> objectsComponent = new List<AttackFunc>();
     //private List<AbstractAttack> attackObjList;
 
-    public void AddorUpdateAttackDictionary(char attackCode, AttackStatus attackStatus)
+    public void AddorUpdateAttackDictionary(char attackCode)
     {
         //과연 생성과 강화는 따로있는데 어떻게 딕셔너리 구분지어서 설정할건지?
         if (containAttackDict.ContainsKey(attackCode))
         {
             //method which use for player through out buffstat with buffcode
-            containAttackDict[attackCode] = attackStatus;
+            containAttackDict[attackCode] = allAttackStatArchive[attackCode].attackStatus;
             Debug.Log($"랭크 증가");
         }
         else
         {
+            Debug.Log(allAttackStatArchive[attackCode].attackStatus);
             containAttackDict.Add(attackCode, allAttackStatArchive[attackCode].attackStatus); //각각에 인스턴스로 존재해버림, 이 데이터 값들을 버프매니저에서 통합으로 관리해야함.
             Debug.Log("없는 공격 추가 : " + allAttackStatArchive[attackCode].attackInfo.attackName + " " + "현재 버프 갯수:" + containAttackDict.Count);
         }
@@ -41,7 +42,7 @@ public class AttackGenerator : MonoBehaviour
 
     private void Start()
     {
-        DataManager.Instance.ReturnDict(allAttackStatArchive);
+        allAttackStatArchive = DataManager.Instance.ReturnDict(allAttackStatArchive);
         FindPlayer();
     }
 
@@ -50,12 +51,13 @@ public class AttackGenerator : MonoBehaviour
        // 플레이어 찾는건 스태틱으로 처리해도 될듯 .수정
         try
         {
-            if (GameObject.FindWithTag("Player").TryGetComponent<Player>(out Player player))
-            {
-                // 게임오브젝트 컴포넌트 자체를 가져오려고 생긴 문제였음.
-                attackTarget = player.gameObject;
-                Debug.Log(attackTarget + "공격 대상");
-            }
+            attackTarget = DataManager.Instance._playerTransform.gameObject;
+            //if (GameObject.FindWithTag("Player").TryGetComponent<Player>(out Player player))
+            //{
+            //    // 게임오브젝트 컴포넌트 자체를 가져오려고 생긴 문제였음.
+            //    attackTarget = player.gameObject;
+            //    Debug.Log(attackTarget + "공격 대상");
+            //}
         }
         catch (NullReferenceException e)
         {

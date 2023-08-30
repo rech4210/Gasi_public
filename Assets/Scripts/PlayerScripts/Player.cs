@@ -67,4 +67,5 @@ public class Player : MonoBehaviour
         keyValuePairs.Add(KeyCode.S, -transform.forward);
         keyValuePairs.Add(KeyCode.D, transform.right);
     }
+    //add dash
 }

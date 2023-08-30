@@ -173,14 +173,14 @@ public class GenerateCard : MonoBehaviour
             // 단, 상승 스탯카드는 공격 타겟이 존재할때 사용
             if (containAttackStatusGenerateDic.TryGetValue(_attackCode, out AttackStatus containAttackStat))
             {
-                targetCard?.GetRandomCodeWithInfo(_attackCode, data.attackInfo, containAttackStat);
-                Debug.Log(targetCard?._AttackCardInfo.attackCardEnum);
+                targetCard?.GetRandomCodeWithInfo(data);
+                Debug.Log(targetCard?._AttackData.attackInfo.attackCardEnum);
                 targetCard?.SetCardInfo();
             }
             else
             {
-                targetCard?.GetRandomCodeWithInfo(_attackCode, data.attackInfo, data.attackStatus);
-                Debug.Log(targetCard?._AttackCardInfo.attackCardEnum);
+                targetCard?.GetRandomCodeWithInfo(data);
+                Debug.Log(targetCard?._AttackData.attackInfo.attackCardEnum);
                 targetCard?.SetCardInfo();
             }
 

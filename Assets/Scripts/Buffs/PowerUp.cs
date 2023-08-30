@@ -14,7 +14,6 @@ public class PowerUp : StatusEffect/*, IBuff*/
 
     private void Start()
     {
-        
         FindBuffManager(buffManager);
     }
     public override void OnChecked()

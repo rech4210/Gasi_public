@@ -9,11 +9,88 @@
  * 
  * 
  */
-#region 버프 종류, 버프 데이터
+
+
+
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEngine.Rendering;
 
+#region 플레이어 데이터
+// 이부분 그냥 클래스로 바꿔버릴까??
+public struct PlayerStatStruct
+{
+    public float[] array;
 
+    public float health;
+    public float will;
+    public float luck;
+    public float agility;
+    public float wisdom;
+    public float faith;
+
+    public float speed;
+    public float defence;
+    public float indurance;
+
+    public PlayerStatStruct(float health, float will, float luck, float agility, float wisdom, float faith, float speed, float defence, float indurance)
+    {
+        array = null;
+        this.health = health;
+        this.will = will;
+        this.luck = luck;
+        this.agility = agility;
+        this.wisdom = wisdom;
+        this.faith = faith;
+
+        this.speed = speed;
+        this.defence = defence;
+        this.indurance = indurance;
+
+        this.damage = 0;
+        this.avoidness = 0;
+        this.blockness = 0;
+    }
+
+    public void SetArrayFromValue(int count)
+    {
+        if(array == null)
+        {
+            array = new float[count];
+        }
+        array[0] = health; 
+        array[1] = will; 
+        array[2] = luck; 
+        array[3] = agility; 
+        array[4] = wisdom; 
+        array[5] = faith; 
+        array[6] = speed; 
+        array[7] = defence;
+        array[8] = indurance;
+    }
+    public void SetValueFromArray()
+    {
+        health = array[0];
+        will = array[1];
+        luck = array[2];
+        agility = array[3];
+        wisdom = array[4];
+        faith = array[5];
+        speed = array[6];
+        defence = array[7];
+        indurance = array[8];
+    }
+
+    // when it activated
+    public float damage;
+    public float avoidness;
+    public float blockness;
+}
+
+#endregion
+
+#region 버프 종류, 버프 데이터
 [Serializable]
 public class BuffStructure : IDataLoader<char, BuffData>
 {
@@ -45,12 +122,20 @@ public class BuffStructure : IDataLoader<char, BuffData>
 }
 
 
+
+
 [Serializable]
 public enum BuffStatEnum
 {
     health,
+    will,
+    luck,
+    agility,
+    wisdom,
+    faith,
     speed,
-    endurance,
+    defence,
+    indurance,
     empty
 }
 
@@ -148,15 +233,17 @@ public class AttackData
     public char attackCode;
     public AttackStatus attackStatus;
     public  AttackCardInfo attackInfo;
+
     public void Print()
     {
         UnityEngine.Debug.Log($"code:{attackCode},{attackInfo.attackName},{attackStatus.point}");
     }
-    public AttackData(char attackCode, AttackStatus status ,AttackCardInfo info)
+    public AttackData(char attackCode, AttackStatus status, AttackCardInfo info)
     {
         this.attackCode = attackCode;
         attackStatus = status;
         attackInfo = info;
+
     }
 
 

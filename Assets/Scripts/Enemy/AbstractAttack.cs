@@ -9,14 +9,13 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo,ICardSkill
     protected int skillCheckNum = 100;
 
     protected AttackGenerator attackGenerator;
-    protected BuffManager buffManager;
+    protected BuffManager buffManager;// delete
 
     protected char attackCode;
-    AttackType attackType;
-    AttackStatus attackStatus;
-    AttackCardInfo attackInfo;
-    public AttackCardInfo _AttackCardInfo { get { return attackInfo; }}
-    public AttackStatus _AttackStatus { get { return attackStatus; }}
+    protected AttackData attackData;
+    protected AttackStatus attackStatus;
+    protected AttackCardInfo attackInfo;
+    public AttackData _AttackData { get { return attackData; } }
 
     //use when checked
     // 이 함수에서 버프매니저를 최신화 시켜줘야하지 않을까?
@@ -46,12 +45,14 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo,ICardSkill
         }
     }
     //이거 잘 적용되는지 확인해봐야함.
-    public virtual void GetRandomCodeWithInfo(char _attackCode, AttackCardInfo _cardInfo, AttackStatus _attackStatus)
-    { this.attackCode = _attackCode; attackInfo = _cardInfo; this.attackStatus = _attackStatus; }
+    // is here updated?
+    public virtual void GetRandomCodeWithInfo(AttackData data)
+    { this.attackCode = data.attackCode; attackData = data; attackInfo = data.attackInfo; attackStatus = data.attackStatus; }
 
     // 스탯타입으로 결정하지말고 차라리 함수가 편할 수도 있음. json에 스탯 타입까지 명시한다면 귀찮아질것.
     public virtual void CalcAttackStatus(float calcNum, string statType)
     {
+
         this.attackStatus.rank++;
         switch (statType)
         {
@@ -136,16 +137,16 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo,ICardSkill
 
     public void Skill()
     {
-        switch (_AttackCardInfo.attackCardEnum)
+        switch (attackInfo.attackCardEnum)
         {
             case AttackCardEnum.skill_1:
-                attackGenerator.UseSkill(_AttackStatus, "skill_1");
+                attackGenerator.UseSkill(attackStatus, "skill_1");
                 break;
             case AttackCardEnum.skill_2:
-                attackGenerator.UseSkill(_AttackStatus, "skill_2");
+                attackGenerator.UseSkill(attackStatus, "skill_2");
                 break;
             case AttackCardEnum.skill_3:
-                attackGenerator.UseSkill(_AttackStatus, "skill_3");
+                attackGenerator.UseSkill(attackStatus, "skill_3");
                 break;
             default:
                 break;
