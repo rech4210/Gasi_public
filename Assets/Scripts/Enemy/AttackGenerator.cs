@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AttackGenerator : MonoBehaviour
 {
+    
     [SerializeField]
     private GameObject[] attackObjectPrefab;
 

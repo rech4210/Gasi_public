@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo,ICardSkill
+public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo, ICardSkill
 {
     protected int skillCheckNum = 100;
 
@@ -102,10 +102,10 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo,ICardSkill
         if (this.transform.GetChild(0).GetChild(0).TryGetComponent<Image>(out Image frontImage))
         {
 
-            frontImage.sprite = Resources.Load<Sprite>(Path.Combine("AttackCardResource/", attackInfo.fRImage));
+            frontImage.sprite = Resources.Load<Sprite>(Path.Combine(StringManager.Instance.attackCardResource, attackInfo.fRImage));
             if (frontImage.sprite == null)
             {
-                Debug.Log($"There is no resource__{attackInfo.fRImage} at: " + Path.Combine(Application.dataPath + "/AttackCardResource/", ""));
+                Debug.Log($"There is no resource__{attackInfo.fRImage} at: " + Path.Combine(Application.dataPath + $"/{StringManager.Instance.attackCardResource}", ""));
             }
         }
         else
@@ -116,10 +116,10 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo,ICardSkill
         if (this.transform.GetChild(0).TryGetComponent<Image>(out Image backImage))
         {
 
-            backImage.sprite = Resources.Load<Sprite>(Path.Combine("AttackCardResource/", attackInfo.bGImage));
+            backImage.sprite = Resources.Load<Sprite>(Path.Combine(StringManager.Instance.attackCardResource, attackInfo.bGImage));
             if (backImage.sprite == null)
             {
-                Debug.Log($"There is no resource__{attackInfo.bGImage} at: " + Path.Combine(Application.dataPath + "/AttackCardResource/", ""));
+                Debug.Log($"There is no resource__{attackInfo.bGImage} at: " + Path.Combine(Application.dataPath + $"/{StringManager.Instance.attackCardResource}", ""));
             }
         }
         else

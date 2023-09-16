@@ -3,13 +3,14 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using System;
 
 public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<AttackData>, IGetDict<PlayerStatStruct>
 {
     string path = null;
     int buffCounts = 100;
 
-    #region player information
+    #region 플레이어 정보
     PlayerStatStruct playerStatStruct;
     Transform playerTransform;
 
@@ -36,25 +37,22 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
     private Dictionary<char, AttackData> AttackArchive = new();
     private Dictionary<char, PlayerStatStruct> playerLastData = new();
     #endregion
-
     private void Awake()
     {
         //SaveBuffJson();
         //SaveAttackJson();
-
-        path = SetPass("BuffData.json");
+        path = SetPass(StringManager.Instance.buffData);
         BuffsArchive = LoadJson<BuffStructure, char, BuffData>(path).MakeDict();
         foreach (var item in BuffsArchive)
         {
             UnityEngine.Debug.Log($"code:{item.Value}");
         }
-        path = SetPass("AttackData.json");
+        path = SetPass(StringManager.Instance.attakData);
         AttackArchive = LoadJson<AttackStructure, char, AttackData>(path).MakeDict();
         foreach (var item in AttackArchive)
         {
             UnityEngine.Debug.Log($"code:{item.Value}");
         }
-
     }
     protected override void Execute()
     {
@@ -66,7 +64,7 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
     public BuffStatEnum statEnum { get; set; }
     public void SaveBuffJson()
     {
-        path = Path.Combine(Application.dataPath + "/Json/", "BuffData.json");
+        path = Path.Combine(Application.dataPath, StringManager.Instance.buffData) ?? "wrongPath";
         //string jsonData = null;
 
         File.WriteAllText(path, "");
@@ -86,7 +84,7 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
     public AttackCardEnum attackEnum { get; set; }
     public void SaveAttackJson()
     {
-        path = Path.Combine(Application.dataPath + "/Json/", "AttackData.json") ?? null;
+        path = Path.Combine(Application.dataPath, StringManager.Instance.attakData) ?? "wrongPath";
         //string jsonData = null;
         if (path == null) return;
 
@@ -108,9 +106,9 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
 
     Loader LoadJson<Loader, Key, Value>(string path) where Loader : IDataLoader<Key, Value>
     {
-        if(string.IsNullOrEmpty(path))
+        if (string.IsNullOrEmpty(path))
         {
-            Debug.Log(path);
+            Debug.Log(path + "null or empty");
         }
         string jsonData = File.ReadAllText(path);
         //TextAsset textAsset= Resources.Load<TextAsset>(path);
@@ -120,7 +118,7 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
     }
     private string SetPass(string _path)
     {
-        return path = Path.Combine(Application.dataPath + "/Json/", _path);
+        return path = Path.Join(Application.dataPath, _path);
     }
 }
 

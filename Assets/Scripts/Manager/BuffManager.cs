@@ -51,7 +51,6 @@ public class BuffManager : MonoBehaviour
         {
             //Do empty work
         }
-
         DataManager.Instance.PlayerStatDele(playerStatStruct);
         return stat;
     }

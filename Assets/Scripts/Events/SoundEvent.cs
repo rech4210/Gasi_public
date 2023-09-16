@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SoundEvent : Events<SoundEvent>
 {
-
+    
     protected override void Execute()
     {
         if (OnExecute?.Method == null)

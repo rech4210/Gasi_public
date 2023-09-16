@@ -19,7 +19,6 @@ public abstract class Events<T> :MonoBehaviour where T : Events<T>
                 instance = Object.FindObjectOfType(typeof(T)) as T;
             }
             return instance;
-
         } 
     }
     protected System.Action OnExecute;

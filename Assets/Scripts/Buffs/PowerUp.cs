@@ -23,6 +23,7 @@ public class PowerUp : StatusEffect/*, IBuff*/
         // 여기에 연산하는 기능?
     }
 
+
     //public override void GetRandomCodeWithInfo(char buffCode, CardInfo cardInfo, BuffStat buffStat )
     //{ base.GetRandomCodeWithInfo(); }
 

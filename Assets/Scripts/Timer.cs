@@ -11,7 +11,6 @@ public class Timer : MonoBehaviour
 
     private void Start()
     {
-        // You can start the timer at the beginning or call the StartTimer() function later.
         StartTimer();
     }
 

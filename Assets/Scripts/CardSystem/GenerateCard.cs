@@ -1,4 +1,8 @@
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,6 +10,12 @@ using UnityEngine.UI;
 public class GenerateCard : MonoBehaviour
 {
     private float timeSinceStart;
+    Queue<Action> actions = new Queue<Action>();
+
+    public void getact(Action action)
+    {
+        actions.Enqueue(action);
+    }
 
     BuffManager buffManager;
     AttackGenerator attackGenerator;
@@ -18,6 +28,8 @@ public class GenerateCard : MonoBehaviour
 
     public GameObject cardPrefab;
     public GameObject attackCardPrefab;
+
+    private List<GameObject> cards = new List<GameObject>();
 
     //추후 카드 프리팹에 들어갈 요소, 이미지 들을 정리할 구조체가 필요할듯.
 
@@ -54,7 +66,10 @@ public class GenerateCard : MonoBehaviour
             throw e;
         }
 
+        //test();
+        //getact(()=>AttackGenerate());
         AttackGenerate();
+
     }
 
     #endregion
@@ -67,12 +82,25 @@ public class GenerateCard : MonoBehaviour
      * 4. 그렇다면 각 카드에 특수기능을 넣어서 관리하여야 하는지..? 아니라면 
      * 5. 일괄적용 기능과 함수 제어는 어텍 제너레이터안에 리스트로 관리해야할것 같다.
     */
+
+    async void test()
+    {
+        Task a = new Task(() => AttackGenerate());
+        a.Start();
+        a.Wait(5000);
+        await a;
+        Debug.Log("delay end");
+    }
+
+    
     private void Update()
     {
-        if ((timeSinceStart  = Time.realtimeSinceStartup)% 30 == 0)
-        {
-            
-        }
+        //if(actions.Count > 0)
+        //{
+        //    actions.Dequeue().Invoke();
+        //}
+
+
         if (Input.GetKeyDown(KeyCode.Mouse0) /*스페이스바로도*/)
         {
             pointerEventData = new PointerEventData(eventSystem);
@@ -88,13 +116,26 @@ public class GenerateCard : MonoBehaviour
                 if(result.gameObject.transform.parent.TryGetComponent<StatusEffect>(out StatusEffect statusEffect))
                 {
                     statusEffect.OnChecked();
+                    for (int i = 0; i < cards.Count; i++)
+                    {
+                        Destroy(cards[i]);
+                    }
+                    cards.Clear();
                 }
                 else if(result.gameObject.transform.parent.TryGetComponent<AbstractAttack>(out AbstractAttack attack))
                 {
                     attack.OnChecked();
+                    for (int i = 0; i < cards.Count; i++)
+                    {
+                        Destroy(cards[i]);
+                    }
+                    cards.Clear();
                 }
                 else
                 { Debug.Log("not defined raytarget"); }
+
+                
+
             }
         }
     }
@@ -105,6 +146,9 @@ public class GenerateCard : MonoBehaviour
      * 3. 카드 생성 시간
      * 
      */
+
+
+    //카드 생성시 문자열 + 숫자 조합하여 해당하는 카드 생성하도록??
     void BuffGenerate() // -> 여기에 특수, 악마, 천사, 일반카드 재사용하도록 짜기
     {
         containStatGenerateDic = buffManager.ContainStatToGenerate();
@@ -141,7 +185,9 @@ public class GenerateCard : MonoBehaviour
         for (int i = 0; i < cardCount; i++)
         {
             var cardObj = Instantiate(attackCardPrefab, this.transform);
+            cards.Add(cardObj);
             cardObj.GetComponent<RectTransform>().anchoredPosition = new Vector2((-210 + (i * 140)),0f);
+
 
             //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
             char _attackCode = (char)UnityEngine.Random.Range(0,4);
