@@ -12,17 +12,6 @@ public abstract class StatusEffect : MonoBehaviour, ISetCardInfo/*, IStatusEffec
     public char _BuffCode { get { return buffCode; } set { buffCode = value; } }
     public CardInfo _CardInfo { get { return cardInfo; } set { cardInfo = value; } }
     public BuffStat _BuffStat { get { return buffStat; } set { buffStat = value; } }
-    //private int _point;
-    //public int point { get { return _point; } protected set { _point = value; } }
-
-    //private int _rank = 1;
-    //public int rank { get { return _rank; } protected set { _rank = value; } }
-
-    //private int _upBuffValue;
-    //public int upBuffValue { get { return _rank; } protected set { _rank = value; } }
-
-    //private int _useBuffValue;
-    //public int useBuffValue { get { return _rank; } protected set { _rank = value; } }
 
     public abstract void OnChecked();
     protected void FindBuffManager(BuffManager buff)
@@ -41,27 +30,27 @@ public abstract class StatusEffect : MonoBehaviour, ISetCardInfo/*, IStatusEffec
             throw e;
         }
     }
-    public virtual void GetRandomCodeWithInfo(char buffCode, CardInfo cardInfo, BuffStat buffStat)
-    { _BuffCode = buffCode; _CardInfo = cardInfo; _BuffStat = buffStat; }
+    public virtual void GetRandomCodeWithInfo(BuffData data)
+    { _BuffCode = data.buffCode; _CardInfo = data.cardInfo; _BuffStat = data.stat; }
 
     public virtual void SetCardInfo()
     {
         if (this.transform.GetChild(0).GetChild(1)
-            .TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI buffname))
+            .TryGetComponent(out TextMeshProUGUI buffname))
         {
             buffname.text = cardInfo.cardName;
         }
         else Debug.LogError("Not Setted Object You're null!!");
 
         if (this.transform.GetChild(0).GetChild(2)
-            .TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI information))
+            .TryGetComponent(out TextMeshProUGUI information))
         {
             information.text = cardInfo.information;
         }
         else Debug.LogError("Not Setted Object You're null!!");
 
         if (this.transform.GetChild(0).GetChild(3)
-            .TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI description))
+            .TryGetComponent(out TextMeshProUGUI description))
         {
             description.text = cardInfo.description;
         }
@@ -104,15 +93,5 @@ public abstract class StatusEffect : MonoBehaviour, ISetCardInfo/*, IStatusEffec
         //Debug.Log(stat);
     }
 
-    // 아래는 인터페이스인데 이거 이렇게 써야 할 필요 있나?
-    //public virtual BuffStat BuffUse()
-    //{
-    //    return new BuffStat();
-    //}
-
-    //public virtual BuffStat BuffUp()
-    //{
-    //    return new BuffStat();
-    //}
 
 }

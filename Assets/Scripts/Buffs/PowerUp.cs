@@ -19,7 +19,14 @@ public class PowerUp : StatusEffect/*, IBuff*/
     public override void OnChecked()
     {
         Debug.Log("온체크 발동");
+        Debug.Log(_BuffCode);
+        //generate 받아야 함 9/29
+
+        //_BuffCode = '0';
         buffManager.AddorUpdateDictionary(_BuffCode);
+        var stat = DataManager.Instance._playerStat;
+        stat.health ++;
+        DataManager.Instance.PlayerStatDele.Invoke(stat);
         // 여기에 연산하는 기능?
     }
 

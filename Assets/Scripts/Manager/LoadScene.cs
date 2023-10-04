@@ -10,6 +10,7 @@ public class LoadScene : Manager<LoadScene> // it will be need to change
     
     private float time;
     public Slider slider;
+    private string sceneName = "MainScene";
     
     new async void Start()
     {
@@ -31,7 +32,7 @@ public class LoadScene : Manager<LoadScene> // it will be need to change
     IEnumerator LoadAsyncScene()
     {
         //여기서 에러가 뜸.
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("MainScene", LoadSceneMode.Single);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         asyncOperation.allowSceneActivation = false;
 
         while(!asyncOperation.isDone)
@@ -40,8 +41,9 @@ public class LoadScene : Manager<LoadScene> // it will be need to change
             slider.value = time / 10f;
 
             //fake loading
-            if(time > 10)
+            if(time > 100)
             {
+                //yield return new WaitForSeconds(1f);
                 asyncOperation.allowSceneActivation = true;
             }
             yield return null;

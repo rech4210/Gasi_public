@@ -10,6 +10,7 @@ public class PlayerStat : MonoBehaviour
     public void UpdatePlayerStat(PlayerStatStruct stat) // here data is buff or attack debuff
     {
         playerStat = stat;
+        playerStat.PrintPlayerStat();
         DataManager.Instance.UpdatePlayerData(playerStat,this);
     }
     public void GetDamaged(float dmg)

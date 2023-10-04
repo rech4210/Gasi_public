@@ -8,15 +8,15 @@ public class AttackGenerator : MonoBehaviour
     [SerializeField]
     private GameObject[] attackObjectPrefab;
 
-    private Dictionary<char, AttackData> allAttackStatArchive = new();
-    private Dictionary<char, AttackStatus> containAttackDict = new();
+    private Dictionary<int, AttackData> allAttackStatArchive = new();
+    private Dictionary<int, AttackStatus> containAttackDict = new();
 
     private GameObject attackTarget;
     private List<GameObject> attackObjects = new List<GameObject>();
     private List<AttackFunc> objectsComponent = new List<AttackFunc>();
     //private List<AbstractAttack> attackObjList;
 
-    public void AddorUpdateAttackDictionary(char attackCode)
+    public void AddorUpdateAttackDictionary(int attackCode)
     {
         //과연 생성과 강화는 따로있는데 어떻게 딕셔너리 구분지어서 설정할건지?
         if (containAttackDict.ContainsKey(attackCode))
@@ -35,7 +35,7 @@ public class AttackGenerator : MonoBehaviour
             $"스탯 상승 : {containAttackDict[attackCode].point}, " +
             $"랭크 : {containAttackDict[attackCode].rank}");
     }
-    public Dictionary<char, AttackStatus> ContainAttackStatToGenerate()
+    public Dictionary<int, AttackStatus> ContainAttackStatToGenerate()
     {
         return containAttackDict;
     }
@@ -78,7 +78,7 @@ public class AttackGenerator : MonoBehaviour
 
     public void Generate(AttackStatus status)
     {
-        Debug.Log(((int)status.attackType).ToString());
+        Debug.Log((status.attackType).ToString());
         var obj = Instantiate(attackObjectPrefab[(int)status.attackType], RandomPose(),this.transform.rotation);
         attackObjects.Add(obj);
 

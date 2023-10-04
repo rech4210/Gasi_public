@@ -14,8 +14,7 @@
 
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
-using UnityEngine.Rendering;
+using UnityEngine;
 
 #region 플레이어 데이터
 // 이부분 그냥 클래스로 바꿔버릴까??
@@ -34,9 +33,14 @@ public struct PlayerStatStruct
     public float defence;
     public float indurance;
 
+
+    public void PrintPlayerStat()
+    {
+        Debug.Log($"PlayerStat: health = {health} will = {will} luck = {luck} agility = {agility} wisdom = {wisdom} faith = {faith} ");
+    }
     public PlayerStatStruct(float health, float will, float luck, float agility, float wisdom, float faith, float speed, float defence, float indurance)
     {
-        array = null;
+        array = new float[50];
         this.health = health;
         this.will = will;
         this.luck = luck;
@@ -92,7 +96,7 @@ public struct PlayerStatStruct
 
 #region 버프 종류, 버프 데이터
 [Serializable]
-public class BuffStructure : IDataLoader<char, BuffData>
+public class BuffStructure : IDataLoader<int, BuffData>
 {
     public BuffData[] buffDatas;
 
@@ -101,9 +105,9 @@ public class BuffStructure : IDataLoader<char, BuffData>
         buffDatas = new BuffData[100];
     }
 
-    public Dictionary<char, BuffData> MakeDict()
+    public Dictionary<int, BuffData> MakeDict()
     {
-        Dictionary<char, BuffData> dict = new();
+        Dictionary<int, BuffData> dict = new();
 
         foreach (var item in buffDatas)
         {
@@ -202,7 +206,7 @@ public struct BuffStat
 
 
 [Serializable]
-public class AttackStructure : IDataLoader<char, AttackData>
+public class AttackStructure : IDataLoader<int, AttackData>
 {
     public AttackData[] attackDatas;
 
@@ -213,9 +217,9 @@ public class AttackStructure : IDataLoader<char, AttackData>
     }
 
 
-    public Dictionary<char, AttackData> MakeDict()
+    public Dictionary<int, AttackData> MakeDict()
     {
-        Dictionary<char, AttackData> dict = new();
+        Dictionary<int, AttackData> dict = new();
         foreach (var item in attackDatas)
         {
             if (item != null)

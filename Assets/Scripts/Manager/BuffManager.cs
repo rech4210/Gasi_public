@@ -4,17 +4,17 @@ using UnityEngine;
 public class BuffManager : MonoBehaviour
 {
 
-    private Dictionary<char, BuffData> allBuffStatArchive = new();
-    private Dictionary<char, BuffStat> containBuffDict = new();
+    private Dictionary<int, BuffData> allBuffStatArchive = new();
+    private Dictionary<int, BuffStat> containBuffDict = new();
 
     Player player = null;
 
     private void Start()
     {
-        DataManager.Instance.ReturnDict(allBuffStatArchive);
+        allBuffStatArchive = DataManager.Instance.ReturnDict(allBuffStatArchive);
     }
 
-    public void AddorUpdateDictionary(char buffCode)
+    public void AddorUpdateDictionary(int buffCode)
     {
         if (containBuffDict.ContainsKey(buffCode))
         {
@@ -35,7 +35,7 @@ public class BuffManager : MonoBehaviour
         //this content must be need switch case
     }
     
-    private BuffStat BuffCase(char buffCode)
+    private BuffStat BuffCase(int buffCode)
     {
         BuffStat stat = containBuffDict[buffCode];
         PlayerStatStruct playerStatStruct = DataManager.Instance._playerStat;
@@ -54,7 +54,7 @@ public class BuffManager : MonoBehaviour
         DataManager.Instance.PlayerStatDele(playerStatStruct);
         return stat;
     }
-    private int CalcBuff(ref BuffStat stat, char buffCode)
+    private int CalcBuff(ref BuffStat stat, int buffCode)
     {
         //Use와 Up을 혼동하진 않았는지..?
         stat.rank++;
@@ -62,7 +62,7 @@ public class BuffManager : MonoBehaviour
         return stat.point;
     }
 
-    public void RemoveSomthing(char buffCode) 
+    public void RemoveSomthing(int buffCode) 
     {
         if (containBuffDict.ContainsKey(buffCode))
         {
@@ -70,13 +70,13 @@ public class BuffManager : MonoBehaviour
         }
     }
 
-    public BuffStat ReturnBuff(char buffCode)
+    public BuffStat ReturnBuff(int buffCode)
     {
         return containBuffDict[buffCode];
     }
 
     // 이 부분 프로퍼티로 수정
-    public Dictionary<char, BuffStat> ContainStatToGenerate()
+    public Dictionary<int, BuffStat> ContainStatToGenerate()
     {
         return containBuffDict;
     }

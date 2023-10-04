@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class DeadEvents : Events<DeadEvents>
 {
     protected override void Execute()
@@ -20,5 +20,6 @@ public class DeadEvents : Events<DeadEvents>
     private void Dead_2()
     {
         Debug.Log("Dead_2");
+        SceneManager.LoadScene(0);
     }
 }

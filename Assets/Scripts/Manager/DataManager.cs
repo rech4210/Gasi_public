@@ -28,27 +28,31 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
 
     #endregion
     #region µñ¼Å³Ê¸® ¹ÝÈ¯ ºÎºÐ
-    public Dictionary<char, BuffData> ReturnDict(Dictionary<char, BuffData> dict) {return dict = BuffsArchive;}
-    public Dictionary<char, AttackData> ReturnDict(Dictionary<char, AttackData> dict) { return dict = AttackArchive;}
-    public Dictionary<char, PlayerStatStruct> ReturnDict(Dictionary<char, PlayerStatStruct> dict) { return dict = playerLastData; }
+    public Dictionary<int, BuffData> ReturnDict(Dictionary<int, BuffData> dict) {return dict = BuffsArchive;}
+    public Dictionary<int, AttackData> ReturnDict(Dictionary<int, AttackData> dict) { return dict = AttackArchive;}
+    public Dictionary<int, PlayerStatStruct> ReturnDict(Dictionary<int, PlayerStatStruct> dict) { return dict = playerLastData; }
 
 
-    private Dictionary<char, BuffData> BuffsArchive = new();
-    private Dictionary<char, AttackData> AttackArchive = new();
-    private Dictionary<char, PlayerStatStruct> playerLastData = new();
+    private Dictionary<int, BuffData> BuffsArchive = new();
+    private Dictionary<int, AttackData> AttackArchive = new();
+    private Dictionary<int, PlayerStatStruct> playerLastData = new();
     #endregion
     private void Awake()
     {
         //SaveBuffJson();
         //SaveAttackJson();
-        path = SetPass(StringManager.Instance.buffData);
-        BuffsArchive = LoadJson<BuffStructure, char, BuffData>(path).MakeDict();
+        var textasset  = Resources.Load<TextAsset>("Json/BuffData");
+        Debug.Log(textasset);
+        BuffsArchive = LoadJson<BuffStructure, int, BuffData>(textasset).MakeDict();
         foreach (var item in BuffsArchive)
         {
             UnityEngine.Debug.Log($"code:{item.Value}");
         }
-        path = SetPass(StringManager.Instance.attakData);
-        AttackArchive = LoadJson<AttackStructure, char, AttackData>(path).MakeDict();
+
+        var txta = Resources.Load<TextAsset>("Json/AttackData");
+        Debug.Log(path);
+
+        AttackArchive = LoadJson<AttackStructure, int, AttackData>(txta).MakeDict();
         foreach (var item in AttackArchive)
         {
             UnityEngine.Debug.Log($"code:{item.Value}");
@@ -104,15 +108,15 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
     }
 
 
-    Loader LoadJson<Loader, Key, Value>(string path) where Loader : IDataLoader<Key, Value>
+    Loader LoadJson<Loader, Key, Value>(TextAsset path) where Loader : IDataLoader<Key, Value>
     {
-        if (string.IsNullOrEmpty(path))
-        {
-            Debug.Log(path + "null or empty");
-        }
-        string jsonData = File.ReadAllText(path);
+        //if (string.IsNullOrEmpty(path))
+        //{
+        //    Debug.Log(path + "null or empty");
+        //}
+        //string jsonData = File.ReadAllText(path);
         //TextAsset textAsset= Resources.Load<TextAsset>(path);
-        Loader data = JsonUtility.FromJson<Loader>(jsonData);
+        Loader data = JsonUtility.FromJson<Loader>(path.ToString());
         Debug.Log(data);
         return data;
     }

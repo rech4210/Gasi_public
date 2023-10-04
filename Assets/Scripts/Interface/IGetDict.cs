@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IGetDict<T>
 {
-    Dictionary<char, T> ReturnDict(Dictionary<char, T> dict);
+    Dictionary<int, T> ReturnDict(Dictionary<int, T> dict);
 
 }

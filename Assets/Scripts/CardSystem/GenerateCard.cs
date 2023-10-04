@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
@@ -20,16 +21,18 @@ public class GenerateCard : MonoBehaviour
     BuffManager buffManager;
     AttackGenerator attackGenerator;
 
-    private Dictionary<char, BuffData> buffArchive = new();
-    private Dictionary<char, AttackData> attackArchive = new();
+    private Dictionary<int, BuffData> buffArchive = new();
+    private Dictionary<int, AttackData> attackArchive = new();
 
-    private Dictionary<char, BuffStat> containStatGenerateDic = new();
-    private Dictionary<char, AttackStatus> containAttackStatusGenerateDic = new();
+    private Dictionary<int, BuffStat> containStatGenerateDic = new();
+    private Dictionary<int, AttackStatus> containAttackStatusGenerateDic = new();
 
     public GameObject cardPrefab;
     public GameObject attackCardPrefab;
 
-    private List<GameObject> cards = new List<GameObject>();
+    private List<GameObject> buffCardList = new List<GameObject>();
+    private List<GameObject> attackCardList = new List<GameObject>();
+
 
     //추후 카드 프리팹에 들어갈 요소, 이미지 들을 정리할 구조체가 필요할듯.
 
@@ -66,9 +69,11 @@ public class GenerateCard : MonoBehaviour
             throw e;
         }
 
-        //test();
-        //getact(()=>AttackGenerate());
-        AttackGenerate();
+        InvokeRepeating("AttackGenerate", 0f, 10f);
+        InvokeRepeating("BuffGenerate", 0.1f, 15f);
+
+        //StartCoroutine(BuffGenerate());
+        //StartCoroutine(AttackGenerate());
 
     }
 
@@ -95,10 +100,6 @@ public class GenerateCard : MonoBehaviour
     
     private void Update()
     {
-        //if(actions.Count > 0)
-        //{
-        //    actions.Dequeue().Invoke();
-        //}
 
 
         if (Input.GetKeyDown(KeyCode.Mouse0) /*스페이스바로도*/)
@@ -116,25 +117,24 @@ public class GenerateCard : MonoBehaviour
                 if(result.gameObject.transform.parent.TryGetComponent<StatusEffect>(out StatusEffect statusEffect))
                 {
                     statusEffect.OnChecked();
-                    for (int i = 0; i < cards.Count; i++)
+                    for (int i = 0; i < buffCardList.Count; i++)
                     {
-                        Destroy(cards[i]);
+                        Destroy(buffCardList[i]);
+                        Time.timeScale = 1.0f;
                     }
-                    cards.Clear();
+                    buffCardList.Clear();
                 }
                 else if(result.gameObject.transform.parent.TryGetComponent<AbstractAttack>(out AbstractAttack attack))
                 {
                     attack.OnChecked();
-                    for (int i = 0; i < cards.Count; i++)
+                    for (int i = 0; i < attackCardList.Count; i++)
                     {
-                        Destroy(cards[i]);
+                        Destroy(attackCardList[i]);
+                        Time.timeScale = 1.0f;
                     }
-                    cards.Clear();
+                    attackCardList.Clear();
                 }
-                else
-                { Debug.Log("not defined raytarget"); }
-
-                
+                else { Debug.Log("not defined raytarget"); }
 
             }
         }
@@ -151,46 +151,58 @@ public class GenerateCard : MonoBehaviour
     //카드 생성시 문자열 + 숫자 조합하여 해당하는 카드 생성하도록??
     void BuffGenerate() // -> 여기에 특수, 악마, 천사, 일반카드 재사용하도록 짜기
     {
+        //Time.timeScale = .0f;
         containStatGenerateDic = buffManager.ContainStatToGenerate();
         for (int i = 0; i < cardCount; i++)
         {
-            var cardObj = Instantiate(cardPrefab,this.transform);
+            var cardGameObj = Instantiate(cardPrefab, this.transform);
             //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
             // 생성된 카드들 배치하는것도 만들어야 함.
             char _buffCode = (char)0;
             var data = buffArchive[_buffCode];
 
-            var targetCard = cardObj.GetComponent<StatusEffect>() ??  null;
-            if(containStatGenerateDic.TryGetValue(_buffCode, out BuffStat stat) /*&& containStatGenerateDic[_buffCode].rank > 0*/)
+                
+            var targetCard = cardGameObj.GetComponent<StatusEffect>() ?? null;
+            buffCardList.Add(cardGameObj);
+            if (containStatGenerateDic.TryGetValue(_buffCode, out BuffStat stat) /*&& containStatGenerateDic[_buffCode].rank > 0*/)
             {
-                targetCard?.GetRandomCodeWithInfo(_buffCode, data.cardInfo, stat);
+                targetCard?.GetRandomCodeWithInfo(data);
                 targetCard?.SetCardInfo();
             }
             else
             {
-                targetCard?.GetRandomCodeWithInfo(_buffCode, data.cardInfo, data.stat);
+                targetCard?.GetRandomCodeWithInfo(data);
                 targetCard?.SetCardInfo();
                 //스탯을 어떻게 적용시켜줄건지?
             }
         }
+
+        //yield return new WaitForSecondsRealtime(15f);
+        Time.timeScale = .0f;
+
+        //if (buffCardList.Count != 0)
+        //{
+        //    Debug.Log("선택하지 않음 축복 소멸");
+        //    RemoveCard(buffCardList);
+        //}
     }
 
+    
     void AttackGenerate()
     {
-        // 수정 : 현재 값으로 카드 추출하도록 조건 추가하기
 
         containAttackStatusGenerateDic = attackGenerator.ContainAttackStatToGenerate();
 
         //카드 카운트 수정
         for (int i = 0; i < cardCount; i++)
         {
-            var cardObj = Instantiate(attackCardPrefab, this.transform);
-            cards.Add(cardObj);
-            cardObj.GetComponent<RectTransform>().anchoredPosition = new Vector2((-210 + (i * 140)),0f);
+            var cardGameObj = Instantiate(attackCardPrefab, this.transform);
+            attackCardList.Add(cardGameObj);
+            cardGameObj.GetComponent<RectTransform>().anchoredPosition = new Vector2((-210 + (i * 140)), 0f);
 
 
             //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
-            char _attackCode = (char)UnityEngine.Random.Range(0,4);
+            char _attackCode = (char)UnityEngine.Random.Range(0, 4);
 
             var data = attackArchive[_attackCode];
 
@@ -199,16 +211,16 @@ public class GenerateCard : MonoBehaviour
             switch (data.attackStatus.attackType)
             {
                 case AttackType.laser:
-                targetCard = cardObj.AddComponent<LaserAttack>();
-                break;
+                    targetCard = cardGameObj.AddComponent<LaserAttack>();
+                    break;
                 case AttackType.guided:
-                    targetCard = cardObj.AddComponent<GuidedAttack>();
+                    targetCard = cardGameObj.AddComponent<GuidedAttack>();
                     break;
                 case AttackType.bullet:
-                    targetCard = cardObj.AddComponent<BulletAttack>();
+                    targetCard = cardGameObj.AddComponent<BulletAttack>();
                     break;
                 case AttackType.trap:
-                    targetCard = cardObj.AddComponent<TrapAttack>();
+                    targetCard = cardGameObj.AddComponent<TrapAttack>();
                     break;
                 default:
                     Debug.Log("There is no maching attack type 정의되지 않은 카드입니다");
@@ -231,5 +243,25 @@ public class GenerateCard : MonoBehaviour
             }
 
         }
+
+        //yield return new WaitForSecondsRealtime(15f);
+        Time.timeScale = .0f;
+        //if (attackCardList.Count != 0)
+        //{
+        //    Debug.Log("선택하지 않음 패널티 부여");
+        //    RemoveCard(attackCardList);
+        //}
+
+
+    }
+
+
+    private void RemoveCard(List<GameObject> carList)
+    {
+        for (int i = 0; i < carList.Count; i++) 
+        {
+            Destroy(carList[i]);
+        }
+        carList.Clear();
     }
 }

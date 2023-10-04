@@ -52,7 +52,6 @@ public class LaserObj : AtkObjStat
         time = 0f;
         while (true)
         {
-
             time += Time.deltaTime;
             transform.localScale = scale * ((Mathf.Cos(Time.deltaTime * scaleSpeed)) * 1f + Random.Range(3,6f));
             laserMaterial.SetColor("_EmissionColor", emissionColor);
