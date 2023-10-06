@@ -46,6 +46,7 @@ public class GenerateCard : MonoBehaviour
 
     private void Start()
     {
+
         graphicRaycaster = GetComponent<GraphicRaycaster>();
 
         buffArchive = DataManager.Instance.ReturnDict(buffArchive);
@@ -60,9 +61,11 @@ public class GenerateCard : MonoBehaviour
             if (GameObject.FindWithTag("BuffManager")
             .TryGetComponent(out BuffManager buff))
             {
+
                 this.buffManager = buff;
             }
         }
+        
         catch (System.NullReferenceException e)
         {
             Debug.LogError($"에러 대상:{this.name}$에러 내용: {e.Message}");

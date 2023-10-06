@@ -26,19 +26,21 @@ public class PlayerStat : MonoBehaviour
     }
     bool isLive = true;
 
-    void Awake()
+    private void Awake()
     {
-        //if manage this in db manager, it will be awake data
+        
+    }
+    void OnEnable() // 플레이어 추적을 실행하기위해 처리함. Awake 또는 manager에서 호출하도록 제어?
+    {
         DataManager.Instance.PlayerStatDele = UpdatePlayerStat; // this calc need
-        DataManager.Instance.PlayerStatDele?.Invoke(new PlayerStatStruct(50, 3, 15, 0, 0, 0, 0,0,0));
-
-
+        DataManager.Instance.PlayerStatDele?.Invoke(new PlayerStatStruct(10, 3, 15, 0, 0, 0, 0,0,0)); 
+        // 이부분 스테이지 생성마다 초기화
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
+        DataManager.Instance.PlayerStatDele -= UpdatePlayerStat;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Background")) { }

@@ -37,7 +37,7 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
     private Dictionary<int, AttackData> AttackArchive = new();
     private Dictionary<int, PlayerStatStruct> playerLastData = new();
     #endregion
-    private void Awake()
+    private void OnEnable()
     {
         //SaveBuffJson();
         //SaveAttackJson();
@@ -58,6 +58,10 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
             UnityEngine.Debug.Log($"code:{item.Value}");
         }
     }
+    //private void OnDisable()
+    //{
+        
+    //}
     protected override void Execute()
     {
         if (OnExecute?.Method == null)

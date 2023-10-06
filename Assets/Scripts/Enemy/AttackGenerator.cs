@@ -47,7 +47,7 @@ public class AttackGenerator : MonoBehaviour
         FindPlayer();
     }
 
-    protected void FindPlayer()
+    protected void FindPlayer() //이부분을 수정해야함 (플레이어 찾기를 실시간으로)
     {
        // 플레이어 찾는건 스태틱으로 처리해도 될듯 .수정
         try
@@ -79,7 +79,7 @@ public class AttackGenerator : MonoBehaviour
     public void Generate(AttackStatus status)
     {
         Debug.Log((status.attackType).ToString());
-        var obj = Instantiate(attackObjectPrefab[(int)status.attackType], RandomPose(),this.transform.rotation);
+        var obj = Instantiate(attackObjectPrefab[(int)status.attackType], RandomPose(),this.transform.rotation,StageManager.Instance.GetCurrentStage().transform);
         attackObjects.Add(obj);
 
         var component = obj.GetComponent<AttackFunc>();
