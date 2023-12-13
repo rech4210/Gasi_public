@@ -5,9 +5,13 @@ public abstract class Events<T> :MonoBehaviour where T : Events<T>
 {
     protected void Start()
     {
-        DontDestroyOnLoad(gameObject);
         Debug.Log((T)this);
         Execute(); // maybe Change?
+        if(instance != this && instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
     }
 
     private static  T instance;
@@ -16,7 +20,7 @@ public abstract class Events<T> :MonoBehaviour where T : Events<T>
         {
             if(instance == null)
             {
-                instance = Object.FindObjectOfType(typeof(T)) as T;
+                instance = FindObjectOfType(typeof(T)) as T;
             }
             return instance;
         } 

@@ -79,7 +79,7 @@ public class AttackGenerator : MonoBehaviour
     public void Generate(AttackStatus status)
     {
         Debug.Log((status.attackType).ToString());
-        var obj = Instantiate(attackObjectPrefab[(int)status.attackType], RandomPose(),this.transform.rotation,StageManager.Instance.GetCurrentStage().transform);
+        var obj = Instantiate(attackObjectPrefab[(int)status.attackType], RandomPose(),this.transform.rotation,StageManager.Instance.GetCurrentStage());
         attackObjects.Add(obj);
 
         var component = obj.GetComponent<AttackFunc>();

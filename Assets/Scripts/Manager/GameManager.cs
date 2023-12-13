@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : Events<GameManager>
+public class GameManager : Manager<GameManager>
 {
     [SerializeField] protected GameObject player;
 
@@ -12,8 +12,4 @@ public class GameManager : Events<GameManager>
 
     }
 
-    protected override void Execute()
-    {
-        //throw new System.NotImplementedException();
-    }
 }

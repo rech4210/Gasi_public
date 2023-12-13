@@ -63,11 +63,11 @@ public struct PlayerStatStruct
         {
             array = new float[count];
         }
-        array[0] = health; 
+        array[0] = health;
         array[1] = will; 
         array[2] = luck; 
-        array[3] = agility; 
-        array[4] = wisdom; 
+        array[3] = agility;
+        array[4] = wisdom;
         array[5] = faith; 
         array[6] = speed; 
         array[7] = defence;

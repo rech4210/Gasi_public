@@ -6,6 +6,10 @@ public abstract class Manager<T> : MonoBehaviour where T : Manager<T>
 {
     protected void Start()
     {
+        if (instance != this && instance != null)
+        {
+            Destroy(this.gameObject);
+        }
         DontDestroyOnLoad(gameObject);
     }
 

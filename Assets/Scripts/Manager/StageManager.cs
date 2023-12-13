@@ -20,8 +20,8 @@ public class StageManager : Manager<StageManager>
         currentStage.SetActive(true);
     }
 
-    public GameObject GetCurrentStage()
+    public Transform GetCurrentStage()
     {
-        return currentStage;
+        return currentStage.transform;
     }
 }

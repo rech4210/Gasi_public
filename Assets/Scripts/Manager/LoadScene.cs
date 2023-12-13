@@ -5,14 +5,14 @@ using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using System;
 
-public class LoadScene : Manager<LoadScene> // it will be need to change
+public class LoadScene : MonoBehaviour
 {
     
     private float time;
     public Slider slider;
     private string sceneName = "MainScene";
     
-    new async void Start()
+    async void Start()
     {
         //GetData();
         Console.WriteLine("done");
