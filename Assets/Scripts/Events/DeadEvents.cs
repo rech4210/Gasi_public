@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class DeadEvents : Events<DeadEvents>
@@ -20,7 +21,9 @@ public class DeadEvents : Events<DeadEvents>
     private void Dead_2()
     {
         Debug.Log("Dead_2");
+        StageManager.Instance.SwichStage();
         //StageManager.Instance.SwichStage(); //이부분 스테이지 변경하기
-        SceneManager.LoadScene(0);
+        // 죽음 이벤트 너무 여러번 발동됨.
+        //StageManager.Instance.SwichStage();
     }
 }

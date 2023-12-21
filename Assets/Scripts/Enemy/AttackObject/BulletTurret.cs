@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,9 +8,12 @@ public class BulletTurret : AttackFunc
 
     private void FixedUpdate()
     {
+
+        transform.rotation = Quaternion.identity;
+        transform.rotation = quaternion.identity;
         transform.rotation = new Quaternion
-            (transform.rotation.x,Quaternion.LookRotation(_Player.transform.position - transform.position).y
-            ,transform.rotation.z, Quaternion.LookRotation(_Player.transform.position - transform.position).w);
+            (transform.rotation.x,ChaseTarget(_Player,this.gameObject).y
+            ,transform.rotation.z, ChaseTarget(_Player, this.gameObject).w);
     }
     public override void CalcStat(AttackStatus status, AttackCardInfo info)
     {
@@ -57,7 +61,6 @@ public class BulletTurret : AttackFunc
             ExcuteAttack();
             yield return new WaitForSeconds(_AttackStatus.duration);
         }
-
     }
     protected override void ExcuteAttack()
     {

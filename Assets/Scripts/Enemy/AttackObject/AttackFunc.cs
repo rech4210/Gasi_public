@@ -24,14 +24,14 @@ public abstract class AttackFunc : MonoBehaviour, IUseSkill
     public int _Rank { protected get { return attackStatus.rank; } set { attackStatus.rank = value; } }
 
 
-    private GameObject player;
+    [SerializeField] private GameObject player;
     public GameObject _Player {protected get { return player;} set { player = value; } }
 
     public abstract void CalcStat(AttackStatus status, AttackCardInfo info);
 
-    public virtual void ChaseTarget(GameObject player) 
+    public virtual Quaternion ChaseTarget(GameObject player, GameObject target) 
     {
-        Quaternion.LookRotation(player.transform.position);
+        return Quaternion.LookRotation(player.transform.position - target.transform.position);
     }
     public abstract void Skill_1();
 

@@ -50,7 +50,6 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
         }
 
         var txta = Resources.Load<TextAsset>("Json/AttackData");
-        Debug.Log(path);
 
         AttackArchive = LoadJson<AttackStructure, int, AttackData>(txta).MakeDict();
         foreach (var item in AttackArchive)

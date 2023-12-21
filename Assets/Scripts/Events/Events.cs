@@ -3,14 +3,14 @@ using UnityEngine;
 
 public abstract class Events<T> :MonoBehaviour where T : Events<T>
 {
-    protected void Start()
+    protected void Awake()
     {
         Debug.Log((T)this);
-        Execute(); // maybe Change?
         if(instance != this && instance != null)
         {
             Destroy(this.gameObject);
         }
+        Execute(); // maybe Change?
         DontDestroyOnLoad(gameObject);
     }
 

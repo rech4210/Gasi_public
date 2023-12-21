@@ -17,7 +17,7 @@ public class LaserObj : AtkObjStat
         laserMaterial = GetComponent<MeshRenderer>().material;
         transform.rotation = new Quaternion(0,Random.rotation.y,0,Random.rotation.w);
         StartCoroutine(LaserLock());
-        emissionColor *= 1.4f;
+        emissionColor *= 1.23f;
     }
 
     IEnumerator LaserLock()
@@ -33,7 +33,7 @@ public class LaserObj : AtkObjStat
 
             laserMaterial.color
             = new Color(Random.Range(.0f, 1), Random.Range(.0f, 1), Random.Range(.0f, 1))
-            * ((1 + Mathf.Sin(Time.deltaTime)) * 0.5f);
+            * ((1 + Mathf.Sin(Time.deltaTime)));
 
             yield return null;
         }
@@ -53,7 +53,7 @@ public class LaserObj : AtkObjStat
         while (true)
         {
             time += Time.deltaTime;
-            transform.localScale = scale * ((Mathf.Cos(Time.deltaTime * scaleSpeed)) * 1f + Random.Range(3,6f));
+            transform.localScale = scale * ((Mathf.Cos(Time.deltaTime * scaleSpeed)) * 1f + Random.Range(4.5f,5f));
             laserMaterial.SetColor("_EmissionColor", emissionColor);
 
             if (time > 0.4f)

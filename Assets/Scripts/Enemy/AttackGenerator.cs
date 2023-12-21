@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -68,24 +69,28 @@ public class AttackGenerator : MonoBehaviour
     }
 
 
-    Vector3 RandomPose()
-    {
-        return new Vector3(
-        UnityEngine.Random.Range(17f, -17f),
-        UnityEngine.Random.Range(0, 0),
-        UnityEngine.Random.Range(1.2f, -20f));
-    }
+    Vector3 RandomPose() => new Vector3(1, 1, 1);
+    //{
+    //    return new Vector3(
+    //    UnityEngine.Random.Range(23f, -23f),
+    //    UnityEngine.Random.Range(0, 0),
+    //    UnityEngine.Random.Range(4f, -23f));
+    //}
 
     public void Generate(AttackStatus status)
     {
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y+5f, transform.localPosition.z); 
+
         Debug.Log((status.attackType).ToString());
-        var obj = Instantiate(attackObjectPrefab[(int)status.attackType], RandomPose(),this.transform.rotation,StageManager.Instance.GetCurrentStage());
+        var obj = Instantiate(attackObjectPrefab[(int)status.attackType], RandomPose(),this.transform.rotation,StageManager.Instance.GetCurrentStagePos());
         attackObjects.Add(obj);
 
         var component = obj.GetComponent<AttackFunc>();
 
         Debug.Log(component.ToString());
         Debug.Log(attackTarget.ToString());
+
+        //직관적이지 않다
         component._Player = attackTarget;
         component._AttackStatus = status;
         //attackFunc에 카드 공격능력치와 추적 대상을 부여해줌.

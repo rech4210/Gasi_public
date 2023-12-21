@@ -8,14 +8,15 @@ public class Stage_1 : StageSetting
     {
         StageOn();
     }
-    protected override void StageOn()
+    public override void StageOn()
     {
         Debug.Log("stage1 open");
     }
 
-    protected override void StageOff()
+    public override void StageOff()
     {
-        Debug.Log("stage off");
+        //Debug.Log("stage off");
+        Destroy(this.gameObject);
         //Destroy(player);
         //StageManager.Instance.SwichStage();
     }

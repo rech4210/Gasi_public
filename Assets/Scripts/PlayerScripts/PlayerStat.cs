@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerStat : MonoBehaviour
 {
@@ -13,18 +13,17 @@ public class PlayerStat : MonoBehaviour
         playerStat.PrintPlayerStat();
         DataManager.Instance.UpdatePlayerData(playerStat,this);
     }
+    bool isLive = true;
     public void GetDamaged(float dmg)
     {
         playerStat.health -= dmg;
         Debug.Log(playerStat.health);
-        if (playerStat.health <= 0f)
+        if (playerStat.health <= 0f && isLive)
         {
             isLive = false;
-
             DeadEvents.Instance.ExecuteEvent();
         }
     }
-    bool isLive = true;
 
     private void Awake()
     {
@@ -38,7 +37,7 @@ public class PlayerStat : MonoBehaviour
     }
     private void OnDisable()
     {
-        DataManager.Instance.PlayerStatDele -= UpdatePlayerStat;
+        DataManager.Instance.PlayerStatDele = null;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,8 +47,8 @@ public class PlayerStat : MonoBehaviour
         {
             //예외처리?
             var attackObject = other.gameObject.GetComponent<AtkObjStat>();
-            GetDamaged(attackObject.Point);
-            attackObject.OnHitTarget();
+            GetDamaged(attackObject.Point *15);
+            attackObject.OnHitTarget(); // 이 부분 액션으로 넘겨주면 좋을듯 (레이저가 타겟 개체를 확인해야할때)
         }
     }
     //private void OnCollisionEnter(Collision collision)

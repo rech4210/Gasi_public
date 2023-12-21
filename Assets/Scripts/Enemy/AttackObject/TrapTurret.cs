@@ -7,10 +7,10 @@ public class TrapTurret : AttackFunc , IUseSkill
 
     private void FixedUpdate()
     {
-        
+
         transform.rotation = new Quaternion
-            (transform.rotation.x, Quaternion.LookRotation(_Player.transform.position - transform.position).y
-            , transform.rotation.z, Quaternion.LookRotation(_Player.transform.position - transform.position).w);
+            (transform.rotation.x, ChaseTarget(_Player, this.gameObject).y
+            , transform.rotation.z, ChaseTarget(_Player, this.gameObject).w);
     }
 
     public override void CalcStat(AttackStatus status, AttackCardInfo info)

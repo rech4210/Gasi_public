@@ -121,7 +121,6 @@ public class BuffStructure : IDataLoader<int, BuffData>
     }
     public void Print()
     {
-        
     }
 }
 

@@ -63,15 +63,17 @@ public class GenerateCard : MonoBehaviour
                 this.buffManager = buff;
             }
         }
-        
+
         catch (System.NullReferenceException e)
         {
             Debug.LogError($"에러 대상:{this.name}$에러 내용: {e.Message}");
             throw e;
         }
 
-        InvokeRepeating("AttackGenerate", 0f, 10f);
-        InvokeRepeating("BuffGenerate", 0.1f, 15f);
+        //InvokeRepeating("AttackGenerate", 0f, 10f);
+        //InvokeRepeating("BuffGenerate", 0.1f, 15f);
+
+        // 이 부분 액션 멀티캐스트로 처리하기
 
         //StartCoroutine(BuffGenerate());
         //StartCoroutine(AttackGenerate());
@@ -98,10 +100,8 @@ public class GenerateCard : MonoBehaviour
         Debug.Log("delay end");
     }
 
-    
     private void Update()
     {
-
 
         if (Input.GetKeyDown(KeyCode.Mouse0) /*스페이스바로도*/)
         {

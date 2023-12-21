@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Manager<T> : MonoBehaviour where T : Manager<T>
@@ -10,7 +8,12 @@ public abstract class Manager<T> : MonoBehaviour where T : Manager<T>
         {
             Destroy(this.gameObject);
         }
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void ReturnInstance()
+    {
+        Debug.Log($"이름: {this.gameObject},타입 : {this.gameObject.GetType()} ");
     }
 
     private static T instance;

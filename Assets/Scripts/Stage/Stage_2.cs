@@ -8,13 +8,13 @@ public class Stage_2 : StageSetting
     {
         StageOn();
     }
-    protected override void StageOn()
+    public override void StageOn()
     {
         //Instantiate(player, gameObject.transform);
         Debug.Log("now is stage2");
     }
 
-    protected override void StageOff()
+    public override void StageOff()
     {
         //Destroy(player);
         //StageManager.Instance.SwichStage();
