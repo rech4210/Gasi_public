@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class AttackFunc : MonoBehaviour, IUseSkill
+public abstract class AttackFunc : MonoBehaviour, IUseSkill, ITimeEvent
 {
     AttackType attackType;
     AttackStatus attackStatus;
@@ -45,4 +45,5 @@ public abstract class AttackFunc : MonoBehaviour, IUseSkill
         _Player.GetComponent<PlayerStat>();
     }
 
+    public abstract ITimeEvent TimeEvent();
 }

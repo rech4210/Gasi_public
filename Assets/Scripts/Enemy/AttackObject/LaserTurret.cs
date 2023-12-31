@@ -63,4 +63,11 @@ public class LaserTurret : AttackFunc, IUseSkill
         atkobj?.GetComponent<AtkObjStat>().GetAtkObjPoint(_AttackStatus);
         atkobj.transform.position = _Player.transform.position;
     }
+
+    public override AttackFunc TimeEvent(AttackFunc obj)
+    {
+        obj.Skill_1();
+        return this;
+        //throw new System.NotImplementedException();
+    }
 }

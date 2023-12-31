@@ -86,6 +86,9 @@ public class AttackGenerator : MonoBehaviour
         attackObjects.Add(obj);
 
         var component = obj.GetComponent<AttackFunc>();
+        //component.GetComponent<ITimeEvent>(() => { TimeEvent.Instance.StoreTimeEventObj(component); });
+        TimeEvent.Instance.StoreTimeEventObj(component);
+        // 윗 부분에서 generate시 자동으로 옵저버에 등록되도록 설정
 
         Debug.Log(component.ToString());
         Debug.Log(attackTarget.ToString());
