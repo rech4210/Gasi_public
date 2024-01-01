@@ -81,7 +81,7 @@ public class AttackGenerator : MonoBehaviour
     {
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y+5f, transform.localPosition.z); 
 
-        Debug.Log((status.attackType).ToString());
+        //Debug.Log((status.attackType).ToString());
         var obj = Instantiate(attackObjectPrefab[(int)status.attackType], RandomPose(),this.transform.rotation,StageManager.Instance.GetCurrentStagePos());
         attackObjects.Add(obj);
 

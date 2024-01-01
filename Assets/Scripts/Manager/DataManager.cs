@@ -42,11 +42,11 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
         //SaveBuffJson();
         //SaveAttackJson();
         var textasset  = Resources.Load<TextAsset>("Json/BuffData");
-        Debug.Log(textasset);
+        //Debug.Log(textasset);
         BuffsArchive = LoadJson<BuffStructure, int, BuffData>(textasset).MakeDict();
         foreach (var item in BuffsArchive)
         {
-            UnityEngine.Debug.Log($"code:{item.Value}");
+            //UnityEngine.Debug.Log($"code:{item.Value}");
         }
 
         var txta = Resources.Load<TextAsset>("Json/AttackData");
@@ -54,7 +54,7 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
         AttackArchive = LoadJson<AttackStructure, int, AttackData>(txta).MakeDict();
         foreach (var item in AttackArchive)
         {
-            UnityEngine.Debug.Log($"code:{item.Value}");
+            //UnityEngine.Debug.Log($"code:{item.Value}");
         }
     }
     //private void OnDisable()
@@ -120,7 +120,7 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
         //string jsonData = File.ReadAllText(path);
         //TextAsset textAsset= Resources.Load<TextAsset>(path);
         Loader data = JsonUtility.FromJson<Loader>(path.ToString());
-        Debug.Log(data);
+        //Debug.Log(data);
         return data;
     }
     private string SetPass(string _path)

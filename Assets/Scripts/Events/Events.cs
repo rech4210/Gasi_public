@@ -5,7 +5,7 @@ public abstract class Events<T> :MonoBehaviour where T : Events<T>
 {
     protected void Awake()
     {
-        Debug.Log((T)this);
+        //Debug.Log((T)this);
         if(instance != this && instance != null)
         {
             Destroy(this.gameObject);

@@ -67,4 +67,10 @@ public class TrapTurret : AttackFunc , IUseSkill
         var atkobj = Instantiate(attackObject);
         atkobj.GetComponent<AtkObjStat>().GetAtkObjPoint(_AttackStatus);
     }
+
+    public override ITimeEvent TimeEvent(float time)
+    {
+        return this;
+
+    }
 }

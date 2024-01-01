@@ -18,8 +18,7 @@ public class PowerUp : StatusEffect/*, IBuff*/
     }
     public override void OnChecked()
     {
-        Debug.Log("온체크 발동");
-        Debug.Log(_BuffCode);
+        //Debug.Log("온체크 발동");
         //generate 받아야 함 9/29
 
         //_BuffCode = '0';

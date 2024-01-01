@@ -57,4 +57,10 @@ public class GuidedTurret : AttackFunc, IUseSkill
         //var atkobj = Instantiate(attackObject, transform.position + transform.forward, transform.rotation,transform);
         //atkobj.GetComponent<AtkObjStat>().GetAtkObjPoint(_AttackStatus);
     }
+
+    public override ITimeEvent TimeEvent(float time)
+    {
+        return this;
+
+    }
 }

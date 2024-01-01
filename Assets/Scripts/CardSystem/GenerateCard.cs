@@ -70,8 +70,8 @@ public class GenerateCard : MonoBehaviour
             throw e;
         }
 
-        //InvokeRepeating("AttackGenerate", 0f, 10f);
-        //InvokeRepeating("BuffGenerate", 0.1f, 15f);
+        InvokeRepeating("AttackGenerate", 0f, 10f);
+        InvokeRepeating("BuffGenerate", 0.1f, 15f);
 
         // 이 부분 액션 멀티캐스트로 처리하기
 
@@ -233,13 +233,13 @@ public class GenerateCard : MonoBehaviour
             if (containAttackStatusGenerateDic.TryGetValue(_attackCode, out AttackStatus containAttackStat))
             {
                 targetCard?.GetRandomCodeWithInfo(data);
-                Debug.Log(targetCard?._AttackData.attackInfo.attackCardEnum);
+                //Debug.Log(targetCard?._AttackData.attackInfo.attackCardEnum);
                 targetCard?.SetCardInfo();
             }
             else
             {
                 targetCard?.GetRandomCodeWithInfo(data);
-                Debug.Log(targetCard?._AttackData.attackInfo.attackCardEnum);
+                //Debug.Log(targetCard?._AttackData.attackInfo.attackCardEnum);
                 targetCard?.SetCardInfo();
             }
 

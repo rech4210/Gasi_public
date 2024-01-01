@@ -12,6 +12,7 @@ public class Timer : MonoBehaviour
     private void Start()
     {
         StartTimer();
+        StartCoroutine(TimeDelay());
     }
 
     public void StartTimer()
@@ -36,18 +37,21 @@ public class Timer : MonoBehaviour
         {
             float currentTime = Time.time - startTime;
 
-            // Calculate minutes and seconds separately.
             int minutes = Mathf.FloorToInt(currentTime / 60f);
             int seconds = Mathf.FloorToInt(currentTime % 60f);
-
-            // Update the timerText to display minutes and seconds.
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-            if (currentTime >=15f)
-            {
-                //currentTime = 0;
-                //StageManager.Instance.SwichStage(); // 한번에 2번 발동함.
-            }
+
         }
     }
 
+
+    IEnumerator TimeDelay()
+    {
+        while (true) 
+        {
+            yield return new WaitForSeconds(5f);
+            TimeEvent.Instance.SendMessagePerSecond();
+        };
+
+    }
 }

@@ -45,5 +45,7 @@ public abstract class AttackFunc : MonoBehaviour, IUseSkill, ITimeEvent
         _Player.GetComponent<PlayerStat>();
     }
 
-    public abstract ITimeEvent TimeEvent();
+    //public abstract ITimeEvent TimeEvent();
+
+    public abstract ITimeEvent TimeEvent(float time);
 }

@@ -63,7 +63,7 @@ public abstract class StatusEffect : MonoBehaviour, ISetCardInfo/*, IStatusEffec
             frontImage.sprite = Resources.Load<Sprite>(Path.Combine(StringManager.Instance.buffCardResource, cardInfo.fRImage));
             if (frontImage.sprite == null)
             {
-                Debug.Log($"There is no resource__{cardInfo.fRImage} at: " + Path.Combine(Application.dataPath + $"/{StringManager.Instance.attackCardResource}", ""));
+                //Debug.Log($"There is no resource__{cardInfo.fRImage} at: " + Path.Combine(Application.dataPath + $"/{StringManager.Instance.attackCardResource}", ""));
             }
         }
         else
@@ -77,7 +77,7 @@ public abstract class StatusEffect : MonoBehaviour, ISetCardInfo/*, IStatusEffec
             backImage.sprite = Resources.Load<Sprite>(Path.Combine(StringManager.Instance.buffCardResource, cardInfo.bGImage));
             if (backImage.sprite == null)
             {
-                Debug.Log($"There is no resource__{cardInfo.bGImage} at: " + Path.Combine(Application.dataPath + "/BuffCardResource/", ""));
+                //Debug.Log($"There is no resource__{cardInfo.bGImage} at: " + Path.Combine(Application.dataPath + "/BuffCardResource/", ""));
             }
         }
         else

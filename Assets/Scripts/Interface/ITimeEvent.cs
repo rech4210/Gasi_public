@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ITimeEvent
 {
-    public ITimeEvent TimeEvent();
+    public ITimeEvent TimeEvent(float time);
 }

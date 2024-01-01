@@ -64,10 +64,8 @@ public class LaserTurret : AttackFunc, IUseSkill
         atkobj.transform.position = _Player.transform.position;
     }
 
-    public override AttackFunc TimeEvent(AttackFunc obj)
+    public override ITimeEvent TimeEvent(float time)
     {
-        obj.Skill_1();
         return this;
-        //throw new System.NotImplementedException();
     }
 }

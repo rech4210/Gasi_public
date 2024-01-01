@@ -68,4 +68,10 @@ public class BulletTurret : AttackFunc
         var atkobj = Instantiate(attackObject, transform.position + transform.forward ,transform.rotation);
         atkobj.GetComponent<AtkObjStat>().GetAtkObjPoint(_AttackStatus);
     }
+
+    public override ITimeEvent TimeEvent(float time)
+    {
+        return this;
+
+    }
 }
