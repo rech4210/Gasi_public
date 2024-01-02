@@ -540,15 +540,15 @@ MonoBehaviour:
     type: 3}
   stagesArray:
   - {fileID: 7612388665599230250, guid: 725ab76f5a7635a40b8e5385e3c0a028, type: 3}
+  - {fileID: 7612388665599230250, guid: b87ac67a8bbd834468be6a36f8ad37bc, type: 3}
   - {fileID: 1642235606891446669, guid: cda6b53632f27984da1f3f641758a81a, type: 3}
-  - {fileID: 7612388665599230250, guid: 725ab76f5a7635a40b8e5385e3c0a028, type: 3}
-  - {fileID: 1642235606891446669, guid: cda6b53632f27984da1f3f641758a81a, type: 3}
-  - {fileID: 7612388665599230250, guid: 725ab76f5a7635a40b8e5385e3c0a028, type: 3}
-  - {fileID: 1642235606891446669, guid: cda6b53632f27984da1f3f641758a81a, type: 3}
-  - {fileID: 7612388665599230250, guid: 725ab76f5a7635a40b8e5385e3c0a028, type: 3}
-  - {fileID: 1642235606891446669, guid: cda6b53632f27984da1f3f641758a81a, type: 3}
-  - {fileID: 7612388665599230250, guid: 725ab76f5a7635a40b8e5385e3c0a028, type: 3}
-  - {fileID: 1642235606891446669, guid: cda6b53632f27984da1f3f641758a81a, type: 3}
+  - {fileID: 7612388665599230250, guid: bde93f5cddcab274eb629418acf23854, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1341977420
 Transform:
   m_ObjectHideFlags: 0

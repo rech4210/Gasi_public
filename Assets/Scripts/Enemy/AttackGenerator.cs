@@ -24,17 +24,17 @@ public class AttackGenerator : MonoBehaviour
         {
             //method which use for player through out buffstat with buffcode
             containAttackDict[attackCode] = allAttackStatArchive[attackCode].attackStatus;
-            Debug.Log($"랭크 증가");
+            //Debug.Log($"랭크 증가");
         }
         else
         {
-            Debug.Log(allAttackStatArchive[attackCode].attackStatus);
+            //Debug.Log(allAttackStatArchive[attackCode].attackStatus);
             containAttackDict.Add(attackCode, allAttackStatArchive[attackCode].attackStatus); //각각에 인스턴스로 존재해버림, 이 데이터 값들을 버프매니저에서 통합으로 관리해야함.
-            Debug.Log("없는 공격 추가 : " + allAttackStatArchive[attackCode].attackInfo.attackName + " " + "현재 버프 갯수:" + containAttackDict.Count);
+            //Debug.Log("없는 공격 추가 : " + allAttackStatArchive[attackCode].attackInfo.attackName + " " + "현재 버프 갯수:" + containAttackDict.Count);
         }
-        Debug.Log($"대상 공격 : {allAttackStatArchive[attackCode].attackInfo.attackName}, " +
-            $"스탯 상승 : {containAttackDict[attackCode].point}, " +
-            $"랭크 : {containAttackDict[attackCode].rank}");
+        //Debug.Log($"대상 공격 : {allAttackStatArchive[attackCode].attackInfo.attackName}, " +
+        //    $"스탯 상승 : {containAttackDict[attackCode].point}, " +
+        //    $"랭크 : {containAttackDict[attackCode].rank}");
     }
     public Dictionary<int, AttackStatus> ContainAttackStatToGenerate()
     {
@@ -86,12 +86,13 @@ public class AttackGenerator : MonoBehaviour
         attackObjects.Add(obj);
 
         var component = obj.GetComponent<AttackFunc>();
+        //var Itimeobj = component.GetComponent<ITimeEvent>();
         //component.GetComponent<ITimeEvent>(() => { TimeEvent.Instance.StoreTimeEventObj(component); });
-        TimeEvent.Instance.StoreTimeEventObj(component);
+        TimeEvent.Instance.StoreTimeEventObj(obj);
         // 윗 부분에서 generate시 자동으로 옵저버에 등록되도록 설정
 
-        Debug.Log(component.ToString());
-        Debug.Log(attackTarget.ToString());
+        //Debug.Log(component.ToString());
+        //Debug.Log(attackTarget.ToString());
 
         //직관적이지 않다
         component._Player = attackTarget;

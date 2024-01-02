@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimeEvent : Events<TimeEvent>
 {
@@ -23,15 +24,25 @@ public class TimeEvent : Events<TimeEvent>
         }
     }
 
+    // ON DESTORY 개체는 씬이 리로드 되더라도 Start가 처음만 발동함
     private void Start()
     {
         //timeWorkTask = Task.Run(() => { SendMessagePerSecond();});
         perSecondTimeEventLists = new List<ITimeEvent>();
+        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+        Debug.Log("TIME EVENT START");
     }
 
-    public void StoreTimeEventObj(ITimeEvent @event)
+    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        perSecondTimeEventLists.Add(@event);
+        perSecondTimeEventLists.Clear();
+        Debug.Log("scene cleared");
+    }
+
+    public void StoreTimeEventObj(GameObject @event)
+    {
+        var target = @event.GetComponent<ITimeEvent>();
+        perSecondTimeEventLists.Add(target);
         foreach (var item in perSecondTimeEventLists)
         {
             Debug.Log(item);

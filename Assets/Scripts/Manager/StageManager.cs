@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +10,7 @@ public class StageManager : Manager<StageManager>
 
     private void Awake()
     {
+        currentStageNum =0;
         //currentStageNum을 받아오기
         currentStage = Instantiate(stagesArray[currentStageNum]);
         currentStage.SetActive(true);
@@ -18,7 +18,7 @@ public class StageManager : Manager<StageManager>
     }
 
 
-    public void SwichStage()
+    public void SwitchStage()
     {
         currentStage?.SetActive(false);
         currentStageNum++;
