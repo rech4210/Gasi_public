@@ -32,6 +32,7 @@ public class TimeEvent : Events<TimeEvent>
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
 
     }
+    // 이 부분 씬을 교체해야하나..? 아니면 onenable로 해야하나
     public override void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         perSecondTimeEventLists.Clear();
@@ -66,6 +67,8 @@ public class TimeEvent : Events<TimeEvent>
     //TimeEvent에 호출될 이벤트들을 분류해두어야 함 (ex) 동시성, 호출 빈도)
     //ITimer을 구현받아 함수를 만들고 TimeEvent에서 분류된 개체들을 모두 호출함
 
+
+    // 이부분이 scene reload가 아닐때 호출되면서 파괴된 개체에 접근함
     public void SendMessagePerSecond(float time)
     {
         for (int i = 0; i < perSecondTimeEventLists.Count; i++)

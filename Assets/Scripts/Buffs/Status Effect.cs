@@ -33,65 +33,19 @@ public abstract class StatusEffect : MonoBehaviour, ISetCardInfo/*, IStatusEffec
     public virtual void GetRandomCodeWithInfo(BuffData data)
     { _BuffCode = data.buffCode; _CardInfo = data.cardInfo; _BuffStat = data.stat; }
 
+    [SerializeField] private TextMeshProUGUI buffname;
+    [SerializeField] private TextMeshProUGUI information;
+    [SerializeField] private TextMeshProUGUI description;
+    [SerializeField] private Image frontImage;
+    [SerializeField] private Image backImage;
+    // 이부분은 카드를 부착식으로 하면 분명 문제가 생긴다.
+    // 다른 컴포넌트 부착시키고 거기서 가져오면 될 문제긴 하다.
     public virtual void SetCardInfo()
     {
-        if (this.transform.GetChild(0).GetChild(1)
-            .TryGetComponent(out TextMeshProUGUI buffname))
-        {
-            buffname.text = cardInfo.cardName;
-        }
-        else Debug.LogError("Not Setted Object You're null!!");
-
-        if (this.transform.GetChild(0).GetChild(2)
-            .TryGetComponent(out TextMeshProUGUI information))
-        {
-            information.text = cardInfo.information;
-        }
-        else Debug.LogError("Not Setted Object You're null!!");
-
-        if (this.transform.GetChild(0).GetChild(3)
-            .TryGetComponent(out TextMeshProUGUI description))
-        {
-            description.text = cardInfo.description;
-        }
-        else Debug.LogError("Not Setted Object You're null!!");
-
-
-        if (this.transform.GetChild(0).GetChild(0).TryGetComponent<Image>(out Image frontImage))
-        {
-
-            frontImage.sprite = Resources.Load<Sprite>(Path.Combine(StringManager.Instance.buffCardResource, cardInfo.fRImage));
-            if (frontImage.sprite == null)
-            {
-                //Debug.Log($"There is no resource__{cardInfo.fRImage} at: " + Path.Combine(Application.dataPath + $"/{StringManager.Instance.attackCardResource}", ""));
-            }
-        }
-        else
-        {
-            Debug.Log("wrong Path in child frontImage");
-        }
-
-        if (this.transform.GetChild(0).TryGetComponent<Image>(out Image backImage))
-        {
-
-            backImage.sprite = Resources.Load<Sprite>(Path.Combine(StringManager.Instance.buffCardResource, cardInfo.bGImage));
-            if (backImage.sprite == null)
-            {
-                //Debug.Log($"There is no resource__{cardInfo.bGImage} at: " + Path.Combine(Application.dataPath + "/BuffCardResource/", ""));
-            }
-        }
-        else
-        {
-            Debug.Log("wrong Path in child backImage");
-        }
-        //this.transform.GetChild(0).GetChild(1).GetComponent<TextMeshPro>().text = cardInfo.BuffEnumName;
-        //this.transform.GetChild(2).GetComponent<TextMeshPro>().text = cardInfo.information;
-        //this.transform.GetChild(3).GetComponent<TextMeshPro>().text = cardInfo.description;
-
-        //this.GetComponent<Image>().sprite = cardInfo.FRImage;
-        //data = buffManager.SetBuffData(buffCode, stat);
-        //Debug.Log(stat);
+        buffname.text = cardInfo.cardName;
+        information.text = cardInfo.information;
+        description.text = cardInfo.description;
+        frontImage.sprite = Resources.Load<Sprite>(Path.Combine(StringManager.Instance.buffCardResource, cardInfo.fRImage));
+        backImage.sprite = Resources.Load<Sprite>(Path.Combine(StringManager.Instance.buffCardResource, cardInfo.bGImage));
     }
-
-
 }

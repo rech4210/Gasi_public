@@ -11,6 +11,7 @@ public class GameManager : Manager<GameManager>
 
     private void Awake()
     {
+        Time.timeScale = 1f;
         // 스테이지 초기화, 플레이어 상태 초기화, 등등 처리해주기
         //GameInitiallzie += test1;
         var obj = Instantiate(player, new Vector3(0,.5f,0),Quaternion.identity);

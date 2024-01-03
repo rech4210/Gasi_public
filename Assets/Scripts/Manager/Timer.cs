@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -25,7 +24,6 @@ public class Timer : MonoBehaviour
     {
         timerIsRunning = false;
     }
-
     public void ResetTimer()
     {
         startTime = Time.time;
@@ -40,10 +38,12 @@ public class Timer : MonoBehaviour
             int minutes = Mathf.FloorToInt(currentTime / 60f);
             int seconds = Mathf.FloorToInt(currentTime % 60f);
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-
+            if (currentTime > 7f && (ClearEvent.Instance.clearFlag == ClearFlag.notClear))
+            {
+                ClearEvent.Instance.ExecuteEvent();
+            }
         }
     }
-
 
     IEnumerator TimeDelay()
     {

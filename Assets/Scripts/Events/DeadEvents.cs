@@ -9,7 +9,6 @@ public class DeadEvents : Events<DeadEvents>
     }
     private void Start()
     {
-        
     }
 
     protected override void ActionInitiallize()

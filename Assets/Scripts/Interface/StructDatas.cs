@@ -10,8 +10,6 @@
  * 
  */
 
-
-
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -248,8 +246,6 @@ public class AttackData
         attackInfo = info;
 
     }
-
-
 }
 
 [Serializable]

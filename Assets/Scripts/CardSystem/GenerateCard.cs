@@ -74,11 +74,11 @@ public class GenerateCard : MonoBehaviour
         InvokeRepeating("BuffGenerate", 0.1f, 15f);
 
         // 이 부분 액션 멀티캐스트로 처리하기
-
-        //StartCoroutine(BuffGenerate());
+        //CancelInvoke();
         //StartCoroutine(AttackGenerate());
 
     }
+
 
     #endregion
 
@@ -149,20 +149,18 @@ public class GenerateCard : MonoBehaviour
      */
 
 
-    //카드 생성시 문자열 + 숫자 조합하여 해당하는 카드 생성하도록??
-    void BuffGenerate() // -> 여기에 특수, 악마, 천사, 일반카드 재사용하도록 짜기
+    void BuffGenerate()
     {
-        //Time.timeScale = .0f;
         containStatGenerateDic = buffManager.ContainStatToGenerate();
         for (int i = 0; i < cardCount; i++)
         {
             var cardGameObj = Instantiate(cardPrefab, this.transform);
-            //buffCode = (char)Random.Range(1, statGenerateDic.Count + 1);
-            // 생성된 카드들 배치하는것도 만들어야 함.
+            cardGameObj.GetComponent<RectTransform>().anchoredPosition = new Vector2((-210 + (i * 140)), 0f);
+
+            // 이부분 random 말고 enum에 정리된걸로 가져오자
             char _buffCode = (char)0;
             var data = buffArchive[_buffCode];
 
-                
             var targetCard = cardGameObj.GetComponent<StatusEffect>() ?? null;
             buffCardList.Add(cardGameObj);
             if (containStatGenerateDic.TryGetValue(_buffCode, out BuffStat stat) /*&& containStatGenerateDic[_buffCode].rank > 0*/)
@@ -178,9 +176,6 @@ public class GenerateCard : MonoBehaviour
             }
         }
 
-        //yield return new WaitForSecondsRealtime(15f);
-        Time.timeScale = .0f;
-
         //if (buffCardList.Count != 0)
         //{
         //    Debug.Log("선택하지 않음 축복 소멸");
@@ -191,9 +186,7 @@ public class GenerateCard : MonoBehaviour
     
     void AttackGenerate()
     {
-
         containAttackStatusGenerateDic = attackGenerator.ContainAttackStatToGenerate();
-
         //카드 카운트 수정
         for (int i = 0; i < cardCount; i++)
         {
@@ -208,25 +201,7 @@ public class GenerateCard : MonoBehaviour
             var data = attackArchive[_attackCode];
 
             AbstractAttack targetCard = null;
-
-            switch (data.attackStatus.attackType)
-            {
-                case AttackType.laser:
-                    targetCard = cardGameObj.AddComponent<LaserAttack>();
-                    break;
-                case AttackType.guided:
-                    targetCard = cardGameObj.AddComponent<GuidedAttack>();
-                    break;
-                case AttackType.bullet:
-                    targetCard = cardGameObj.AddComponent<BulletAttack>();
-                    break;
-                case AttackType.trap:
-                    targetCard = cardGameObj.AddComponent<TrapAttack>();
-                    break;
-                default:
-                    Debug.Log("There is no maching attack type 정의되지 않은 카드입니다");
-                    break;
-            }
+            targetCard = GetTargetType(cardGameObj, data, targetCard);
 
             // 현재 딕셔너리에 값이 저장된 이력이 있다면.
             // 단, 상승 스탯카드는 공격 타겟이 존재할때 사용
@@ -252,10 +227,31 @@ public class GenerateCard : MonoBehaviour
         //    Debug.Log("선택하지 않음 패널티 부여");
         //    RemoveCard(attackCardList);
         //}
-
-
     }
 
+    private AbstractAttack GetTargetType(GameObject cardGameObj, AttackData data, AbstractAttack targetCard)
+    {
+        switch (data.attackStatus.attackType)
+        {
+            case AttackType.laser:
+                targetCard = cardGameObj.AddComponent<LaserAttack>();
+                break;
+            case AttackType.guided:
+                targetCard = cardGameObj.AddComponent<GuidedAttack>();
+                break;
+            case AttackType.bullet:
+                targetCard = cardGameObj.AddComponent<BulletAttack>();
+                break;
+            case AttackType.trap:
+                targetCard = cardGameObj.AddComponent<TrapAttack>();
+                break;
+            default:
+                Debug.Log("There is no maching attack type 정의되지 않은 카드입니다");
+                break;
+        }
+
+        return targetCard;
+    }
 
     private void RemoveCard(List<GameObject> carList)
     {

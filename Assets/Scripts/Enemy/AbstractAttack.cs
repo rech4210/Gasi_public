@@ -66,7 +66,6 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo, ICardSkill
                 break;
         }
     }
-
     
     public virtual void SetCardInfo()
     {

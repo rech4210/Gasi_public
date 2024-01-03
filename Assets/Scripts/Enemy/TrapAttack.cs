@@ -1,6 +1,4 @@
 
-using Unity.VisualScripting;
-
 public class TrapAttack : AbstractAttack
 {
     public void Start()

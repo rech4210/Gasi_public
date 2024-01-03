@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LaserTurret : AttackFunc, IUseSkill
@@ -56,7 +55,6 @@ public class LaserTurret : AttackFunc, IUseSkill
             ExcuteAttack();
             yield return new WaitForSeconds(_AttackStatus.duration);
         }
-
     }
     protected override void ExcuteAttack()
     {

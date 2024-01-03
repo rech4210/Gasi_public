@@ -81,18 +81,14 @@ public class AttackGenerator : MonoBehaviour
     {
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y+5f, transform.localPosition.z); 
 
-        //Debug.Log((status.attackType).ToString());
         var obj = Instantiate(attackObjectPrefab[(int)status.attackType], RandomPose(),this.transform.rotation,StageManager.Instance.GetCurrentStagePos());
         attackObjects.Add(obj);
 
         var component = obj.GetComponent<AttackFunc>();
-        //var Itimeobj = component.GetComponent<ITimeEvent>();
-        //component.GetComponent<ITimeEvent>(() => { TimeEvent.Instance.StoreTimeEventObj(component); });
+
+
         TimeEvent.Instance.StoreTimeEventObj(obj);
         // 윗 부분에서 generate시 자동으로 옵저버에 등록되도록 설정
-
-        //Debug.Log(component.ToString());
-        //Debug.Log(attackTarget.ToString());
 
         //직관적이지 않다
         component._Player = attackTarget;
@@ -103,11 +99,6 @@ public class AttackGenerator : MonoBehaviour
 
         objectsComponent?.Add(component);
 
-        //var _abstract = obj.GetComponent<AbstractAttack>();
-
-        // 아무래도 여기서 초기 설정은 제어해줘야 할듯. Buffmanager -> CardGen -> AttackGen -> 생성
-        //if (_abstract != null ) { _abstract.SetAttackStatus(); }
-        //else 
     }
 
     public void IncreaseTargetStat(AttackStatus status, AttackCardInfo info)

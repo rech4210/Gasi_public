@@ -1,12 +1,7 @@
 using System.IO;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
 
 public class PowerUp : StatusEffect/*, IBuff*/
 {
-    // Card Generate -> search BuffContainer -> add buffcode in card
-    // -> click ->  
     //CardInfo _CardInfo
     //{ /*호버 정보표기*/ get { return cardInfo; }
     //  /*카드 변화 리플렉션*/ set { cardInfo = value; Init(); } }
