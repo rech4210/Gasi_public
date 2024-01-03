@@ -14,8 +14,8 @@ public abstract class AttackFunc : MonoBehaviour, IUseSkill, ITimeEvent
         Gizmos.DrawRay(this.transform.position, _Player.transform.position - transform.position);
     }
 
-    public AttackType _AttackType { get { return attackType;} set {attackType = value;} }
-    public AttackStatus _AttackStatus { protected get { return attackStatus;} set { attackStatus = value;} }
+    public AttackType _AttackType { get => attackType; set => attackType = value; }
+    public AttackStatus _AttackStatus { protected get => attackStatus; set => attackStatus = value; }
 
     public int _Point { protected get { return attackStatus.point; } set { attackStatus.point = value; } }
     public float _Duration { protected get { return attackStatus.duration; } set { attackStatus.duration = value; } }
@@ -42,10 +42,10 @@ public abstract class AttackFunc : MonoBehaviour, IUseSkill, ITimeEvent
 
     protected virtual void OnHited()
     {
-        _Player.GetComponent<PlayerStat>();
+        _Player.GetComponent<PlayerData>();
     }
 
     //public abstract ITimeEvent TimeEvent();
 
-    public abstract ITimeEvent TimeEvent(float time);
+    public abstract void TimeEvent(float time);
 }

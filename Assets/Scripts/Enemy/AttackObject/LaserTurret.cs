@@ -13,6 +13,7 @@ public class LaserTurret : AttackFunc, IUseSkill
     }
     public override void CalcStat(AttackStatus status, AttackCardInfo info)
     {
+        //이거 제대로 작동하나? 매우 딱딱한 구조다
         switch (info.attackCardEnum)
         {
             case AttackCardEnum.duration:
@@ -33,7 +34,7 @@ public class LaserTurret : AttackFunc, IUseSkill
 
     public override void Skill_1()
     {
-        throw new System.NotImplementedException();
+        transform.Rotate(new Vector3(0, 100f * Time.deltaTime, 0));
     }
     public override void Skill_2()
     {
@@ -64,8 +65,13 @@ public class LaserTurret : AttackFunc, IUseSkill
         atkobj.transform.position = _Player.transform.position;
     }
 
-    public override ITimeEvent TimeEvent(float time)
+    public override void TimeEvent(float time)
     {
-        return this;
+        Debug.Log(time + this.gameObject.name);
+        if (time > 15f)
+        {
+            Debug.Log("스킬 발동");
+        };
+
     }
 }

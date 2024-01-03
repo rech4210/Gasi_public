@@ -58,9 +58,9 @@ public class GuidedTurret : AttackFunc, IUseSkill
         //atkobj.GetComponent<AtkObjStat>().GetAtkObjPoint(_AttackStatus);
     }
 
-    public override ITimeEvent TimeEvent(float time)
+    public override void TimeEvent(float time)
     {
-        return this;
+        Debug.Log(time + this.gameObject.name);
 
     }
 }

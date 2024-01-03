@@ -1,11 +1,10 @@
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
-public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<AttackData>, IGetDict<PlayerStatStruct>
+public class DataManager : Manager<DataManager>, IGetDict<int,BuffData>,IGetDict<int,AttackData>, IGetDict<int,PlayerStatStruct>
 {
     string path = null;
     int buffCounts = 100;
@@ -14,35 +13,33 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
     PlayerStatStruct playerStatStruct;
     Transform playerTransform;
 
-    public delegate void PlayerStatDelegate (PlayerStatStruct stat);
+    public delegate void PlayerStatDelegate(PlayerStatStruct stat);
     public PlayerStatDelegate PlayerStatDele;
 
     public PlayerStatStruct _playerStat { get { return playerStatStruct; }set { }}
     public Transform _playerTransform { get { return playerTransform; } set { } }
-    public void UpdatePlayerData(PlayerStatStruct statStruct, PlayerStat stat) 
+    public void UpdatePlayerData(PlayerStatStruct stat, PlayerData player) 
     {
-        playerStatStruct = statStruct;
-        playerTransform = stat.gameObject.transform;
+        playerStatStruct = stat;
+        playerTransform = player.gameObject.transform;
     }
 
 
     #endregion
     #region 딕셔너리 반환 부분
-    public Dictionary<int, BuffData> ReturnDict(Dictionary<int, BuffData> dict) {return dict = BuffsArchive;}
-    public Dictionary<int, AttackData> ReturnDict(Dictionary<int, AttackData> dict) { return dict = AttackArchive;}
-    public Dictionary<int, PlayerStatStruct> ReturnDict(Dictionary<int, PlayerStatStruct> dict) { return dict = playerLastData; }
-
+    public Dictionary<int, BuffData> ReturnDict(Dictionary<int, BuffData> dict) {return BuffsArchive;}
+    public Dictionary<int, AttackData> ReturnDict(Dictionary<int, AttackData> dict) { return  AttackArchive;}
+    public Dictionary<int, PlayerStatStruct> ReturnDict(Dictionary<int, PlayerStatStruct> dict) { return playerLastData; }
 
     private Dictionary<int, BuffData> BuffsArchive = new();
     private Dictionary<int, AttackData> AttackArchive = new();
     private Dictionary<int, PlayerStatStruct> playerLastData = new();
     #endregion
-    private void OnEnable()
+    private void Awake()
     {
         //SaveBuffJson();
         //SaveAttackJson();
         var textasset  = Resources.Load<TextAsset>("Json/BuffData");
-        //Debug.Log(textasset);
         BuffsArchive = LoadJson<BuffStructure, int, BuffData>(textasset).MakeDict();
         foreach (var item in BuffsArchive)
         {
@@ -57,17 +54,8 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
             //UnityEngine.Debug.Log($"code:{item.Value}");
         }
     }
-    //private void OnDisable()
-    //{
-        
-    //}
-    protected override void Execute()
-    {
-        if (OnExecute?.Method == null)
-        {
-            //모든 데이터 초기화 및 관리
-        }
-    }
+
+    #region Json 파싱 저장 및 호출
     public BuffStatEnum statEnum { get; set; }
     public void SaveBuffJson()
     {
@@ -127,6 +115,9 @@ public class DataManager : Events<DataManager>, IGetDict<BuffData>,IGetDict<Atta
     {
         return path = Path.Join(Application.dataPath, _path);
     }
+
+ 
+    #endregion
 }
 
 

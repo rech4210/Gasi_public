@@ -49,8 +49,8 @@ public class Timer : MonoBehaviour
     {
         while (true) 
         {
-            yield return new WaitForSeconds(5f);
-            TimeEvent.Instance.SendMessagePerSecond();
+            yield return new WaitForSeconds(1f);
+            TimeEvent.Instance.SendMessagePerSecond(Time.time - startTime);
         };
 
     }

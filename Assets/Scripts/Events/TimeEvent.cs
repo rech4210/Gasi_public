@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class TimeEvent : Events<TimeEvent>
 {
-    float time;
+    float savedTime;
 
     List<ITimeEvent> perSecondTimeEventLists;
     List<ITimeEvent> perHMiniteTimeEventLists;
@@ -15,7 +15,7 @@ public class TimeEvent : Events<TimeEvent>
 
     Task timeWorkTask;
 
-    protected override void Execute()
+    protected override void ActionInitiallize()
     {
         if (OnExecute?.Method == null)
         {
@@ -30,10 +30,9 @@ public class TimeEvent : Events<TimeEvent>
         //timeWorkTask = Task.Run(() => { SendMessagePerSecond();});
         perSecondTimeEventLists = new List<ITimeEvent>();
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
-        Debug.Log("TIME EVENT START");
-    }
 
-    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+    }
+    public override void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         perSecondTimeEventLists.Clear();
         Debug.Log("scene cleared");
@@ -45,7 +44,7 @@ public class TimeEvent : Events<TimeEvent>
         perSecondTimeEventLists.Add(target);
         foreach (var item in perSecondTimeEventLists)
         {
-            Debug.Log(item);
+            Debug.Log(item + " " + perSecondTimeEventLists.Count);
         }
     }
 
@@ -67,26 +66,26 @@ public class TimeEvent : Events<TimeEvent>
     //TimeEvent에 호출될 이벤트들을 분류해두어야 함 (ex) 동시성, 호출 빈도)
     //ITimer을 구현받아 함수를 만들고 TimeEvent에서 분류된 개체들을 모두 호출함
 
-    public void SendMessagePerSecond()
+    public void SendMessagePerSecond(float time)
     {
         for (int i = 0; i < perSecondTimeEventLists.Count; i++)
         {
             //get now time in here
-            perSecondTimeEventLists[i].TimeEvent(Time.time);
+            perSecondTimeEventLists[i].TimeEvent(time);
         } 
     }
 
     private void Time_1()
     {
         Debug.Log("Time_1");
-        //Time.timeScale = 0;
+        Time.timeScale = 0;
     }
     private void Time_2()
     {
         Debug.Log("Time_2");
     }
-    public void SaveTime(float time)
+    public void Save(float time)
     {
-        this.time = time;
+        savedTime = time;
     }
 }

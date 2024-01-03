@@ -10,7 +10,7 @@ public class LaserObj : AtkObjStat
     float time = 0;
     Color emissionColor = new Color(0.5f, 0.5f, 0.5f);
 
-    PlayerStat target;
+    PlayerData target;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +67,7 @@ public class LaserObj : AtkObjStat
 
     public override void OnHitTarget()
     {
-        target = GameObject.FindWithTag("Player").GetComponent<PlayerStat>();
+        target = GameObject.FindWithTag("Player").GetComponent<PlayerData>();
         Debug.Log("레이저 타격");
     }
 

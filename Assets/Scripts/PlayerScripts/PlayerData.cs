@@ -1,16 +1,17 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerStat : MonoBehaviour
+public class PlayerData : MonoBehaviour
 {
     PlayerStatStruct playerStat;
 
+    // 버프 -> 데이터매니저 -> 플레이어 -> 데이터 매니저
 
     // this section must be proteted so it will be use action type
     public void UpdatePlayerStat(PlayerStatStruct stat) // here data is buff or attack debuff
     {
         playerStat = stat;
-        playerStat.PrintPlayerStat();
+        //playerStat.PrintPlayerStat();
         DataManager.Instance.UpdatePlayerData(playerStat,this);
     }
     bool isLive = true;
@@ -27,13 +28,14 @@ public class PlayerStat : MonoBehaviour
 
     private void Awake()
     {
-        
+        DataManager.Instance.PlayerStatDele = null;
+        DataManager.Instance.PlayerStatDele = UpdatePlayerStat; // this calc need
+        DataManager.Instance.PlayerStatDele?.Invoke(new PlayerStatStruct(10, 3, 15, 0, 0, 0, 0, 0, 0));
     }
     void OnEnable() // 플레이어 추적을 실행하기위해 처리함. Awake 또는 manager에서 호출하도록 제어?
     {
         isLive = true;
-        DataManager.Instance.PlayerStatDele = UpdatePlayerStat; // this calc need
-        DataManager.Instance.PlayerStatDele?.Invoke(new PlayerStatStruct(10, 3, 15, 0, 0, 0, 0,0,0)); 
+
         // 이부분 스테이지 생성마다 초기화
     }
     private void OnDisable()

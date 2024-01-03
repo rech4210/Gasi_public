@@ -6,14 +6,8 @@ public abstract class Manager<T> : MonoBehaviour where T : Manager<T>
     {
         if (instance != this && instance != null)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
-        //DontDestroyOnLoad(this.gameObject);
-    }
-
-    public void ReturnInstance()
-    {
-        Debug.Log($"이름: {this.gameObject},타입 : {this.gameObject.GetType()} ");
     }
 
     private static T instance;
@@ -23,7 +17,7 @@ public abstract class Manager<T> : MonoBehaviour where T : Manager<T>
         {
             if (instance == null)
             {
-                instance = Object.FindObjectOfType(typeof(T)) as T;
+                instance = FindObjectOfType(typeof(T)) as T;
             }
             return instance;
         }
