@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour
     public TMP_Text timerText;
     private float startTime;
     private bool timerIsRunning = false;
+    private float clearTime = 7f;
 
     private void Start()
     {
@@ -38,7 +39,9 @@ public class Timer : MonoBehaviour
             int minutes = Mathf.FloorToInt(currentTime / 60f);
             int seconds = Mathf.FloorToInt(currentTime % 60f);
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-            if (currentTime > 7f && (ClearEvent.Instance.clearFlag == ClearFlag.notClear))
+
+            //이 부분 수정해야함 Clear 발생 조건을 execute에 action형식으로 부착할까?
+            if ((currentTime > clearTime) && (ClearEvent.Instance.clearFlag == ClearFlag.notClear))
             {
                 ClearEvent.Instance.ExecuteEvent();
             }

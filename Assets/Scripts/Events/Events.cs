@@ -11,7 +11,6 @@ public abstract class Events<T> :MonoBehaviour, ISceneLoaded where T : Events<T>
             Destroy(this.gameObject);
         }
         ActionInitiallize();
-        DontDestroyOnLoad(gameObject);
     }
 
     private static  T instance;

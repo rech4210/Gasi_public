@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GenerateCard : MonoBehaviour
@@ -41,6 +42,7 @@ public class GenerateCard : MonoBehaviour
 
     [SerializeField]
     EventSystem eventSystem;
+
 
     private void Start()
     {
@@ -261,4 +263,5 @@ public class GenerateCard : MonoBehaviour
         }
         carList.Clear();
     }
+
 }

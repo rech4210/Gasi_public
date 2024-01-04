@@ -11,11 +11,11 @@ public class LoadScene : MonoBehaviour
     private float time;
     public Slider slider;
     private string sceneName = "MainScene";
+    [SerializeField] private GameObject LoadPopUp;
     
     async void Start()
     {
-        //GetData();
-        Console.WriteLine("done");
+        LoadPopUp.SetActive(true);
         await LoadAsyncScene();
     }
 
@@ -32,7 +32,7 @@ public class LoadScene : MonoBehaviour
     IEnumerator LoadAsyncScene()
     {
         //여기서 에러가 뜸.
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         asyncOperation.allowSceneActivation = false;
 
         while(!asyncOperation.isDone)
@@ -45,6 +45,7 @@ public class LoadScene : MonoBehaviour
             {
                 //yield return new WaitForSeconds(1f);
                 asyncOperation.allowSceneActivation = true;
+                LoadPopUp.SetActive(false);
             }
             yield return null;
 
