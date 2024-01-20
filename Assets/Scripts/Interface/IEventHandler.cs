@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICardSkill
+public interface IEventHandler <T> where T : Events<T>
 {
-    void Skill<T>() where T :AttackFunc<T>;
+    void Event();
 }

@@ -16,10 +16,6 @@ public class Player : MonoBehaviour
 
     [Range(5, 30)] private float movePower = 13;
 
-    Vector3 normalizedVector; // 노말라이즈 변수
-    private Dictionary<KeyCode, Vector3> keyValuePairs = new Dictionary<KeyCode, Vector3>();
-    
-
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -40,11 +36,5 @@ public class Player : MonoBehaviour
             rigid.angularVelocity = Vector3.zero;
         }
         //rigid.velocity = Vector3.SmoothDamp(rigid.velocity, direction, ref refValue, .2f) * Time.fixedDeltaTime * movePower;
-    }
-
-    Vector3 vector_Normalized(Vector3 vector3)
-    {
-        return normalizedVector = vector3 * movePower; //대각선 움직임을 부드럽게 하기위한 벡터 노말라이즈 과정
-        // 물리 충돌 수정, 로컬 좌표계로 이동시 각도에따른 방향 이동 제어
     }
 }

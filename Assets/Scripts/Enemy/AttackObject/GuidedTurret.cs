@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class GuidedTurret : AttackFunc, IUseSkill
+public class GuidedTurret : AttackFunc<GuidedTurret>
 {
 
     private void FixedUpdate()
@@ -26,19 +26,8 @@ public class GuidedTurret : AttackFunc, IUseSkill
         }
     }
 
-    public override void Skill_1()
-    {
-        throw new System.NotImplementedException();
-    }
-    public override void Skill_2()
-    {
-        throw new System.NotImplementedException();
-    }
+    //override ini
 
-    public override void Skill_3()
-    {
-        throw new System.NotImplementedException();
-    }
     void Start()
     {
         StartCoroutine(Attack());
@@ -47,12 +36,12 @@ public class GuidedTurret : AttackFunc, IUseSkill
     {
         while (true)
         {
-            ExcuteAttack();
+            ExcuteAttack<LaserObj>();
             yield return new WaitForSeconds(_AttackStatus.duration);
         }
 
     }
-    protected override void ExcuteAttack()
+    protected override void ExcuteAttack<U>()
     {
         //var atkobj = Instantiate(attackObject, transform.position + transform.forward, transform.rotation,transform);
         //atkobj.GetComponent<AtkObjStat>().GetAtkObjPoint(_AttackStatus);
@@ -61,6 +50,6 @@ public class GuidedTurret : AttackFunc, IUseSkill
     public override void TimeEvent(float time)
     {
         Debug.Log(time + this.gameObject.name);
-
     }
+
 }

@@ -43,13 +43,14 @@ public class PlayerData : MonoBehaviour
         DataManager.Instance.PlayerStatDele = null;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter<T>(Collider other) where T : AtkObjStat<T>
     {
         if (other.gameObject.CompareTag("Background")) { }
         else if(isLive)
         {
             //예외처리?
-            var attackObject = other.gameObject.GetComponent<AtkObjStat>();
+            var attackObject = other.gameObject.GetComponent<AtkObjStat<T>>();
+            //이 부분 수정하셈 두개가 겹치고있음.
             GetDamaged(attackObject.Point *15);
             attackObject.OnHitTarget(); // 이 부분 액션으로 넘겨주면 좋을듯 (레이저가 타겟 개체를 확인해야할때)
         }

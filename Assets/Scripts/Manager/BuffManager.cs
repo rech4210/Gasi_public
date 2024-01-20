@@ -7,8 +7,6 @@ public class BuffManager : MonoBehaviour
     private Dictionary<int, BuffData> allBuffStatArchive = new();
     private Dictionary<int, BuffStat> containBuffDict = new();
 
-    Player player = null;
-
     private void Start()
     {
         allBuffStatArchive = DataManager.Instance.ReturnDict(allBuffStatArchive);
@@ -24,9 +22,7 @@ public class BuffManager : MonoBehaviour
         }
         else
         {
-            //초기 값을 설정해주어 BuffCase를 거쳐 플레이어 데이터 계산할건지? 추가해야함.
             containBuffDict.Add(buffCode, allBuffStatArchive[buffCode].stat); //각각에 인스턴스로 존재해버림, 이 데이터 값들을 버프매니저에서 통합으로 관리해야함.
-            //Debug.Log("없는 버프 추가 : " + allBuffStatArchive[buffCode].cardInfo.cardName + " " + "현재 버프 갯수:"+ containBuffDict.Count);
         }
        /* Debug.Log($"대상 버프 : {allBuffStatArchive[buffCode].cardInfo.cardName}, " +
             $"스탯 상승 : {containBuffDict[buffCode].point}, " +

@@ -24,7 +24,7 @@ public abstract class Events<T> :MonoBehaviour, ISceneLoaded where T : Events<T>
             return instance;
         } 
     }
-    protected System.Action OnExecute;
+    public System.Action OnExecute;
 
     protected abstract void ActionInitiallize();
     public virtual void ExecuteEvent()

@@ -1,9 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class TrapTurret : AttackFunc , IUseSkill
+public class TrapTurret : AttackFunc<TrapTurret> , IUseSkill
 {
-
     private void FixedUpdate()
     {
 
@@ -33,20 +32,6 @@ public class TrapTurret : AttackFunc , IUseSkill
     }
 
 
-    public override void Skill_1()
-    {
-        throw new System.NotImplementedException();
-    }
-    public override void Skill_2()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Skill_3()
-    {
-        throw new System.NotImplementedException();
-    }
-
     void Start()
     {
         StartCoroutine(Attack());
@@ -55,21 +40,25 @@ public class TrapTurret : AttackFunc , IUseSkill
     {
         while (true)
         {
-            ExcuteAttack();
+            ExcuteAttack<TrapObj>();
             yield return new WaitForSeconds(_AttackStatus.duration);
         }
 
     }
-    protected override void ExcuteAttack()
+    protected override void ExcuteAttack<U>()
     {
         //Instantiate(attackObject,transform);
         var atkobj = Instantiate(attackObject);
-        atkobj.GetComponent<AtkObjStat>().GetAtkObjPoint(_AttackStatus);
+        atkobj.GetComponent<AtkObjStat<TrapObj>>().Initialize(_AttackStatus,sk_1,sk_2,sk_3);
     }
 
     public override void TimeEvent(float time)
     {
         Debug.Log(time + this.gameObject.name);
+    }
 
+    public void Skill()
+    {
+        throw new System.NotImplementedException();
     }
 }

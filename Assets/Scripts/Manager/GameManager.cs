@@ -7,7 +7,10 @@ using UnityEngine;
 public class GameManager : Manager<GameManager>
 {
     [SerializeField] protected GameObject player;
+    Transform playerTransform;
     Action GameInitiallzie;
+
+    public Transform _PlayerTransform { get { return _PlayerTransform; } }
 
     private void Awake()
     {
@@ -16,6 +19,12 @@ public class GameManager : Manager<GameManager>
         //GameInitiallzie += test1;
         var obj = Instantiate(player, new Vector3(0,.5f,0),Quaternion.identity);
         obj.SetActive(true);
+        playerTransform = obj.transform;
+    }
+
+    private void Do<T>(IEventHandler<T> eventHandler) where T : Events<T>
+    {
+        eventHandler.Event();
     }
 
     //void test1()

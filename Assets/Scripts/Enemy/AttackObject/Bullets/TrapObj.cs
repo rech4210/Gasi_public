@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapObj : AtkObjStat
+public class TrapObj : AtkObjStat<TrapObj>, IUseSkill
 {
     Vector3 RandomPose()
     {
@@ -18,6 +18,15 @@ public class TrapObj : AtkObjStat
         StartCoroutine(Attack());
     }
 
+    public override void Initialize(AttackStatus attackStatus, bool skill_1, bool skill_2)
+    {
+        GetAtkObjPoint(attackStatus);
+        if (skill_1)
+        {
+            Skill();
+        }
+    }
+
     IEnumerator Attack()
     {
         yield return new WaitForSeconds(3f);
@@ -25,9 +34,9 @@ public class TrapObj : AtkObjStat
         gameObject.GetComponent<MeshRenderer>().material.color= Color.red;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void Skill()
     {
-        
+        throw new System.NotImplementedException();
     }
 }

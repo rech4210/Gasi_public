@@ -1,9 +1,23 @@
+using System;
+using System.ComponentModel;
 using UnityEngine;
 
-public abstract class AttackFunc : MonoBehaviour, IUseSkill, ITimeEvent
+public abstract class AttackFunc<T> : MonoBehaviour, ITimeEvent where T : AttackFunc<T>
 {
-    AttackType attackType;
+    AttackCardInfo attackInfo;
     AttackStatus attackStatus;
+
+    public void Initalize(AttackStatus status, AttackCardInfo info, GameObject attackTarget)
+    {
+        _Player = attackTarget;
+        _AttackStatus = status;
+        _AttackCardInfo = info;
+        CalcStat(status,info);
+    }
+
+    protected bool sk_1 = false;
+    protected bool sk_2 = false;
+    protected bool sk_3 = false;
 
     [SerializeField] protected GameObject attackObject;
     protected void OnDrawGizmos()
@@ -14,8 +28,8 @@ public abstract class AttackFunc : MonoBehaviour, IUseSkill, ITimeEvent
         Gizmos.DrawRay(this.transform.position, _Player.transform.position - transform.position);
     }
 
-    public AttackType _AttackType { get => attackType; set => attackType = value; }
-    public AttackStatus _AttackStatus { protected get => attackStatus; set => attackStatus = value; }
+    public AttackCardInfo _AttackCardInfo { get => attackInfo; set => attackInfo = value; }
+    public AttackStatus _AttackStatus { get => attackStatus; set => attackStatus = value; }
 
     public int _Point { protected get { return attackStatus.point; } set { attackStatus.point = value; } }
     public float _Duration { protected get { return attackStatus.duration; } set { attackStatus.duration = value; } }
@@ -25,20 +39,17 @@ public abstract class AttackFunc : MonoBehaviour, IUseSkill, ITimeEvent
 
 
     [SerializeField] private GameObject player;
-    public GameObject _Player {protected get { return player;} set { player = value; } }
+    public GameObject _Player { protected get { return player; } set { player = value; } }
 
+    // 이거 분리해야함.
     public abstract void CalcStat(AttackStatus status, AttackCardInfo info);
 
-    public virtual Quaternion ChaseTarget(GameObject player, GameObject target) 
+    public virtual Quaternion ChaseTarget(GameObject player, GameObject target)
     {
         return Quaternion.LookRotation(player.transform.position - target.transform.position);
     }
-    public abstract void Skill_1();
 
-    public abstract void Skill_2();
-    public abstract void Skill_3();
-
-    protected abstract void ExcuteAttack();
+    protected abstract void ExcuteAttack<U>() where U : AtkObjStat<U>;
 
     protected virtual void OnHited()
     {
@@ -48,4 +59,24 @@ public abstract class AttackFunc : MonoBehaviour, IUseSkill, ITimeEvent
     //public abstract ITimeEvent TimeEvent();
 
     public abstract void TimeEvent(float time);
+
+
+    public void SetSkillBool(int i)
+    {
+        switch (i)
+        {
+            case 0: sk_1 = true; break;
+            case 1: sk_2 = true; break;
+            case 2: sk_3 = true; break;
+            /*            case 2: sk_3 = true; break;
+                        case 2: sk_3 = true; break;*/
+            default:
+                break;
+        }
+    }
+
+    public void DeadAction(Action action) { turretAction += action; }
+
+    private Action turretAction;
+
 }

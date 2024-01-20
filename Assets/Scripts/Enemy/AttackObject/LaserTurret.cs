@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class LaserTurret : AttackFunc, IUseSkill
+public class LaserTurret : AttackFunc<LaserTurret>
 {
 
     private void FixedUpdate()
@@ -31,19 +31,7 @@ public class LaserTurret : AttackFunc, IUseSkill
         }
     }
 
-    public override void Skill_1()
-    {
-        transform.Rotate(new Vector3(0, 100f * Time.deltaTime, 0));
-    }
-    public override void Skill_2()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Skill_3()
-    {
-        throw new System.NotImplementedException();
-    }
+  
     void Start()
     {
         StartCoroutine(Attack());
@@ -52,15 +40,15 @@ public class LaserTurret : AttackFunc, IUseSkill
     {
         while (true)
         {
-            ExcuteAttack();
+            ExcuteAttack<LaserObj>();
             yield return new WaitForSeconds(_AttackStatus.duration);
         }
     }
-    protected override void ExcuteAttack()
+    protected override void ExcuteAttack<U>()
     {
         var atkobj = Instantiate(attackObject,transform.position,Quaternion.identity);
-        atkobj?.GetComponent<AtkObjStat>().GetAtkObjPoint(_AttackStatus);
-        atkobj.transform.position = _Player.transform.position;
+        atkobj.GetComponent<AtkObjStat<LaserObj>>().Initialize(_AttackStatus, sk_1, sk_2, sk_3);
+        atkobj.transform.position = _Player? _Player.transform.position : Vector3.zero;
     }
 
     public override void TimeEvent(float time)

@@ -1,7 +1,10 @@
-using Cysharp.Threading.Tasks;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AttackGenerator : MonoBehaviour
 {
@@ -13,8 +16,11 @@ public class AttackGenerator : MonoBehaviour
     private Dictionary<int, AttackStatus> containAttackDict = new();
 
     private GameObject attackTarget;
-    private List<GameObject> attackObjects = new List<GameObject>();
-    private List<AttackFunc> objectsComponent = new List<AttackFunc>();
+
+    private List<LaserTurret> laserList = new List<LaserTurret>();
+    private List<TrapTurret> trapList = new List<TrapTurret>();
+    private List<GuidedTurret> guidedList = new List<GuidedTurret>();
+    private List<BulletTurret> bulletList = new List<BulletTurret>();
     //private List<AbstractAttack> attackObjList;
 
     public void AddorUpdateAttackDictionary(int attackCode)
@@ -77,57 +83,63 @@ public class AttackGenerator : MonoBehaviour
     //    UnityEngine.Random.Range(4f, -23f));
     //}
 
-    public void Generate(AttackStatus status)
+    public void Generate<T>(AttackStatus status, AttackCardInfo info) where T : AttackFunc<T>
     {
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y+5f, transform.localPosition.z); 
-
         var obj = Instantiate(attackObjectPrefab[(int)status.attackType], RandomPose(),this.transform.rotation,StageManager.Instance.GetCurrentStagePos());
-        attackObjects.Add(obj);
-
-        var component = obj.GetComponent<AttackFunc>();
-
+        var component = obj? obj.GetComponent<AttackFunc<T>>() : null;
+        
+        component.Initalize(status,info,attackTarget); // 여기서 제대로 전달되는지 확인하자.
+        component.DeadAction(() =>
+        {
+            GetTurretList<T>(status).Remove(component as T);
+            obj.SetActive(false); // enable 시 제거 처리?
+        });
 
         TimeEvent.Instance.StoreTimeEventObj(obj);
-        // 윗 부분에서 generate시 자동으로 옵저버에 등록되도록 설정
 
-        //직관적이지 않다
-        component._Player = attackTarget;
-        component._AttackStatus = status;
-        //attackFunc에 카드 공격능력치와 추적 대상을 부여해줌.
-        //후에, AttackFunc를 상속받는 대상들에게 전달
-        //공격 개체들이 데이터를 받으면 파생된 탄막들에게 공격수치를 입력해줌.
-
-        objectsComponent?.Add(component);
-
+        //objectsComponent?.Add(component as AttackFunc<T>);
+        StoreList(component);
     }
 
-    public void IncreaseTargetStat(AttackStatus status, AttackCardInfo info)
+    public void IncreaseTargetStat<T>(AttackStatus status, AttackCardInfo info) where T : AttackFunc<T>
     {
-        //삭제해질 경우 해당 부분에서 에러가 발생할 여지가 있다. 수정
-        foreach (var obj in objectsComponent) 
+        var list = GetTurretList<T>(status);
+        for (int i = 0; i < list.Count; i++)
         {
-            if (obj._AttackType == status.attackType) 
-            {
-                obj.GetComponent<AttackFunc>()?.CalcStat(status,info);
-            }
-            // 공격에 대한 정보 (적용부임)
-            // 
-            //obj.GetComponent<>();
+            list[i].CalcStat(status, info);
         }
-        //foreach (var attack in attackObjList) { attack.CalcAttackStatus()}
     }
 
-    public void UseSkill(AttackStatus status, string skill)
+    // 스킬 발동될때 1회만 사용하도록 이벤트 던지는걸로 만들까?
+    public void SetSkillActive<T>(AttackStatus status, int skillNum) where T : AttackFunc<T>
     {
-        foreach (var obj in objectsComponent)
+        var list = GetTurretList<T>(status);
+        for (int i = 0; i < list.Count; i++)
         {
-            if (obj._AttackType == status.attackType)
-            {
-                obj.GetComponent<AttackFunc>()?.Invoke(skill,0);
-            }
-            // 공격에 대한 정보 (적용부임)
-            // 
-            //obj.GetComponent<>();
+            list[i].SetSkillBool(skillNum);
+        }
+    }
+
+    private void StoreList<T>(AttackFunc<T> attackFunc) where T : AttackFunc<T>
+    {
+        GetTurretList<T>(attackFunc._AttackStatus).Add(attackFunc as T);
+    }
+
+    private List<T> GetTurretList<T>(AttackStatus status) where T : AttackFunc<T>
+    {
+        switch (status.attackType)
+        {
+            case AttackType.laser:
+                return laserList as List<T>;
+            case AttackType.guided:
+                return guidedList as List<T>;
+            case AttackType.bullet:
+                return bulletList as List<T>;
+            case AttackType.trap:
+                return trapList as List<T>;
+            default:
+                return null;
         }
     }
 

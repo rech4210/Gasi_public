@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
@@ -9,12 +8,12 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo, ICardSkill
     protected int skillCheckNum = 100;
 
     protected AttackGenerator attackGenerator;
-    protected BuffManager buffManager;// delete
+    //protected BuffManager buffManager;// delete
 
     protected char attackCode;
     protected AttackData attackData;
     protected AttackStatus attackStatus;
-    protected AttackCardInfo attackInfo;
+    protected AttackCardInfo attackCardInfo;
     public AttackData _AttackData { get { return attackData; } }
 
     //use when checked
@@ -32,11 +31,11 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo, ICardSkill
             {
                 this.attackGenerator = attack;
             }
-            if (GameObject.FindWithTag("BuffManager")
-            .TryGetComponent(out BuffManager buff))
-            {
-                this.buffManager = buff;
-            }
+            //if (GameObject.FindWithTag("BuffManager")
+            //.TryGetComponent(out BuffManager buff))
+            //{
+            //    this.buffManager = buff;
+            //}
         }
         catch (System.NullReferenceException e)
         {
@@ -47,7 +46,7 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo, ICardSkill
     //이거 잘 적용되는지 확인해봐야함.
     // is here updated?
     public virtual void GetRandomCodeWithInfo(AttackData data)
-    { this.attackCode = data.attackCode; attackData = data; attackInfo = data.attackInfo; attackStatus = data.attackStatus; }
+    { this.attackCode = data.attackCode; attackData = data; attackCardInfo = data.attackInfo; attackStatus = data.attackStatus; }
 
     // 스탯타입으로 결정하지말고 차라리 함수가 편할 수도 있음. json에 스탯 타입까지 명시한다면 귀찮아질것.
     public virtual void CalcAttackStatus(float calcNum, string statType)
@@ -72,21 +71,21 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo, ICardSkill
         if (this.transform.GetChild(0).GetChild(1)
             .TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI buffname))
         {
-            buffname.text = attackInfo.attackName;
+            buffname.text = attackCardInfo.attackName;
         }
         else Debug.LogError("Not Setted Object You're null!!");
 
         if (this.transform.GetChild(0).GetChild(2)
             .TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI information))
         {
-            information.text = attackInfo.information;
+            information.text = attackCardInfo.information;
         }
         else Debug.LogError("Not Setted Object You're null!!");
 
         if (this.transform.GetChild(0).GetChild(3)
             .TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI description))
         {
-            description.text = attackInfo.description;
+            description.text = attackCardInfo.description;
         }
         else Debug.LogError("Not Setted Object You're null!!");
 
@@ -101,10 +100,10 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo, ICardSkill
         if (this.transform.GetChild(0).GetChild(0).TryGetComponent<Image>(out Image frontImage))
         {
 
-            frontImage.sprite = Resources.Load<Sprite>(Path.Combine(StringManager.Instance.attackCardResource, attackInfo.fRImage));
+            frontImage.sprite = Resources.Load<Sprite>(Path.Combine(StringManager.Instance.attackCardResource, attackCardInfo.fRImage));
             if (frontImage.sprite == null)
             {
-                Debug.Log($"There is no resource__{attackInfo.fRImage} at: " + Path.Combine(Application.dataPath + $"/{StringManager.Instance.attackCardResource}", ""));
+                Debug.Log($"There is no resource__{attackCardInfo.fRImage} at: " + Path.Combine(Application.dataPath + $"/{StringManager.Instance.attackCardResource}", ""));
             }
         }
         else
@@ -115,10 +114,10 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo, ICardSkill
         if (this.transform.GetChild(0).TryGetComponent<Image>(out Image backImage))
         {
 
-            backImage.sprite = Resources.Load<Sprite>(Path.Combine(StringManager.Instance.attackCardResource, attackInfo.bGImage));
+            backImage.sprite = Resources.Load<Sprite>(Path.Combine(StringManager.Instance.attackCardResource, attackCardInfo.bGImage));
             if (backImage.sprite == null)
             {
-                Debug.Log($"There is no resource__{attackInfo.bGImage} at: " + Path.Combine(Application.dataPath + $"/{StringManager.Instance.attackCardResource}", ""));
+                Debug.Log($"There is no resource__{attackCardInfo.bGImage} at: " + Path.Combine(Application.dataPath + $"/{StringManager.Instance.attackCardResource}", ""));
             }
         }
         else
@@ -134,19 +133,26 @@ public abstract class AbstractAttack : MonoBehaviour, ISetCardInfo, ICardSkill
         //Debug.Log(stat);
     }
 
-    public void Skill()
+    // 이부분 무조건 수정 
+    public void Skill<T>() where T : AttackFunc<T>
     {
-        switch (attackInfo.attackCardEnum)
+        switch (attackCardInfo.attackCardEnum)
         {
             case AttackCardEnum.skill_1:
-                attackGenerator.UseSkill(attackStatus, "skill_1");
+                attackGenerator.SetSkillActive<T>(attackStatus, 1);
                 break;
             case AttackCardEnum.skill_2:
-                attackGenerator.UseSkill(attackStatus, "skill_2");
+                attackGenerator.SetSkillActive<T>(attackStatus, 2);
                 break;
             case AttackCardEnum.skill_3:
-                attackGenerator.UseSkill(attackStatus, "skill_3");
+                attackGenerator.SetSkillActive<T>(attackStatus, 3);
                 break;
+            //case AttackCardEnum.skill_4:
+            //    attackGenerator.SetSkillActive(attackStatus, 4);
+            //    break;
+            //case AttackCardEnum.skill_5:
+            //    attackGenerator.SetSkillActive(attackStatus, 5);
+            //    break;
             default:
                 break;
         }

@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +7,7 @@ public enum ClearFlag : int
 {
     notClear = 0, clear = 1
 }
-public class ClearEvent : Events<ClearEvent>
+public class ClearEvent : Events<ClearEvent>, IEventHandler<ClearEvent>
 {
     [SerializeField] private GameObject clearPopUp;
     bool isClear = false;
@@ -54,5 +53,10 @@ public class ClearEvent : Events<ClearEvent>
     IEnumerator WaitClearInput()
     {
         yield return new WaitUntil(() => Input.anyKeyDown);
+    }
+
+    public void Event()
+    {
+        throw new System.NotImplementedException();
     }
 }

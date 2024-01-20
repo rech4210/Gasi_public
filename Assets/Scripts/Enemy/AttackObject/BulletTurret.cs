@@ -3,7 +3,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BulletTurret : AttackFunc
+public class BulletTurret : AttackFunc<BulletTurret>
 {
 
     private void FixedUpdate()
@@ -35,21 +35,6 @@ public class BulletTurret : AttackFunc
         }
     }
 
-    // Start is called before the first frame update
-    public override void Skill_1()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Skill_2()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Skill_3()
-    {
-        throw new System.NotImplementedException();
-    }
     void Start()
     {
         StartCoroutine(Attack());
@@ -58,15 +43,15 @@ public class BulletTurret : AttackFunc
     {
         while (true)
         {
-            ExcuteAttack();
+            ExcuteAttack<BulletObj>();
             yield return new WaitForSeconds(_AttackStatus.duration);
         }
     }
-    protected override void ExcuteAttack()
+    protected override void ExcuteAttack<U>()
     {
         //Instantiate(attackObject,transform);
         var atkobj = Instantiate(attackObject, transform.position + transform.forward ,transform.rotation);
-        atkobj.GetComponent<AtkObjStat>().GetAtkObjPoint(_AttackStatus);
+        atkobj.GetComponent<AtkObjStat<BulletObj>>().Initialize(_AttackStatus, sk_1, sk_2, sk_3);
     }
 
     public override void TimeEvent(float time)

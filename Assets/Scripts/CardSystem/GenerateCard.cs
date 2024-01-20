@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GenerateCard : MonoBehaviour
@@ -43,6 +42,17 @@ public class GenerateCard : MonoBehaviour
     [SerializeField]
     EventSystem eventSystem;
 
+    private void OnEnable()
+    {
+        InvokeRepeating("AttackGenerate", 0f, 10f);
+        InvokeRepeating("BuffGenerate", 0.1f, 15f);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
+    }
+
 
     private void Start()
     {
@@ -72,13 +82,12 @@ public class GenerateCard : MonoBehaviour
             throw e;
         }
 
-        InvokeRepeating("AttackGenerate", 0f, 10f);
-        InvokeRepeating("BuffGenerate", 0.1f, 15f);
+        //InvokeRepeating("AttackGenerate", 0f, 10f);
+        //InvokeRepeating("BuffGenerate", 0.1f, 15f);
 
         // 이 부분 액션 멀티캐스트로 처리하기
         //CancelInvoke();
         //StartCoroutine(AttackGenerate());
-
     }
 
 
@@ -93,14 +102,14 @@ public class GenerateCard : MonoBehaviour
      * 5. 일괄적용 기능과 함수 제어는 어텍 제너레이터안에 리스트로 관리해야할것 같다.
     */
 
-    async void test()
-    {
-        Task a = new Task(() => AttackGenerate());
-        a.Start();
-        a.Wait(5000);
-        await a;
-        Debug.Log("delay end");
-    }
+    //async void test()
+    //{
+    //    Task a = new Task(() => AttackGenerate());
+    //    a.Start();
+    //    a.Wait(5000);
+    //    await a;
+    //    Debug.Log("delay end");
+    //}
 
     private void Update()
     {
@@ -138,7 +147,6 @@ public class GenerateCard : MonoBehaviour
                     attackCardList.Clear();
                 }
                 else { Debug.Log("not defined raytarget"); }
-
             }
         }
     }
@@ -149,7 +157,6 @@ public class GenerateCard : MonoBehaviour
      * 3. 카드 생성 시간
      * 
      */
-
 
     void BuffGenerate()
     {
