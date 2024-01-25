@@ -49,7 +49,7 @@ public abstract class AttackFunc<T> : MonoBehaviour, ITimeEvent where T : Attack
         return Quaternion.LookRotation(player.transform.position - target.transform.position);
     }
 
-    protected abstract void ExcuteAttack<U>() where U : AtkObjStat<U>;
+    protected abstract void ExcuteAttack();
 
     protected virtual void OnHited()
     {

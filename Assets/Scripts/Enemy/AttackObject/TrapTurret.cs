@@ -40,12 +40,12 @@ public class TrapTurret : AttackFunc<TrapTurret> , IUseSkill
     {
         while (true)
         {
-            ExcuteAttack<TrapObj>();
+            ExcuteAttack();
             yield return new WaitForSeconds(_AttackStatus.duration);
         }
 
     }
-    protected override void ExcuteAttack<U>()
+    protected override void ExcuteAttack()
     {
         //Instantiate(attackObject,transform);
         var atkobj = Instantiate(attackObject);

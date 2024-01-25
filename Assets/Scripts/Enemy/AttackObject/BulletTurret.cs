@@ -43,11 +43,11 @@ public class BulletTurret : AttackFunc<BulletTurret>
     {
         while (true)
         {
-            ExcuteAttack<BulletObj>();
+            ExcuteAttack();
             yield return new WaitForSeconds(_AttackStatus.duration);
         }
     }
-    protected override void ExcuteAttack<U>()
+    protected override void ExcuteAttack()
     {
         //Instantiate(attackObject,transform);
         var atkobj = Instantiate(attackObject, transform.position + transform.forward ,transform.rotation);

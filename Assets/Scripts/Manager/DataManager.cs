@@ -99,6 +99,16 @@ public class DataManager : Manager<DataManager>, IGetDict<int,BuffData>,IGetDict
     }
 
 
+    //public void SaveJson<T>(string path)
+    //{
+    //    if(path == null) return;
+
+    //    File.WriteAllText(path, "");
+
+    //    string jsonData = JsonUtility.ToJson(structure, true);
+    //    File.WriteAllText(path, jsonData);
+    //}
+
     Loader LoadJson<Loader, Key, Value>(TextAsset path) where Loader : IDataLoader<Key, Value>
     {
         //if (string.IsNullOrEmpty(path))

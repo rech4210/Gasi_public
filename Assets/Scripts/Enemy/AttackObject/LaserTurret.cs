@@ -40,11 +40,11 @@ public class LaserTurret : AttackFunc<LaserTurret>
     {
         while (true)
         {
-            ExcuteAttack<LaserObj>();
+            ExcuteAttack();
             yield return new WaitForSeconds(_AttackStatus.duration);
         }
     }
-    protected override void ExcuteAttack<U>()
+    protected override void ExcuteAttack()
     {
         var atkobj = Instantiate(attackObject,transform.position,Quaternion.identity);
         atkobj.GetComponent<AtkObjStat<LaserObj>>().Initialize(_AttackStatus, sk_1, sk_2, sk_3);

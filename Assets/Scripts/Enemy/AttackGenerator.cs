@@ -90,6 +90,7 @@ public class AttackGenerator : MonoBehaviour
         var component = obj? obj.GetComponent<AttackFunc<T>>() : null;
         
         component.Initalize(status,info,attackTarget); // 여기서 제대로 전달되는지 확인하자.
+        //TimeEvent.Instance.StoreTimeEventObj(obj);
         component.DeadAction(() =>
         {
             GetTurretList<T>(status).Remove(component as T);

@@ -36,12 +36,12 @@ public class GuidedTurret : AttackFunc<GuidedTurret>
     {
         while (true)
         {
-            ExcuteAttack<LaserObj>();
+            ExcuteAttack();
             yield return new WaitForSeconds(_AttackStatus.duration);
         }
 
     }
-    protected override void ExcuteAttack<U>()
+    protected override void ExcuteAttack()
     {
         //var atkobj = Instantiate(attackObject, transform.position + transform.forward, transform.rotation,transform);
         //atkobj.GetComponent<AtkObjStat>().GetAtkObjPoint(_AttackStatus);
